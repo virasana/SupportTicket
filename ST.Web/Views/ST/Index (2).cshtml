@@ -1,0 +1,79 @@
+﻿@model ICollection<ST.SharedEntities.Models.Ticket>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Support Tickets (Active Only)</h1>
+</div>
+
+<div>
+    <p>
+        Download the code from Github <a href="https://github.com/virasana/SupportTicket">here</a>
+    </p>
+</div>
+
+<div class="row">
+    <div class="col-md-12 container">
+        <div class="well">
+            @using (Html.BeginForm("Search", "ST", FormMethod.Post))
+            {
+                <div><label for="searchTerm">Search</label><input id="searchTerm" name="searchTerm" type="text"/><input type="submit" value="Search" /></div>
+                <div>Note: Azure Search Index updates every 5 mins</div>
+            }
+        </div>
+        <div class="well">
+            @foreach (var item in Model)
+            {
+                <table class="table-bordered table-striped table-responsive">
+                    <tr>
+                        <td colspan="2"><strong>Ticket ID</strong>: @item.TicketId</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(m => item.Description)
+                        </td>
+                        <td>
+                            @item.Description
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(m => item.Problem)
+                        </td>
+                        <td>
+                            @item.Problem
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(m => item.Active)
+                        </td>
+                        <td>
+                            @item.Active
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(m => item.TicketId)
+                        </td>
+                        <td>
+                            @item.TicketId
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(m => item.Severity.DisplayName)
+                        </td>
+                        <td>
+                            @item.Severity.DisplayName
+                        </td>
+                    </tr>
+                </table>
+                <hr/>
+            }
+        </div>
+    </div>
+
+</div>

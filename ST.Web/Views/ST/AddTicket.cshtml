@@ -1,0 +1,74 @@
+﻿@using ST.SharedEntities.Models
+@model ST.Web.ViewModels.STAddTicketViewModel
+
+@{
+    Html.EnableClientValidation();
+    ViewBag.Title = "Add Ticket";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+@{
+
+    if (ViewBag.Message != null && ((string)ViewBag.Message).Contains("Your ticket has been created.  Your ticket ID is"))
+    {
+        <h3>@ViewBag.Message</h3>
+
+    }
+    else
+    {
+        Html.EnableClientValidation();
+
+        using (@Html.BeginForm())
+        {
+            @Html.ValidationSummary(true)
+       
+            @Html.AntiForgeryToken()
+
+            <legend>Ticket Details</legend>
+
+            <div>
+                <strong>@Html.LabelFor(model => model.Ticket.Description)</strong>
+                @Html.EditorFor(model => model.Ticket.Description)
+            </div>
+
+            <div class="validation-errors">
+                @Html.ValidationMessageFor(model => model.Ticket.Description)
+            </div>
+
+            <div>
+                <strong>@Html.LabelFor(model => model.Products, "Product")</strong>
+                @Html.DropDownListFor(model => model.Ticket.ProductId, Model.Products, null, "productId")
+            </div>
+
+            <div>
+                <strong>@Html.LabelFor(model => model.Ticket.Active)</strong>
+                @Html.EditorFor(model => model.Ticket.Active, null, "active")
+            </div>
+
+            <div>
+                <strong>@Html.LabelFor(model => model.Ticket.Problem)</strong>
+                @Html.TextAreaFor(model => model.Ticket.Problem, 10, 100, null)
+            </div>
+
+            <div class="validation-errors">
+                @Html.ValidationMessageFor(model => model.Ticket.Problem)
+            </div>
+
+            <div>
+                <strong>@Html.LabelFor(model => model.Ticket.Severity.DisplayName, "Severity")</strong>
+                @Html.DropDownListFor(model => model.Ticket.SeverityId, Model.Severities)
+            </div>
+
+            <div><input type="submit" value="Create Ticket" /></div>
+        }
+
+        @section Scripts
+{
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+    }
+}
+
+
+

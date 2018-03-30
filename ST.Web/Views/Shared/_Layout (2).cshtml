@@ -1,0 +1,102 @@
+﻿@using ST.Web.App
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Support Ticket Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @*<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>*@
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Support Ticket", "Index", "ST", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("View Tickets", "Index", "ST")</li>
+                    <li>@Html.ActionLink("Add Ticket", "AddTicket", "ST")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "ST")</li>
+                    @if (!String.IsNullOrEmpty(User.Identity.Name))
+                    {
+                        <li>@Html.ActionLink("Log Off", "LogOff", "Account")</li>
+                        <li class="unlinked-nav-item">
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    <span class="caret"></span>
+                                    <span>@User.Identity.Name</span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Country: @STUser.Country</a></li>
+                                    <li><a href="#">Avatar: @STUser.Avatar</a></li>
+                                    <li>Status:<input id="statusInput" type="text" value="@STUser.Status" /></li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application - Environment: @ViewBag.Environment - v1.1</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script>
+        $(document).ready(function () {
+            $('#statusInput').on('click', function (event) {
+                event.stopPropagation();
+            });
+
+            $('#statusInput').on('blur', updateStatus);
+            $("#statusInput").on('keyup', function (e) {
+                if (e.keyCode === 13) {
+                    updateStatus();
+                }
+            });
+        });
+
+        function updateStatus() {
+            var el = $('#statusInput');
+
+            $.post("/st/updatestatus", { status: el.val() })
+                .done(function() {
+                    console.log("success");
+                })
+                .fail(function() {
+                    console.log("error");
+                })
+                .always(function() {
+                    console.log("updated! - show toast!");
+                });
+
+            hideDropdowns();
+        }
+
+        function hideDropdowns() {
+            $('.dropdown.open .dropdown-toggle').dropdown('toggle');
+        }
+
+    </script>
+</body>
+</html>
