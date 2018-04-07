@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using InterfacesLib;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ST.ServicesLib;
-using ST.SQLRepoLib;
+using ST.AppServicesLib;
+using ST.SharedInterfacesLib;
+using ST.SQLServerRepoLib;
 
 namespace ST.Web
 {
@@ -26,7 +22,7 @@ namespace ST.Web
         {
             services.AddMvc();
             services.AddTransient<ISTRepo, SQLRepo>();
-            services.AddTransient<ISTService<ISTRepo>, STService<ISTRepo>>();
+            services.AddTransient<ISTAppService<ISTRepo>, STAppService<ISTRepo>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,7 +44,7 @@ namespace ST.Web
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=ST}/{action=Index}/{id?}");
             });
         }
     }

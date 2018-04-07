@@ -1,8 +1,7 @@
-﻿
-using System.Collections.Generic;
-using ST.SharedEntities.Models;
+﻿using System.Collections.Generic;
+using ST.SharedEntitiesLib;
 
-namespace InterfacesLib
+namespace ST.SharedInterfacesLib
 {
     public interface ISTRepo
     {

@@ -1,10 +1,9 @@
 ﻿using System.Linq;
-using InterfacesLib;
 using Microsoft.AspNetCore.Authorization;
-using ST.SharedEntities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.IdentityModel.Protocols;
+using ST.SharedEntitiesLib;
+using ST.SharedInterfacesLib;
 using ST.Web.ViewModels;
 
 namespace ST.Web.Controllers
@@ -12,9 +11,9 @@ namespace ST.Web.Controllers
     //TODO [Authorize]
     public class STController : Controller
     {
-        private readonly ISTService<ISTRepo> _stService;
+        private readonly ISTAppService<ISTRepo> _stService;
 
-        public STController(ISTService<ISTRepo> stService)
+        public STController(ISTAppService<ISTRepo> stService)
         {
             _stService = stService;
             Initialise();
