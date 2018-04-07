@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using ST.SharedEntities.Models;
+using ST.SharedEntitiesLib;
 
-namespace InterfacesLib
+namespace ST.SharedInterfacesLib
 {
-    public interface ISTService<out TRepo> where TRepo : ISTRepo
+    public interface ISTAppService<out TRepo> where TRepo : ISTRepo
     {
         ICollection<Ticket> GetClosedTickets();
 
