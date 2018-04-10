@@ -33,3 +33,21 @@
         display: none;
     }
 }
+
+.unlinked-nav-item {
+    padding: 15px;
+    color: yellowgreen;
+    border-radius: 5px;
+    border-style: solid;
+}
+
+@media (max-width: 767px) {
+    .unlinked-nav-item {
+        padding: 15px;
+    }
+}
+
+.validation-errors {
+    color: #ff0000;
+    margin-left: 200px;
+}

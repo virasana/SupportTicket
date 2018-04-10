@@ -2,7 +2,6 @@
 @model ST.Web.ViewModels.STAddTicketViewModel
 
 @{
-    Html.EnableClientValidation();
     ViewBag.Title = "Add Ticket";
 }
 
@@ -17,8 +16,6 @@
     }
     else
     {
-        Html.EnableClientValidation();
-
         using (@Html.BeginForm())
         {
             @Html.ValidationSummary(true)
@@ -61,11 +58,6 @@
             </div>
 
             <div><input type="submit" value="Create Ticket" /></div>
-        }
-
-        @section Scripts
-{
-            @Scripts.Render("~/bundles/jqueryval")
         }
     }
 }
