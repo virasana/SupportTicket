@@ -19,14 +19,16 @@
         using (@Html.BeginForm())
         {
             @Html.ValidationSummary(true)
-       
+
             @Html.AntiForgeryToken()
 
             <legend>Ticket Details</legend>
 
             <div>
-                <strong>@Html.LabelFor(model => model.Ticket.Description)</strong>
-                @Html.EditorFor(model => model.Ticket.Description)
+                <div>
+                    @Html.LabelFor(model => model.Ticket.Description)
+                    @Html.EditorFor(model => model.Ticket.Description)
+                </div>
             </div>
 
             <div class="validation-errors">
@@ -39,13 +41,15 @@
             </div>
 
             <div>
-                <strong>@Html.LabelFor(model => model.Ticket.Active)</strong>
-                @Html.EditorFor(model => model.Ticket.Active, null, "active")
+                @Html.LabelFor(model => model.Ticket.Active)
+                    @Html.EditorFor(model => model.Ticket.Active, null, "active")
             </div>
 
             <div>
-                <strong>@Html.LabelFor(model => model.Ticket.Problem)</strong>
-                @Html.TextAreaFor(model => model.Ticket.Problem, 10, 100, null)
+                <p class="formfield">
+                    <strong>@Html.LabelFor(model => model.Ticket.Problem)</strong>
+                    @Html.TextAreaFor(model => model.Ticket.Problem, 10, 100, null)
+                </p>
             </div>
 
             <div class="validation-errors">

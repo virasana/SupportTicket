@@ -51,3 +51,11 @@
     color: #ff0000;
     margin-left: 200px;
 }
+
+.formfield * {
+    vertical-align: top
+}
+label {
+    width: 200px;
+    display: inline-block;
+}
