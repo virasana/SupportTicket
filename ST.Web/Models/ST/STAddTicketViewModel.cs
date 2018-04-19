@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ST.SharedEntitiesLib;
 
-namespace ST.Web.ViewModels
+namespace ST.Web.Models.ST
 {
     public class STAddTicketViewModel
     {

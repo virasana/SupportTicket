@@ -10,6 +10,7 @@ using ST.SharedInterfacesLib;
 using ST.SQLServerRepoLib;
 using ST.Web.Data;
 using ST.Web.Models;
+using ST.Web.Services;
 
 namespace ST.Web
 {
@@ -28,6 +29,8 @@ namespace ST.Web
             services.AddMvc();
             services.AddTransient<ISTRepo, SQLRepo>();
             services.AddTransient<ISTAppService<ISTRepo>, STAppService<ISTRepo>>();
+            // Add application services.
+            services.AddTransient<IEmailSender, EmailSender>();
 
             #region Authentication
 

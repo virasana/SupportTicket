@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ST.SharedEntitiesLib;
 using ST.SharedInterfacesLib;
-using ST.Web.ViewModels;
+using ST.Web.Models.ST;
 
 namespace ST.Web.Controllers
 {
@@ -86,7 +86,7 @@ namespace ST.Web.Controllers
                 Text = p.Description
             });
 
-            var vm = new ViewModels.STAddTicketViewModel()
+            var vm = new STAddTicketViewModel()
             {
                 Severities = severitiesSelectItem,
                 Products = productsSelectItem,
