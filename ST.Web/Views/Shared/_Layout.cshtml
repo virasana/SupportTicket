@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewBag.Title - Support Ticket Application</title>
+    <title>@ViewData["Title"] - ST.Web</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -26,39 +26,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-controller="ST" asp-action="Index" class="navbar-brand">Support Ticket</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">ST.Web</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-controller="ST" asp-action="Index">Home</a></li>
-                    <li><a asp-controller="ST" asp-action="Index">View Tickets</a></li>
-                    <li><a asp-controller="ST" asp-action="AddTicket">Add Ticket</a></li>
-                    <li><a asp-controller="ST" asp-action="Contact">Contact</a></li>
-
-                    @if (!string.IsNullOrEmpty(User.Identity.Name))
-                    {
-                        <li><a asp-controller="Account" asp-action="LogOff">Log Off</a></li>
-                        <li class="unlinked-nav-item">
-                            <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                                    <span class="glyphicon glyphicon-user"></span>
-                                    <span class="caret"></span>
-                                    <span>@User.Identity.Name</span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Country: TODO Country</a></li>
-                                    <li><a href="#">Avatar: TODO Avatar</a></li>
-                                    <li>Status:<input id="statusInput" type="text" value="TODO Status" /></li>
-                                </ul>
-                            </div>
-                        </li>
-                    }
-                    else
-                    {
-                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
-                    }
-
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
+                @await Html.PartialAsync("_LoginPartial")
             </div>
         </div>
     </nav>
@@ -66,7 +42,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2018 - Karunasoft Consulting Ltd</p>
+            <p>&copy; 2018 - ST.Web</p>
         </footer>
     </div>
 

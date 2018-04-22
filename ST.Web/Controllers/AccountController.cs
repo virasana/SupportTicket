@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
@@ -6,14 +8,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using ST.Web.Extensions;
 using ST.Web.Models;
 using ST.Web.Models.AccountViewModels;
 using ST.Web.Services;
-using ForgotPasswordViewModel = ST.Web.Models.AccountViewModels.ForgotPasswordViewModel;
-using LoginViewModel = ST.Web.Models.AccountViewModels.LoginViewModel;
-using RegisterViewModel = ST.Web.Models.AccountViewModels.RegisterViewModel;
-using ResetPasswordViewModel = ST.Web.Models.AccountViewModels.ResetPasswordViewModel;
+using ST.Web.Controllers;
+using ST.Web.Extensions;
 
 namespace ST.Web.Controllers
 {
@@ -70,7 +69,7 @@ namespace ST.Web.Controllers
                 }
                 if (result.RequiresTwoFactor)
                 {
-                    return RedirectToAction(nameof(LoginWith2Fa), new { returnUrl, model.RememberMe });
+                    return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
                 }
                 if (result.IsLockedOut)
                 {
@@ -90,7 +89,7 @@ namespace ST.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> LoginWith2Fa(bool rememberMe, string returnUrl = null)
+        public async Task<IActionResult> LoginWith2fa(bool rememberMe, string returnUrl = null)
         {
             // Ensure the user has gone through the username & password screen first
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
@@ -100,7 +99,7 @@ namespace ST.Web.Controllers
                 throw new ApplicationException($"Unable to load two-factor authentication user.");
             }
 
-            var model = new LoginWith2FaViewModel { RememberMe = rememberMe };
+            var model = new LoginWith2FaViewModel() { RememberMe = rememberMe };
             ViewData["ReturnUrl"] = returnUrl;
 
             return View(model);
@@ -109,7 +108,7 @@ namespace ST.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LoginWith2Fa(LoginWith2FaViewModel model, bool rememberMe, string returnUrl = null)
+        public async Task<IActionResult> LoginWith2fa(LoginWith2FaViewModel model, bool rememberMe, string returnUrl = null)
         {
             if (!ModelState.IsValid)
             {
@@ -456,7 +455,7 @@ namespace ST.Web.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(STController.Index), "ST");
+                return RedirectToAction(nameof(STController.Index), "Home");
             }
         }
 

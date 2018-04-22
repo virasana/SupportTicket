@@ -26,7 +26,7 @@ namespace ST.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            
             services.AddTransient<ISTRepo, SQLRepo>();
             services.AddTransient<ISTAppService<ISTRepo>, STAppService<ISTRepo>>();
             // Add application services.
@@ -38,8 +38,8 @@ namespace ST.Web
                 options.UseSqlServer(Configuration.GetConnectionString("SupportTicketCoreAuth")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                    .AddEntityFrameworkStores<ApplicationDbContext>()
-                    .AddDefaultTokenProviders();
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -72,8 +72,10 @@ namespace ST.Web
                 // the path to /Account/AccessDenied.
                 options.AccessDeniedPath = "/Account/AccessDenied";
                 options.SlidingExpiration = true;
-            }); 
+            });
             #endregion
+
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -86,10 +88,12 @@ namespace ST.Web
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/ST/Error");
             }
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
@@ -98,7 +102,7 @@ namespace ST.Web
                     template: "{controller=ST}/{action=Index}/{id?}");
             });
 
-            app.UseAuthentication();
+            
         }
     }
 }
