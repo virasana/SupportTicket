@@ -8,7 +8,7 @@ using ST.Web.Models.ST;
 
 namespace ST.Web.Controllers
 {
-    //TODO [Authorize]
+    [Authorize]
     public class STController : Controller
     {
         private readonly ISTAppService<ISTRepo> _stService;

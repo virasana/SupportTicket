@@ -247,7 +247,7 @@ namespace ST.Web.Controllers
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
-            return RedirectToAction(nameof(STController.Index), "Home");
+            return RedirectToAction(nameof(STController.Index), "ST");
         }
 
         [HttpPost]
@@ -335,7 +335,7 @@ namespace ST.Web.Controllers
         {
             if (userId == null || code == null)
             {
-                return RedirectToAction(nameof(STController.Index), "Home");
+                return RedirectToAction(nameof(STController.Index), "ST");
             }
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
@@ -455,7 +455,7 @@ namespace ST.Web.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(STController.Index), "Home");
+                return RedirectToAction(nameof(STController.Index), "ST");
             }
         }
 

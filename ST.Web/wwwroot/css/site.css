@@ -59,3 +59,14 @@ label {
     width: 200px;
     display: inline-block;
 }
+
+.normal {
+    color: rgb(157,157,157);
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    vertical-align: middle;
+    background-color: transparent;
+    border-color: transparent;
+}
