@@ -5,13 +5,21 @@ VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ST.Web", "ST.Web\ST.Web.csproj", "{E231E9F9-FA58-4E1E-B6E4-B499F189B6AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ST.SQLServerRepoLib", "ST.SQlServerRepoLib\ST.SQLServerRepoLib.csproj", "{7C2BC5A4-F981-4CF3-BA86-592511C6D601}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ST.SQLServerRepoLib", "ST.SQlServerRepoLib\ST.SQLServerRepoLib.csproj", "{7C2BC5A4-F981-4CF3-BA86-592511C6D601}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ST.AppServicesLib", "ST.AppServicesLib\ST.AppServicesLib.csproj", "{79A3C1B7-1242-4C8A-81E6-CFFF68AEFCFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ST.AppServicesLib", "ST.AppServicesLib\ST.AppServicesLib.csproj", "{79A3C1B7-1242-4C8A-81E6-CFFF68AEFCFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ST.SharedEntitiesLib", "ST.SharedEntitiesLib\ST.SharedEntitiesLib.csproj", "{837977F4-8F4E-4845-B37F-98AED3E7EDFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ST.SharedEntitiesLib", "ST.SharedEntitiesLib\ST.SharedEntitiesLib.csproj", "{837977F4-8F4E-4845-B37F-98AED3E7EDFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ST.SharedInterfacesLib", "ST.SharedInterfacesLib\ST.SharedInterfacesLib.csproj", "{647BF54C-4925-43B3-84B6-6F7218393F70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ST.SharedInterfacesLib", "ST.SharedInterfacesLib\ST.SharedInterfacesLib.csproj", "{647BF54C-4925-43B3-84B6-6F7218393F70}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{07AFDEB2-D20E-46E1-9F5F-B3A549C55D02}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s-config", "k8s-config", "{10E60439-A807-4779-87AB-D79F168FB7BC}"
+	ProjectSection(SolutionItems) = preProject
+		deployment.yaml = deployment.yaml
+		service.yaml = service.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +47,10 @@ Global
 		{647BF54C-4925-43B3-84B6-6F7218393F70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{647BF54C-4925-43B3-84B6-6F7218393F70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{647BF54C-4925-43B3-84B6-6F7218393F70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07AFDEB2-D20E-46E1-9F5F-B3A549C55D02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07AFDEB2-D20E-46E1-9F5F-B3A549C55D02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07AFDEB2-D20E-46E1-9F5F-B3A549C55D02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07AFDEB2-D20E-46E1-9F5F-B3A549C55D02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
