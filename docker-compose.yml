@@ -1,6 +1,15 @@
 version: '3'
 
 services:
+  mssql:
+    image: microsoft/mssql-server-linux:2017-latest
+    container_name: sql1
+    ports:
+      - 1433:1433
+    environment:
+      SA_PASSWORD: "K00s!!!K00s"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: Developer
   st.web:
     image: stweb
     build:

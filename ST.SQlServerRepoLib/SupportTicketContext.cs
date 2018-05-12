@@ -16,7 +16,9 @@ namespace ST.Web
             if (!optionsBuilder.IsConfigured)
             {
                 // TODO - Get from config
-                optionsBuilder.UseSqlServer(@"data source=(localdb)\ProjectsV13;initial catalog=SupportTicket;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework");
+                var connString = @"Data Source = sql1; Initial Catalog = SupportTicket; User Id = SA; password = K00s!!!K00s";
+                // var connString = @"data source=sql1;initial catalog=SupportTicket;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework"
+                optionsBuilder.UseSqlServer(connString);
             }
         }
 
