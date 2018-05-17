@@ -24,6 +24,7 @@ namespace ST.Web
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.Property(e => e.Description)

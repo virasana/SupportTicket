@@ -76,7 +76,15 @@ namespace ST.Web
             #endregion
 
             services.AddMvc();
+
+            services.AddDbContext<ApplicationDbContext>(
+                options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("SupportTicketCoreAuth")
+                    ));
+
         }
+
+        
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -102,7 +110,10 @@ namespace ST.Web
                     template: "{controller=ST}/{action=Index}/{id?}");
             });
 
-            
+            using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                scope.ServiceProvider.GetRequiredService<ApplicationDbContext>().Database.Migrate();
+            }
         }
     }
 }

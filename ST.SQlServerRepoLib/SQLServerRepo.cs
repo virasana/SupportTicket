@@ -10,6 +10,13 @@ namespace ST.SQLServerRepoLib
 {
     public class SQLRepo : ISTRepo
     {
+        public SQLRepo()
+        {
+            using (var context = new SupportTicketContext())
+            {
+                context.Database.Migrate();
+            }
+        }
         public virtual Ticket AddTicket(Ticket ticket)
         {
             using (var ctx = new SupportTicketContext())
