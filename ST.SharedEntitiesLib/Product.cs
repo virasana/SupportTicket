@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ST.SharedEntitiesLib
 {
@@ -8,7 +9,7 @@ namespace ST.SharedEntitiesLib
         {
             Ticket = new HashSet<Ticket>();
         }
-
+        [Key]
         public int ProductId { get; set; }
         public string Description { get; set; }
 

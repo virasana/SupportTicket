@@ -26,7 +26,7 @@ namespace ST.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+
             services.AddTransient<ISTRepo, SQLRepo>();
             services.AddTransient<ISTAppService<ISTRepo>, STAppService<ISTRepo>>();
             // Add application services.
@@ -73,6 +73,7 @@ namespace ST.Web
                 options.AccessDeniedPath = "/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
+
             #endregion
 
             services.AddMvc();
@@ -84,7 +85,7 @@ namespace ST.Web
 
         }
 
-        
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -112,7 +113,10 @@ namespace ST.Web
 
             using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
-                scope.ServiceProvider.GetRequiredService<ApplicationDbContext>().Database.Migrate();
+                scope.ServiceProvider.GetRequiredService<ApplicationDbContext>()
+                    .Database.Migrate();
+                scope.ServiceProvider.GetRequiredService<ISTRepo>().Initialise();
+
             }
         }
     }

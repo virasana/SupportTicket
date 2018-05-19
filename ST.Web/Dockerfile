@@ -21,5 +21,4 @@ RUN dotnet publish -c Release -o /app
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-RUN dotnet ef database update
 ENTRYPOINT ["dotnet", "ST.Web.dll"]

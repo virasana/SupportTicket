@@ -5,6 +5,8 @@ namespace ST.SharedInterfacesLib
 {
     public interface ISTRepo
     {
+        void Initialise();
+
         Ticket AddTicket(Ticket info);
 
         ICollection<Ticket> GetClosedTickets();

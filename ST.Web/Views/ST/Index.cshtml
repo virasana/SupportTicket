@@ -16,13 +16,13 @@
 
 <div class="row">
     <div class="col-md-12 container">
-        <div class="well">
+        @*<div class="well">
             @using (Html.BeginForm("Search", "ST", FormMethod.Post))
             {
                 <div><label for="searchTerm">Search</label><input id="searchTerm" name="searchTerm" type="text"/><input type="submit" value="Search" /></div>
                 <div>Note: Azure Search Index updates every 5 mins</div>
             }
-        </div>
+        </div>*@
         <div class="well">
             @foreach (var item in Model)
             {

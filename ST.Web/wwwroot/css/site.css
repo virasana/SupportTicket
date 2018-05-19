@@ -70,3 +70,7 @@ label {
     background-color: transparent;
     border-color: transparent;
 }
+
+td {
+    padding: 5px;
+}

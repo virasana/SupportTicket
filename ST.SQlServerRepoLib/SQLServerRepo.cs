@@ -4,19 +4,65 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using ST.SharedEntitiesLib;
 using ST.SharedInterfacesLib;
+using ST.SQLServerRepoLib.Extensions;
 using ST.Web;
 
 namespace ST.SQLServerRepoLib
 {
     public class SQLRepo : ISTRepo
     {
-        public SQLRepo()
+        public void Initialise()
         {
             using (var context = new SupportTicketContext())
             {
                 context.Database.Migrate();
             }
+
+            SeedDatabase();
         }
+
+        private void SeedDatabase()
+        {
+            using (var context = new SupportTicketContext())
+            {
+                var products = new List<Product>()
+                {
+                    new Product(){ Description = "P1"},
+                    new Product(){ Description = "P2"},
+                    new Product(){ Description = "P3"}
+                };
+
+                foreach (var newProduct in products)
+                {
+                    var dbProduct =
+                        context.Product.ToList().FirstOrDefault(p => p.Description.Equals(newProduct.Description));
+                    if (dbProduct == null)
+                    {
+                        context.Product.AddOrUpdate(newProduct);
+                    }
+                }
+
+                var severities = new List<Severity>()
+                {
+                    new Severity() {DisplayName = "Mild"},
+                    new Severity() {DisplayName = "Medium"},
+                    new Severity() {DisplayName = "Critical"}
+                };
+
+                foreach (var newSeverity in severities)
+                {
+                    var dbSeverity =
+                        context.Severity.ToList().FirstOrDefault(s => s.DisplayName.Equals(newSeverity.DisplayName));
+                    if (dbSeverity == null)
+                    {
+                        context.Severity.AddOrUpdate(newSeverity);
+                    }
+                }
+
+                context.SaveChanges(true);
+            }
+        }
+
         public virtual Ticket AddTicket(Ticket ticket)
         {
             using (var ctx = new SupportTicketContext())

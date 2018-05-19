@@ -1,0 +1,52 @@
+commit 3a148160df8c423028b40d2d9bb0ff98c99069c3
+Merge: d55dbd5 bbe4e2c
+Author: director@sharpit.co.za <jeanpierrefouche@gmail.com>
+Date:   Thu May 17 21:04:29 2018 +0100
+
+    WIP on master: d55dbd5 Getting there with EF Update Database.
+
+diff --cc ST.SQlServerRepoLib/SQLServerRepo.cs
+index 2dc1672,2dc1672..f4c9d55
+--- a/ST.SQlServerRepoLib/SQLServerRepo.cs
++++ b/ST.SQlServerRepoLib/SQLServerRepo.cs
+@@@ -10,12 -10,12 +10,14 @@@ namespace ST.SQLServerRepoLi
+  {
+      public class SQLRepo : ISTRepo
+      {
+--        public SQLRepo()
+++        public void Initialise()
+          {
+              using (var context = new SupportTicketContext())
+              {
+                  context.Database.Migrate();
+              }
+++
+++            // Seed the database
+          }
+          public virtual Ticket AddTicket(Ticket ticket)
+          {
+diff --cc ST.Web/Startup.cs
+index 30641c3,30641c3..441dd2d
+--- a/ST.Web/Startup.cs
++++ b/ST.Web/Startup.cs
+@@@ -81,7 -81,7 +81,6 @@@ namespace ST.We
+                  options =>
+                      options.UseSqlServer(Configuration.GetConnectionString("SupportTicketCoreAuth")
+                      ));
+--
+          }
+  
+          
+@@@ -113,7 -113,7 +112,12 @@@
+              using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+              {
+                  scope.ServiceProvider.GetRequiredService<ApplicationDbContext>().Database.Migrate();
+++                scope.ServiceProvider.GetRequiredService<SQLRepo>().Initialise();
+++
+              }
+++
+++            //Seed the database.
+++            
+          }
+      }
+  }
