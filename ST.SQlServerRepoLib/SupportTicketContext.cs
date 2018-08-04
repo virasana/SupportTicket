@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using ST.SharedEntitiesLib;
@@ -16,8 +17,11 @@ namespace ST.Web
             if (!optionsBuilder.IsConfigured)
             {
                 // TODO - Get from config
-                var connString = @"Data Source = sql1; Initial Catalog = SupportTicket; User Id = SA; password = K00s!!!K00s";
-                // var connString = @"data source=sql1;initial catalog=SupportTicket;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework"
+
+                var connString = $"{Environment.GetEnvironmentVariable("CONN_STRING")}";
+                Console.WriteLine($"** ConnectionString: {connString}");
+                File.WriteAllText(Path.Combine(Environment.CurrentDirectory, "ConnString.txt"), connString);
+
                 optionsBuilder.UseSqlServer(connString);
             }
         }

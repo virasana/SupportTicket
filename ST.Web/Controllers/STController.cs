@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -8,7 +9,7 @@ using ST.Web.Models.ST;
 
 namespace ST.Web.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class STController : Controller
     {
         private readonly ISTAppService<ISTRepo> _stService;

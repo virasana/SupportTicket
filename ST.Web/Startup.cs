@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using ST.AppServicesLib;
 using ST.SharedInterfacesLib;
 using ST.SQLServerRepoLib;
@@ -19,6 +21,7 @@ namespace ST.Web
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            
         }
 
         public IConfiguration Configuration { get; }
@@ -26,7 +29,7 @@ namespace ST.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            
             services.AddTransient<ISTRepo, SQLRepo>();
             services.AddTransient<ISTAppService<ISTRepo>, STAppService<ISTRepo>>();
             // Add application services.
@@ -88,7 +91,7 @@ namespace ST.Web
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -118,6 +121,12 @@ namespace ST.Web
                 scope.ServiceProvider.GetRequiredService<ISTRepo>().Initialise();
 
             }
+
+            loggerFactory.AddDebug();
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            var logger = loggerFactory.CreateLogger("Default");
+            var connString = $"{Environment.GetEnvironmentVariable("CONN_STRING")}";
+            logger.Log(LogLevel.Information, $"*** CONN_STRING: '{connString}'");
         }
     }
 }

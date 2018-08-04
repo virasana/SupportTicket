@@ -19,7 +19,8 @@
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CONN_STRING": "Data Source=sqlservice;Initial Catalog=SupportTicket;User Id=SA; password=K00s123^^^K00s123"
       },
       "applicationUrl": "http://localhost:58887/"
     }

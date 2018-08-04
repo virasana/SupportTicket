@@ -80,6 +80,7 @@ namespace ST.SQLServerRepoLib
 
                 return result;
             }
+            // return new Ticket();
         }
 
         public ICollection<Ticket> GetClosedTickets()
@@ -93,6 +94,7 @@ namespace ST.SQLServerRepoLib
                     .ToList();
                 return result;
             }
+            //return new List<Ticket>();
         }
 
         private ICollection<Ticket> GetClosedTicketsMatching(List<int> ticketIds)
@@ -106,6 +108,7 @@ namespace ST.SQLServerRepoLib
                     .ToList();
                 return result;
             }
+            //return new List<Ticket>();
         }
 
         public ICollection<Ticket> GetClosedTicketsMatching(string searchTerm)
@@ -138,6 +141,8 @@ namespace ST.SQLServerRepoLib
                 var result = ctx.Severity.ToList();
                 return result;
             }
+
+            //return new List<Severity>();
         }
 
         public ICollection<Product> GetProducts()
@@ -147,6 +152,7 @@ namespace ST.SQLServerRepoLib
                 var result = ctx.Product.ToList();
                 return result;
             }
+            //return new List<Product>();
         }
 
         public Ticket GetTicket(int id)
@@ -159,6 +165,7 @@ namespace ST.SQLServerRepoLib
                     .FirstOrDefault(t => t.ProductId.Equals(id));
                 return result;
             }
+            // return new Ticket();
         }
     }
 }

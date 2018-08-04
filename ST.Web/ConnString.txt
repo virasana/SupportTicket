@@ -1,0 +1,1 @@
+Data Source=sqlservice;Initial Catalog=SupportTicket;User Id=SA;password=K00s123^^^K00s123
