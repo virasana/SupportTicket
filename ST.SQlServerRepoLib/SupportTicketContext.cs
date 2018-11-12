@@ -1,10 +1,9 @@
 ﻿using System;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using ST.SharedEntitiesLib;
 
-namespace ST.Web
+namespace ST.SQLServerRepoLib
 {
     public partial class SupportTicketContext : DbContext
     {
