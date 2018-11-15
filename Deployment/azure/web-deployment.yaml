@@ -1,0 +1,22 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: web-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: stweb
+    spec:
+      containers:
+      - name: stweb
+        image: virasana/stweb:1.0.0.19
+        ports:
+        - containerPort: 80
+        env:
+        - name: CONN_STRING
+          valueFrom:
+            secretKeyRef:
+              name: mssql
+              key: CONN_STRING               

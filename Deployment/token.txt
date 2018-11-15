@@ -1,0 +1,13 @@
+Name:         kubernetes-dashboard-token-vpjxq
+Namespace:    kube-system
+Labels:       <none>
+Annotations:  kubernetes.io/service-account.name=kubernetes-dashboard
+              kubernetes.io/service-account.uid=690efa4f-7728-11e8-9487-0a14cf60c9bc
+
+Type:  kubernetes.io/service-account-token
+
+Data
+====
+token:      eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJrdWJlcm5ldGVzLWRhc2hib2FyZC10b2tlbi12cGp4cSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjY5MGVmYTRmLTc3MjgtMTFlOC05NDg3LTBhMTRjZjYwYzliYyIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlLXN5c3RlbTprdWJlcm5ldGVzLWRhc2hib2FyZCJ9.ht5k1wYPLKNqVcPPkXxc-gF9yYct5nWyRlNVSyYc2-HOaZ1t3wOjus4EZ-eGMSs3iCxns8Egts_AgupdWSrJBR17J8NxPfK44sIWZMqdpcfXD4b2oUqf0hMPox7wFRzkp3NGMJcImRA7y1qtclmCfvdK_DepO9Dp0CeCayphofWahWQRrnVJFkFvRop5DRQhmxvhZKgeZX4DsZ_UMVtfFyHVIUQcdl9ZmhVu99ZuR2tKFRoCI6JXdsZGWehWykPC1s567NEeM0XliC8T5VD-HDAdILZH7a9_Q4n5Ps_d-vubdGQR5QkTvu4CJ67R1BwClvo8LMcOg-9nsyZxZ6yblg
+ca.crt:     1042 bytes
+namespace:  11 bytes
