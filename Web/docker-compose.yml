@@ -21,3 +21,14 @@ services:
       context: .
       dockerfile: ST.Web/Dockerfile
     ports: ['80:80']
+    streact:
+    environment:
+      WEB_API_URL: "http://some.url"
+    depends_on:
+     - st.web
+    image: virasana/streact:dev
+    container_name: streact-dev
+    build:
+      context: ./streact
+      dockerfile: streact/Dockerfile
+    ports: ['3000:3000']
