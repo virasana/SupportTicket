@@ -264,10 +264,22 @@ __pycache__/
 bundle.js
 *.iml
 /node_modules
-bundle.js
-npm-debug.log
-.DS_Store
+/.pnp
+.pnp.js
 
-# IntelliJ
-*.iml
-/.idea
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

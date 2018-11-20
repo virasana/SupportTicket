@@ -2,7 +2,9 @@ version: '3'
 
 services:
   mssql:
-    image: microsoft/mssql-server-linux:2017-latest
+    #volumes:
+#     - .\sqldata:/var/opt/mssql
+    image: mcr.microsoft.com/mssql/server:2017-latest
     container_name: sqlservice
     ports:
       - 1433:1433
@@ -21,14 +23,17 @@ services:
       context: .
       dockerfile: ST.Web/Dockerfile
     ports: ['80:80']
-    streact:
+  streact:
+    volumes:
+     - .\streact\:/usr/src/app
     environment:
       WEB_API_URL: "http://some.url"
+      CHOKIDAR_USEPOLLING: "true"
     depends_on:
      - st.web
     image: virasana/streact:dev
     container_name: streact-dev
     build:
       context: ./streact
-      dockerfile: streact/Dockerfile
+      dockerfile: streact/Dockerfile-dev
     ports: ['3000:3000']

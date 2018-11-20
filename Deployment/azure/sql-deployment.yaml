@@ -12,7 +12,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: sql1
-        image: microsoft/mssql-server-linux
+        image: mcr.microsoft.com/mssql/server:2017-latest
         ports:
         - containerPort: 1433
         env:

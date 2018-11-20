@@ -9,7 +9,7 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
-            &copy; Karunasoft Ltd 2018 
+            &copy; Karunasoft Ltd 2018.
           </p>
 		  <p>1.0.0.14</p>
           <a
