@@ -8,10 +8,11 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
+		  <p>Ticket Track</p>
           <p>
             &copy; Karunasoft Ltd 2018. All rights reserved.
           </p>
-		  <p>${SUPPORT_TICKET_REACT_IMAGE}</p>
+		  <p>Docker: ${SUPPORT_TICKET_REACT_IMAGE}</p>
           <a
             className="App-link"
             href="https://reactjs.org"
