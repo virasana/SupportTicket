@@ -1,12 +1,14 @@
 #!/bin/bash
+echo '*********************************************************************'
 echo "Generating kubernetes template for this release"
-echo "Release Tag ${SUPPORT_TICKET_RELEASE_TAG}"
+echo "Release Tag: ${SUPPORT_TICKET_RELEASE_TAG}"
+echo "Template Path:  ${1}"
+echo "Output Path: ${2}"
+echo '*********************************************************************'
 
-echo "File output: ./support-ticket-k8s.yaml"
+envsubst < ${1} > ${2}
 
-envsubst < ./template-support-ticket-k8s.yaml > ./support-ticket-k8s.yaml
-
-cat ./support-ticket-k8s.yaml
+cat ${2}
 
 echo "...Done!"
 

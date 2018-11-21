@@ -107,7 +107,7 @@ spec:
     spec:
       containers:
       - name: streact
-        image: virasana/streact:Banana
+        image: virasana/streact:Banana123
         ports:
         - containerPort: 3000
 ---
