@@ -109,7 +109,7 @@ spec:
     spec:
       containers:
       - name: stweb
-        image: ${SUPPORT_TICKET_WEB_API_IMAGE}}
+        image: ${SUPPORT_TICKET_WEB_API_IMAGE}
         ports:
         - containerPort: 80
         env:
