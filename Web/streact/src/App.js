@@ -11,7 +11,7 @@ class App extends Component {
           <p>
             &copy; Karunasoft Ltd 2018. 
           </p>
-		  <p>BaNaNa</p>
+		  <p>${SUPPORT_TICKET_REACT_IMAGE}</p>
           <a
             className="App-link"
             href="https://reactjs.org"
