@@ -10,6 +10,7 @@ echo '*********************************************************************'
 echo "==> Copying template to ${1} to ${1}.temp"
 cp ${1} "${1}.temp"
 
+echo "==> Performing substitutions on ${1}"
 envsubst < "${1}.temp" > "${2}"
 
 echo "==> Removing temporary file ${1}.temp"
