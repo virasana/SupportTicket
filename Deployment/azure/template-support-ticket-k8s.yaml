@@ -91,7 +91,7 @@ spec:
     spec:
       containers:
       - name: streact
-        image: virasana/streact:${SUPPORT_TICKET_REACT_IMAGE}
+        image: ${SUPPORT_TICKET_REACT_IMAGE}
         ports:
         - containerPort: 3000
 ---
