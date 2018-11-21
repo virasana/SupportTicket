@@ -10,6 +10,9 @@ curl -L https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
 apt-get install apt-transport-https
 apt-get update &&  apt-get install azure-cli
 
+# envsubst - used for tokenisation of files
+apt-get -y install gettext-base 
+
 az aks install-cli
 
 # sql command line tools
