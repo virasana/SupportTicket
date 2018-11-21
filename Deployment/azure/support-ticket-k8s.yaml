@@ -91,7 +91,7 @@ spec:
     spec:
       containers:
       - name: streact
-        image: virasana/streact:2.0.20181121.25
+        image: ${SUPPORT_TICKET_REACT_IMAGE}
         ports:
         - containerPort: 3000
 ---
@@ -109,7 +109,7 @@ spec:
     spec:
       containers:
       - name: stweb
-        image: virasana/stweb:1.0.0.19
+        image: ${SUPPORT_TICKET_WEB_API_IMAGE}}
         ports:
         - containerPort: 80
         env:

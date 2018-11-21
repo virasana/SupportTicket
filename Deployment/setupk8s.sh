@@ -6,7 +6,7 @@ echo "*** EXPORT KOPS STATE ***"
 export KOPS_STATE_STORE=s3://kops-state-karunasoft
 
 #echo "*** AWS CONFIGURE ***"
-#aws configure 
+aws configure 
 
 #exit
 
