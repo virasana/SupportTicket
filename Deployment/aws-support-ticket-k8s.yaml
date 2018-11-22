@@ -9,7 +9,7 @@ spec:
     - protocol: TCP
       port: 1433
       targetPort: 1433
-  type: LoadBalancer 
+  type: LoadBalancer #ClusterIP for internal only 
 
 ---
 
@@ -37,7 +37,7 @@ spec:
     app: streact
   ports:
     - protocol: TCP
-      port: 3000
+      port: 80
       targetPort: 3000
   type: LoadBalancer
     
