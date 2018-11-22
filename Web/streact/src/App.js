@@ -7,8 +7,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-		  <p>Ticket Track</p>
+          <p>Ticket-Track</p>
           <p>
             &copy; Karunasoft Ltd 2018. All rights reserved.
           </p>
@@ -19,9 +18,7 @@ class App extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-		  
-            Learn React
-          </a>
+		  </a>
         </header>
       </div>
     );
