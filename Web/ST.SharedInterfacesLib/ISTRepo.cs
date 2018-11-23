@@ -9,9 +9,9 @@ namespace ST.SharedInterfacesLib
 
         Ticket AddTicket(Ticket info);
 
-        ICollection<Ticket> GetClosedTickets();
+        ICollection<Ticket> GetActiveTickets();
 
-        ICollection<Ticket> GetClosedTicketsMatching(string searchTerm);
+        ICollection<Ticket> GetActiveTicketsMatching(string searchTerm);
 
         ICollection<Severity> GetSeverities();
 

@@ -29,13 +29,13 @@ namespace ST.Web.Controllers
 
         public ActionResult Index()
         {
-            var tickets = _stService.GetClosedTickets();
+            var tickets = _stService.GetActiveTickets();
 
             return View(tickets);
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult AddTicket([Bind(Prefix = "Ticket.ProductId")]int productId, [Bind(Prefix = "Ticket.SeverityId")]int severityId, [Bind(Prefix = "Ticket.Problem")]string problem, [Bind(Prefix = "Ticket.Description")]string description, bool active)
+        public ActionResult AddTicket([Bind(Prefix = "Tickets.ProductId")]int productId, [Bind(Prefix = "Tickets.SeverityId")]int severityId, [Bind(Prefix = "Tickets.Problem")]string problem, [Bind(Prefix = "Tickets.Description")]string description, bool active)
         {
             if (!ModelState.IsValid)
             {
@@ -109,7 +109,7 @@ namespace ST.Web.Controllers
 
         public ActionResult Search(string searchTerm)
         {
-            var tickets = _stService.GetClosedTicketsMatching(searchTerm);
+            var tickets = _stService.GetActiveTicketsMatching(searchTerm);
             return View("Index", tickets);
         }
 

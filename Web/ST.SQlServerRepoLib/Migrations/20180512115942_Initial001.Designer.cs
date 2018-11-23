@@ -50,7 +50,7 @@ namespace ST.SQLServerRepoLib.Migrations
                     b.ToTable("Severity");
                 });
 
-            modelBuilder.Entity("ST.SharedEntitiesLib.Ticket", b =>
+            modelBuilder.Entity("ST.SharedEntitiesLib.Tickets", b =>
                 {
                     b.Property<int>("TicketId")
                         .ValueGeneratedOnAdd();
@@ -84,19 +84,19 @@ namespace ST.SQLServerRepoLib.Migrations
                     b.HasIndex("SeverityId")
                         .HasName("IX_SeverityId");
 
-                    b.ToTable("Ticket");
+                    b.ToTable("Tickets");
                 });
 
-            modelBuilder.Entity("ST.SharedEntitiesLib.Ticket", b =>
+            modelBuilder.Entity("ST.SharedEntitiesLib.Tickets", b =>
                 {
                     b.HasOne("ST.SharedEntitiesLib.Product", "Product")
-                        .WithMany("Ticket")
+                        .WithMany("Tickets")
                         .HasForeignKey("ProductId")
                         .HasConstraintName("FK_dbo.Ticket_dbo.Product_ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ST.SharedEntitiesLib.Severity", "Severity")
-                        .WithMany("Ticket")
+                        .WithMany("Tickets")
                         .HasForeignKey("SeverityId")
                         .HasConstraintName("FK_dbo.Ticket_dbo.Severity_SeverityId")
                         .OnDelete(DeleteBehavior.Cascade);

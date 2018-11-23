@@ -79,10 +79,10 @@ namespace ST.SQLServerRepoLib
 
                 return result;
             }
-            // return new Ticket();
+            // return new Tickets();
         }
 
-        public ICollection<Ticket> GetClosedTickets()
+        public ICollection<Ticket> GetActiveTickets()
         {
             using (var ctx = new SupportTicketContext())
             {
@@ -93,10 +93,10 @@ namespace ST.SQLServerRepoLib
                     .ToList();
                 return result;
             }
-            //return new List<Ticket>();
+            //return new List<Tickets>();
         }
 
-        private ICollection<Ticket> GetClosedTicketsMatching(List<int> ticketIds)
+        private ICollection<Ticket> GetActiveTicketsMatching(List<int> ticketIds)
         {
             using (var ctx = new SupportTicketContext())
             {
@@ -107,10 +107,10 @@ namespace ST.SQLServerRepoLib
                     .ToList();
                 return result;
             }
-            //return new List<Ticket>();
+            //return new List<Tickets>();
         }
 
-        public ICollection<Ticket> GetClosedTicketsMatching(string searchTerm)
+        public ICollection<Ticket> GetActiveTicketsMatching(string searchTerm)
         {
             // TODO: Search by Facet, Add Suggestions to the front end
             // TODO: Note: you should be using Azure queries to get the keys specific to an index, rather than using the admin key!   
@@ -119,7 +119,7 @@ namespace ST.SQLServerRepoLib
             //var searchClient = new SearchServiceClient(searchServiceName, new SearchCredentials(apiKey));
             //var indexClient = searchClient.Indexes.GetClient("idxticket");
             //var sp = new SearchParameters() { SearchMode = SearchMode.All };
-            //var docs = indexClient.Documents.Search<Ticket>(searchTerm, sp).Results;
+            //var docs = indexClient.Documents.Search<Tickets>(searchTerm, sp).Results;
 
             var ticketIds = new List<int>();
 
@@ -128,7 +128,7 @@ namespace ST.SQLServerRepoLib
             //    ticketIds.Add(searchResult.Document.TicketId);
             //}
 
-            var result = GetClosedTicketsMatching(ticketIds);
+            var result = GetActiveTicketsMatching(ticketIds);
 
             return result;
         }
@@ -161,10 +161,10 @@ namespace ST.SQLServerRepoLib
                 var result = ctx.Ticket
                     .Include("Severity")
                     .Include("Product")
-                    .FirstOrDefault(t => t.ProductId.Equals(id));
+                    .FirstOrDefault(t => t.TicketId.Equals(id));
                 return result;
             }
-            // return new Ticket();
+            // return new Tickets();
         }
     }
 }

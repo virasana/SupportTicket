@@ -36,7 +36,7 @@ namespace ST.SQLServerRepoLib.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ticket",
+                name: "Tickets",
                 columns: table => new
                 {
                     TicketId = table.Column<int>(nullable: false)
@@ -67,19 +67,19 @@ namespace ST.SQLServerRepoLib.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductId",
-                table: "Ticket",
+                table: "Tickets",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SeverityId",
-                table: "Ticket",
+                table: "Tickets",
                 column: "SeverityId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Ticket");
+                name: "Tickets");
 
             migrationBuilder.DropTable(
                 name: "Product");

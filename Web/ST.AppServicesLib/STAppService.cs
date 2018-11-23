@@ -19,15 +19,15 @@ namespace ST.AppServicesLib
             return result;
         }
 
-        public ICollection<Ticket> GetClosedTickets()
+        public ICollection<Ticket> GetActiveTickets()
         {
-            var result = _repo.GetClosedTickets();
+            var result = _repo.GetActiveTickets();
             return result;
         }
 
-        public ICollection<Ticket> GetClosedTicketsMatching(string searchTerm)
+        public ICollection<Ticket> GetActiveTicketsMatching(string searchTerm)
         {
-            var result = _repo.GetClosedTicketsMatching(searchTerm);
+            var result = _repo.GetActiveTicketsMatching(searchTerm);
             return result;
         }
 

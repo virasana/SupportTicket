@@ -66,12 +66,12 @@ namespace ST.SQLServerRepoLib
                     .IsRowVersion();
 
                 entity.HasOne(d => d.Product)
-                    .WithMany(p => p.Ticket)
+                    .WithMany(p => p.Tickets)
                     .HasForeignKey(d => d.ProductId)
                     .HasConstraintName("FK_dbo.Ticket_dbo.Product_ProductId");
 
                 entity.HasOne(d => d.Severity)
-                    .WithMany(p => p.Ticket)
+                    .WithMany(p => p.Tickets)
                     .HasForeignKey(d => d.SeverityId)
                     .HasConstraintName("FK_dbo.Ticket_dbo.Severity_SeverityId");
             });

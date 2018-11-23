@@ -5,9 +5,9 @@ namespace ST.SharedInterfacesLib
 {
     public interface ISTAppService<out TRepo> where TRepo : ISTRepo
     {
-        ICollection<Ticket> GetClosedTickets();
+        ICollection<Ticket> GetActiveTickets();
 
-        ICollection<Ticket> GetClosedTicketsMatching(string searchTerm);
+        ICollection<Ticket> GetActiveTicketsMatching(string searchTerm);
 
         ICollection<Severity> GetSeverities();
 

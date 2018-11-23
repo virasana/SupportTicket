@@ -16,7 +16,7 @@
 //        public virtual DbSet<Product> Product { get; set; }
 //        public virtual DbSet<Severity> Severity { get; set; }
 //        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-//        public virtual DbSet<Ticket> Ticket { get; set; }
+//        public virtual DbSet<Tickets> Tickets { get; set; }
 //        protected override void OnModelCreating(DbModelBuilder modelBuilder)
 //        {
 //            modelBuilder.Entity<Product>()
@@ -28,15 +28,15 @@
 //                .IsUnicode(false);
 
 //            //modelBuilder.Entity<Severity>()
-//            //    .HasMany(e => e.Ticket)
+//            //    .HasMany(e => e.Tickets)
 //            //    .WithRequired(e => e.Severity)
 //            //    .WillCascadeOnDelete(false);
 
-//            modelBuilder.Entity<Ticket>()
+//            modelBuilder.Entity<Tickets>()
 //                .Property(e => e.Problem)
 //                .IsUnicode(false);
 
-//            modelBuilder.Entity<Ticket>()
+//            modelBuilder.Entity<Tickets>()
 //                .Property(e => e.Description)
 //                .IsUnicode(false);
 //        }

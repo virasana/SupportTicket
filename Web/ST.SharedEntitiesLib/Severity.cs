@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace ST.SharedEntitiesLib
 {
@@ -7,13 +8,16 @@ namespace ST.SharedEntitiesLib
     {
         public Severity()
         {
-            Ticket = new HashSet<Ticket>();
+            Tickets = new HashSet<Ticket>();
         }
 
         [Key]
         public int SeverityId { get; set; }
         public string DisplayName { get; set; }
 
-        public ICollection<Ticket> Ticket { get; set; }
+        [JsonIgnore] // If needed, you can derive from this class
+                     // to create two versions - one will serialise,
+                     // and the other will ignore
+        public ICollection<Ticket> Tickets { get; set; }
     }
 }

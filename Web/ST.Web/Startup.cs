@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -7,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using ST.AppServicesLib;
 using ST.SharedInterfacesLib;
 using ST.SQLServerRepoLib;
@@ -29,7 +31,15 @@ namespace ST.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+            // Handle the case where it returns cyclically with an unclosed array! i.e. "[\\\ (unclosed"
+            // https://stackoverflow.com/questions/48417166/rest-api-returns-bad-array-instead-of-json-object
+            services.AddMvc().AddJsonOptions(
+                options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            );
+
+            services.AddAutoMapper();
+
+            services.AddCors();
             services.AddTransient<ISTRepo, SQLRepo>();
             services.AddTransient<ISTAppService<ISTRepo>, STAppService<ISTRepo>>();
             // Add application services.
@@ -127,6 +137,8 @@ namespace ST.Web
             var logger = loggerFactory.CreateLogger("Default");
             var connString = $"{Environment.GetEnvironmentVariable("CONN_STRING")}";
             logger.Log(LogLevel.Information, $"*** CONN_STRING: '{connString}'");
+
+            app.UseCors(builder => builder.AllowAnyOrigin());
         }
     }
 }
