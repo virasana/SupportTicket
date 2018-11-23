@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ST.SharedEntitiesLib;
 using ST.SharedInterfacesLib;
@@ -8,12 +7,10 @@ namespace ST.Web.Controllers.ApiControllers
 {
     public class TicketsController : Controller
     {
-        private readonly IMapper _mapper;
         private readonly ISTAppService<ISTRepo> _stService;
 
-        public TicketsController(ISTAppService<ISTRepo> stService, IMapper mapper)
+        public TicketsController(ISTAppService<ISTRepo> stService)
         {
-            _mapper = mapper;
             _stService = stService;
         }
 

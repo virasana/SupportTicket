@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -32,12 +31,11 @@ namespace ST.Web
         public void ConfigureServices(IServiceCollection services)
         {
             // Handle the case where it returns cyclically with an unclosed array! i.e. "[\\\ (unclosed"
+            // See also the IgnoreJson attributes on the entities
             // https://stackoverflow.com/questions/48417166/rest-api-returns-bad-array-instead-of-json-object
             services.AddMvc().AddJsonOptions(
                 options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             );
-
-            services.AddAutoMapper();
 
             services.AddCors();
             services.AddTransient<ISTRepo, SQLRepo>();
