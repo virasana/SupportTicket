@@ -11,6 +11,7 @@ COPY ST.SharedInterfacesLib/ST.SharedInterfacesLib.csproj ST.SharedInterfacesLib
 COPY ST.SharedEntitiesLib/ST.SharedEntitiesLib.csproj ST.SharedEntitiesLib/
 COPY ST.SQlServerRepoLib/ST.SQLServerRepoLib.csproj ST.SQlServerRepoLib/
 RUN dotnet restore -nowarn:msb3202,nu1503
+
 COPY . .
 WORKDIR /src/ST.Web
 RUN dotnet build -c Release -o /app
