@@ -12,7 +12,7 @@ class TicketDetail extends Component {
         <h3>Details for:</h3>
         <div>Id: {this.props.ticket.ticketId}</div>
         <div>Description: {this.props.ticket.description}</div>
-        <div>Problem: {this.props.ticket.problem}</div>
+        <div>Problem:<div class="ticketDetail">{this.props.ticket.problem}</div></div>
       </div>
     );
   }

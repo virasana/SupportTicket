@@ -3,7 +3,9 @@
 export default function(state = null, action) {
     switch (action.type) {
       case "TICKET_SELECTED":
-        return action.payload;
+        var ticket = action.payload;
+        ticket.active = true;
+        return ticket;
     default: 
         return state;
     }

@@ -6,13 +6,22 @@ import { bindActionCreators } from "redux";
 class TicketList extends Component {
   renderList() {
     return this.props.tickets.map(ticket => {
+      var theClassName = "";
+      if(this.props.activeTicket !== null && ticket.ticketId === this.props.activeTicket.ticketId){
+        theClassName = "appListItemActive";
+      }
+      else
+      {
+        theClassName = "appListItem";
+      }
+
       return (
         <li
           key={ticket.ticketId}
           onClick={() => this.props.selectTicket(ticket)}
-          className="list-group-item"
+          className={theClassName}
         >
-          {ticket.description}
+          {ticket.description} 
         </li>
       );
     });
@@ -31,7 +40,8 @@ function mapStateToProps(state) {
   // Whatever is returned will show up as props
   // inside of TicketList
   return {
-    tickets: state.tickets
+    tickets: state.tickets,
+    activeTicket: state.activeTicket
   };
 }
 
