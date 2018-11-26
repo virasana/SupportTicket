@@ -35,8 +35,8 @@ namespace ST.Web.Controllers
         }
         
         [HttpPost, ValidateAntiForgeryToken]
-        //[Route("/AddTicket")]
-        public ActionResult AddTicket([Bind(Prefix = "Tickets.ProductId")]int productId, [Bind(Prefix = "Tickets.SeverityId")]int severityId, [Bind(Prefix = "Tickets.Problem")]string problem, [Bind(Prefix = "Tickets.Description")]string description, bool active)
+        [Route("/AddTicket")]
+        public ActionResult AddTicket([Bind(Prefix = "Ticket.ProductId")]int productId, [Bind(Prefix = "Ticket.SeverityId")]int severityId, [Bind(Prefix = "Ticket.Problem")]string problem, [Bind(Prefix = "Ticket.Description")]string description, bool active)
         {
             if (!ModelState.IsValid)
             {
@@ -63,6 +63,7 @@ namespace ST.Web.Controllers
             return View(vm);
         }
 
+        [Route("/AddTicket")]
         public ActionResult AddTicket()
         {
             var ticket = new Ticket();
