@@ -9,7 +9,7 @@ namespace ST.SQLServerRepoLib
     {
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Severity> Severity { get; set; }
-        public virtual DbSet<Ticket> Ticket { get; set; }
+        public virtual DbSet<Ticket> Tickets { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

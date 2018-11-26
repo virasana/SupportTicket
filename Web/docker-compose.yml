@@ -35,5 +35,5 @@ services:
     container_name: streact-dev
     build:
       context: ./streact
-      dockerfile: streact/Dockerfile-dev
+      dockerfile: ./Dockerfile-dev
     ports: ['3000:3000']

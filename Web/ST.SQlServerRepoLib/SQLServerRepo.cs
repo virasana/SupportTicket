@@ -68,11 +68,11 @@ namespace ST.SQLServerRepoLib
             {
                 ticket.Product = null;
                 ticket.Severity = null;
-                ctx.Ticket.Add(ticket);
+                ctx.Tickets.Add(ticket);
 
                 ctx.SaveChanges();
 
-                var result = ctx.Ticket
+                var result = ctx.Tickets
                     .Include("Product")
                     .Include("Severity")
                     .FirstOrDefault(t => t.TicketId == ticket.TicketId);
@@ -86,7 +86,7 @@ namespace ST.SQLServerRepoLib
         {
             using (var ctx = new SupportTicketContext())
             {
-                var result = ctx.Ticket
+                var result = ctx.Tickets
                     .Include("Severity")
                     .Include("Product")
                     .Where(t => t.Active)
@@ -100,7 +100,7 @@ namespace ST.SQLServerRepoLib
         {
             using (var ctx = new SupportTicketContext())
             {
-                var result = ctx.Ticket
+                var result = ctx.Tickets
                     .Include("Severity")
                     .Include("Product")
                     .Where(t => t.Active && ticketIds.Any(tid => tid == t.TicketId))
@@ -158,7 +158,7 @@ namespace ST.SQLServerRepoLib
         {
             using (var ctx = new SupportTicketContext())
             {
-                var result = ctx.Ticket
+                var result = ctx.Tickets
                     .Include("Severity")
                     .Include("Product")
                     .FirstOrDefault(t => t.TicketId.Equals(id));
