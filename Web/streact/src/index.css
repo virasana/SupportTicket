@@ -84,10 +84,6 @@ label {
     border-color: transparent;
 }
 
-td {
-    padding: 5px;
-}
-
 .st-footer {
     text-align: center;
 }
@@ -99,4 +95,8 @@ td {
 .st-tickets-panel {
     border-radius: 5px;
     background-color: rgb(244, 250, 250)
+}
+
+td {
+    padding: 5px;
 }
