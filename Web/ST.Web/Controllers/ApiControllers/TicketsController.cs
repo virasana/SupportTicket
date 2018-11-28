@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using ST.SharedEntitiesLib;
 using ST.SharedInterfacesLib;
 
 namespace ST.Web.Controllers.ApiControllers
 {
+    [EnableCors("AllowAnyOrigin")]
     public class TicketsController : Controller
     {
         private readonly ISTAppService<ISTRepo> _stService;

@@ -1,59 +1,66 @@
+import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { selectTicket } from "../actions/index";
-import { bindActionCreators } from "redux";
+import { fetchTickets } from "../actions/index";
+//import { bindActionCreators } from "redux";
+import TicketDetail from "./ticket-detail";
 
 class TicketList extends Component {
-  renderList() {
-    return this.props.tickets.map(ticket => {
-      var theClassName = "";
-      if(this.props.activeTicket !== null && ticket.ticketId === this.props.activeTicket.ticketId){
-        theClassName = "appListItemActive";
-      }
-      else
-      {
-        theClassName = "appListItem";
-      }
 
+  componentWillMount() {
+    console.log('componentWillMount');
+    this.props.fetchTickets();
+  }
+
+  renderList() {
+    return _.map(this.props.tickets, ticket => {
       return (
-        <li
-          key={ticket.ticketId}
-          onClick={() => this.props.selectTicket(ticket)}
-          className={theClassName}
-        >
-          {ticket.description} 
-        </li>
+        <TicketDetail key={ticket.ticketId} ticket={ticket}/>
       );
     });
   }
 
   render() {
     return (
-      <ul className="list-group col-sm-4">
-        {this.renderList()}
-      </ul>
-    );
+      <div>
+        <div>
+          <h2>View Tickets</h2>
+          <p><strong>Note: </strong>Inactive tickets will not be displayed</p>
+          <div>
+              <p>
+                  Download the code from Github <a href="https://github.com/virasana/SupportTicket">here</a>
+              </p>
+          </div>
+        </div>
+        <div className="row st-tickets-panel">
+            <div className="col-md-12 container">
+                {this.renderList()}
+          </div>
+        </div>
+      </div>
+      )
   }
 }
 
-function mapStateToProps(state) {
-  // Whatever is returned will show up as props
-  // inside of TicketList
-  return {
-    tickets: state.tickets,
-    activeTicket: state.activeTicket
-  };
-}
 
-// Anything returned from this function will end up as props
-// on the TicketList container
-function mapDispatchToProps(dispatch) {
-  // Whenever selectTicket is called, the result should be passed
-  // to all of our reducers
-  return bindActionCreators({ selectTicket: selectTicket }, dispatch);
-}
+
+// function mapDispatchToProps(dispatch) {
+//   // Whenever selectTicket is called, the result should be passed
+//   // to all of our reducers
+//   return bindActionCreators({ fetchTickets: fetchTickets }, dispatch);
+// }
 
 // Promote TicketList from a component to a container - it needs to know
 // about this new dispatch method, selectTicket. Make it available
 // as a prop.
-export default connect(mapStateToProps, mapDispatchToProps)(TicketList);
+
+// Anything returned from this function will end up as props
+// on the TicketList container
+function mapStateToProps(state) {
+  // Whatever is returned will show up as props
+  // inside of TicketList
+  return { tickets: state.tickets };
+}
+
+
+export default connect(mapStateToProps, { fetchTickets })(TicketList);

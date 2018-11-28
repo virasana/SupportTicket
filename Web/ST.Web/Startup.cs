@@ -37,7 +37,11 @@ namespace ST.Web
                 options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             );
 
-            services.AddCors();
+            services.AddCors(options => options.AddPolicy("AllowAnyOrigin",
+                builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()));
+
             services.AddTransient<ISTRepo, SQLRepo>();
             services.AddTransient<ISTAppService<ISTRepo>, STAppService<ISTRepo>>();
             // Add application services.
@@ -87,16 +91,13 @@ namespace ST.Web
 
             #endregion
 
-            services.AddMvc();
-
             services.AddDbContext<ApplicationDbContext>(
                 options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SupportTicketCoreAuth")
                     ));
 
+            services.AddMvc();
         }
-
-
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -114,6 +115,8 @@ namespace ST.Web
             app.UseStaticFiles();
 
             app.UseAuthentication();
+
+            app.UseCors("AllowAnyOrigin");
 
             app.UseMvc(routes =>
             {
@@ -136,7 +139,7 @@ namespace ST.Web
             var connString = $"{Environment.GetEnvironmentVariable("CONN_STRING")}";
             logger.Log(LogLevel.Information, $"*** CONN_STRING: '{connString}'");
 
-            app.UseCors(builder => builder.AllowAnyOrigin());
+            
         }
     }
 }

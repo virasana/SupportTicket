@@ -1,27 +1,66 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+
 
 class TicketDetail extends Component {
   render() {
     if (!this.props.ticket) {
-      return <div>Select a ticket to get started.</div>;
+      return <div>No ticket to display</div>;
     }
 
     return (
       <div>
-        <h3>Details for:</h3>
-        <div>Id: {this.props.ticket.ticketId}</div>
-        <div>Description: {this.props.ticket.description}</div>
-        <div>Problem:<div class="ticketDetail">{this.props.ticket.problem}</div></div>
-      </div>
+      <table className="table-bordered table-striped table-responsive">
+      <tbody>
+        <tr>
+          <td colSpan="2"><strong>Ticket ID</strong>: {this.props.ticket.ticketId}</td>
+        </tr>
+        <tr>
+            <td className="st-label">
+                Description
+            </td>
+            <td>
+                {this.props.ticket.description}
+            </td>
+        </tr>
+        <tr>
+            <td className="st-label">
+                Problem
+            </td>
+            <td>
+                {this.props.ticket.problem}
+            </td>
+        </tr>
+        <tr>
+            <td className="st-label">
+                Active
+            </td>
+            <td>
+                {this.props.ticket.active.toString()}
+            </td>
+        </tr>
+        <tr>
+            <td className="st-label">
+                TicketId
+            </td>
+            <td>
+                {this.props.ticket.ticketId}
+            </td>
+        </tr>
+        <tr>
+            <td className="st-label">
+                Severity
+            </td>
+            <td>
+                {typeof(this.props.ticket.severity) === 'undefined'? '' : this.props.ticket.severity.displayName}
+            </td>
+        </tr>
+      </tbody>
+    </table>
+    <hr/>
+    </div>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    ticket: state.activeTicket
-  };
-}
 
-export default connect(mapStateToProps)(TicketDetail);
+export default TicketDetail;
