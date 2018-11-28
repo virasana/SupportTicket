@@ -94,7 +94,8 @@ label {
 
 .st-tickets-panel {
     border-radius: 5px;
-    background-color: rgb(244, 250, 250)
+    background-color: rgb(244, 250, 250);
+    padding: 10px;
 }
 
 td {
