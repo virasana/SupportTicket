@@ -9,12 +9,12 @@ services:
     ports:
       - 1433:1433
     environment:
-      SA_PASSWORD: "K00s123^^^K00s123"
+      SA_PASSWORD: "D3vP4ss^^^D3vP4ss"
       ACCEPT_EULA: "Y"
       MSSQL_PID: Developer
   st.web:
     environment:
-      CONN_STRING: "Data Source=sqlservice;Initial Catalog=SupportTicket;User Id=SA;password=K00s123^^^K00s123"
+      CONN_STRING: "Data Source=sqlservice;Initial Catalog=SupportTicket;User Id=SA;password=D3vP4ss^^^D3vP4ss"
     depends_on:
      - mssql
     image: virasana/stweb:1.0.0.1
