@@ -45,8 +45,8 @@ spec:
 
 apiVersion: v1
 data:
-  CONN_STRING: ${SUPPORT_TICKET_DB_CONN_STRING} 
-  SA_PASSWORD: ${SUPPORT_TICKET_DB_SA_PASSWORD}
+  CONN_STRING: ${SUPPORT_TICKET_DEPLOY_DB_CONN_STRING} 
+  SA_PASSWORD: ${SUPPORT_TICKET_DEPLOY_SA_PASSWORD}
 kind: Secret
 metadata:
   name: mssql
@@ -104,12 +104,12 @@ spec:
     spec:
       containers:
       - name: streact
-        image: ${SUPPORT_TICKET_REACT_IMAGE}
+        image: ${SUPPORT_TICKET_BUILD_REACT_IMAGE}
         ports:
         - containerPort: 3000
         env:
         - name: REACT_APP_API_URL
-          value: ${REACT_APP_AZURE_API_URL}
+          value: ${SUPPORT_TICKET_DEPLOY_REACT_AZURE_API_URL}
 ---
 
 apiVersion: apps/v1beta1
@@ -125,7 +125,7 @@ spec:
     spec:
       containers:
       - name: stweb
-        image: ${SUPPORT_TICKET_WEB_API_IMAGE}
+        image: ${SUPPORT_TICKET_BUILD_WEB_API_IMAGE}
         ports:
         - containerPort: 80
         env:
