@@ -133,6 +133,9 @@ spec:
         image: ${SUPPORT_TICKET_REACT_IMAGE}
         ports:
         - containerPort: 3000
+        env:
+        - name: REACT_APP_API_URL
+          value: ${REACT_APP_API_URL}
 ---
 
 apiVersion: apps/v1beta1
