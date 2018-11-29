@@ -9,7 +9,7 @@ spec:
     - protocol: TCP
       port: 1433
       targetPort: 1433
-  type: LoadBalancer #ClusterIP for internal only 
+  type: LoadBalancer 
 
 ---
 
@@ -45,8 +45,8 @@ spec:
 
 apiVersion: v1
 data:
-  CONN_STRING: ${SUPPORT_TICKET_DB_CONN_STRING}
-  SA_PASSWORD: ${SUPPORT_TICKET_DB_SA_PASSWORD}
+  CONN_STRING:  
+  SA_PASSWORD: 
 kind: Secret
 metadata:
   name: mssql
@@ -54,32 +54,6 @@ metadata:
   selfLink: /api/v1/namespaces/default/secrets/mssql
 type: Opaque
 
----
-
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-  name: slow
-provisioner: kubernetes.io/aws-ebs
-parameters:
-  type: io1
-  iopsPerGB: "10"
-  fsType: ext4
-  
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: mssql-data
-  annotations:
-    storageClassName: slow
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 8Gi
-      
 ---
 
 apiVersion: apps/v1beta1
@@ -130,12 +104,12 @@ spec:
     spec:
       containers:
       - name: streact
-        image: ${SUPPORT_TICKET_REACT_IMAGE}
+        image: 
         ports:
         - containerPort: 3000
         env:
         - name: REACT_APP_API_URL
-          value: ${REACT_APP_AWS_API_URL}
+          value: Banana
 ---
 
 apiVersion: apps/v1beta1
@@ -151,7 +125,7 @@ spec:
     spec:
       containers:
       - name: stweb
-        image: ${SUPPORT_TICKET_WEB_API_IMAGE}
+        image: 
         ports:
         - containerPort: 80
         env:
