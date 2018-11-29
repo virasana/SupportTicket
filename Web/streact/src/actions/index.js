@@ -1,8 +1,9 @@
 import axios from "axios";
 
+
 export const FETCH_TICKETS = "FETCH_TICKETS";
 
-const ROOT_URL = "http://webservice/api";
+const ROOT_URL = process.env.REACT_APP_API_URL;
 
 export function fetchTickets() {
   const request = axios.get(`${ROOT_URL}/tickets`);

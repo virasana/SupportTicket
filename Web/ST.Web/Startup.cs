@@ -50,7 +50,10 @@ namespace ST.Web
             #region Authentication
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("SupportTicketCoreAuth")));
+                options
+                    .UseSqlServer(Environment.GetEnvironmentVariable(App.Constants.SupportTicketConnStringKey) 
+                                  ?? throw new InvalidOperationException(
+                                      "Could not find the connection string")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()

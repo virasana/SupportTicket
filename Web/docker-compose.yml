@@ -27,7 +27,7 @@ services:
     volumes:
      - .\streact\:/usr/src/app
     environment:
-      WEB_API_URL: "http://some.url"
+      REACT_APP_API_URL: "http://webservice/api"
       CHOKIDAR_USEPOLLING: "true"
     depends_on:
      - st.web
