@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const FETCH_TICKETS = "FETCH_TICKETS";
 
-const ROOT_URL = "http://webservice:32768/api";
+const ROOT_URL = "http://webservice/api";
 
 export function fetchTickets() {
   const request = axios.get(`${ROOT_URL}/tickets`);

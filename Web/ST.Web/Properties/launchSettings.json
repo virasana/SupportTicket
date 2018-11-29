@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:58886/",
+      "applicationUrl": "http://localhost",
       "sslPort": 0
     }
   },
@@ -22,7 +22,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "CONN_STRING": "Data Source=sqlservice;Initial Catalog=SupportTicket;User Id=SA; password=K00s123^^^K00s123"
       },
-      "applicationUrl": "http://localhost:58887/"
+      "applicationUrl": "http://localhost"
     }
   }
 }

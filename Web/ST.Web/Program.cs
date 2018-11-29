@@ -16,13 +16,17 @@ namespace ST.Web
     {
         public static void Main(string[] args)
         {
-            Trace.WriteLine("Container started!!!");
-            BuildWebHost(args).Run();
+            var host = BuildWebHost(args);
+            host.Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static IWebHost BuildWebHost(string[] args)
+        {
+            var host = WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .Build();
+
+            return host;
+        }
     }
 }
