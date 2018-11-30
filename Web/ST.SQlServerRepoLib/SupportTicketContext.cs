@@ -7,6 +7,12 @@ namespace ST.SQLServerRepoLib
 {
     public partial class SupportTicketContext : DbContext
     {
+        private readonly string _connectionString;
+
+        public SupportTicketContext(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Severity> Severity { get; set; }
         public virtual DbSet<Ticket> Tickets { get; set; }
@@ -15,13 +21,7 @@ namespace ST.SQLServerRepoLib
         {
             if (!optionsBuilder.IsConfigured)
             {
-                // TODO - Get from config
-
-                var connString = $"{Environment.GetEnvironmentVariable("CONN_STRING")}";
-                Console.WriteLine($"** ConnectionString: {connString}");
-                File.WriteAllText(Path.Combine(Environment.CurrentDirectory, "ConnString.txt"), connString);
-
-                optionsBuilder.UseSqlServer(connString);
+                optionsBuilder.UseSqlServer(_connectionString);
             }
         }
 

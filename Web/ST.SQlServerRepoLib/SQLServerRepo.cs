@@ -10,9 +10,12 @@ namespace ST.SQLServerRepoLib
 {
     public class SQLRepo : ISTRepo
     {
-        public void Initialise()
+        private static string _connectionString; 
+        public void Initialise(string connectionString)
         {
-            using (var context = new SupportTicketContext())
+            _connectionString = connectionString;
+
+            using (var context = new SupportTicketContext(connectionString))
             {
                 context.Database.Migrate();
             }
@@ -22,7 +25,7 @@ namespace ST.SQLServerRepoLib
 
         private void SeedDatabase()
         {
-            using (var context = new SupportTicketContext())
+            using (var context = new SupportTicketContext(_connectionString))
             {
                 var products = new List<Product>()
                 {
@@ -64,7 +67,7 @@ namespace ST.SQLServerRepoLib
 
         public virtual Ticket AddTicket(Ticket ticket)
         {
-            using (var ctx = new SupportTicketContext())
+            using (var ctx = new SupportTicketContext(_connectionString))
             {
                 ticket.Product = null;
                 ticket.Severity = null;
@@ -84,7 +87,7 @@ namespace ST.SQLServerRepoLib
 
         public ICollection<Ticket> GetActiveTickets()
         {
-            using (var ctx = new SupportTicketContext())
+            using (var ctx = new SupportTicketContext(_connectionString))
             {
                 var result = ctx.Tickets
                     .Include("Severity")
@@ -98,7 +101,7 @@ namespace ST.SQLServerRepoLib
 
         private ICollection<Ticket> GetActiveTicketsMatching(List<int> ticketIds)
         {
-            using (var ctx = new SupportTicketContext())
+            using (var ctx = new SupportTicketContext(_connectionString))
             {
                 var result = ctx.Tickets
                     .Include("Severity")
@@ -135,7 +138,7 @@ namespace ST.SQLServerRepoLib
 
         public ICollection<Severity> GetSeverities()
         {
-            using (var ctx = new SupportTicketContext())
+            using (var ctx = new SupportTicketContext(_connectionString))
             {
                 var result = ctx.Severity.ToList();
                 return result;
@@ -146,7 +149,7 @@ namespace ST.SQLServerRepoLib
 
         public ICollection<Product> GetProducts()
         {
-            using (var ctx = new SupportTicketContext())
+            using (var ctx = new SupportTicketContext(_connectionString))
             {
                 var result = ctx.Product.ToList();
                 return result;
@@ -156,7 +159,7 @@ namespace ST.SQLServerRepoLib
 
         public Ticket GetTicket(int id)
         {
-            using (var ctx = new SupportTicketContext())
+            using (var ctx = new SupportTicketContext(_connectionString))
             {
                 var result = ctx.Tickets
                     .Include("Severity")

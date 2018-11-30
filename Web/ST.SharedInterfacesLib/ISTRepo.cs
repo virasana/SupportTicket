@@ -5,7 +5,7 @@ namespace ST.SharedInterfacesLib
 {
     public interface ISTRepo
     {
-        void Initialise();
+        void Initialise(string connectionString);
 
         Ticket AddTicket(Ticket info);
 

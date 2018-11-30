@@ -19,10 +19,13 @@ namespace ST.Web
 {
     public class Startup
     {
+        private readonly string _connectionStringAuth;
+        private readonly string _connectionStringSupportTicket;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            
+            _connectionStringSupportTicket = Environment.GetEnvironmentVariable(App.Constants.SupportTicketConnStringKey);
+            _connectionStringAuth = Environment.GetEnvironmentVariable(App.Constants.SupportTicketConnStringKey);
         }
 
         public IConfiguration Configuration { get; }
@@ -48,12 +51,12 @@ namespace ST.Web
             services.AddTransient<IEmailSender, EmailSender>();
 
             #region Authentication
-
             services.AddDbContext<ApplicationDbContext>(options =>
                 options
-                    .UseSqlServer(Environment.GetEnvironmentVariable(App.Constants.SupportTicketConnStringKey) 
-                                  ?? throw new InvalidOperationException(
-                                      "Could not find the connection string")));
+                    .UseSqlServer(_connectionStringAuth ?? throw new InvalidOperationException(
+                                      "No connection string for authentication database!")));
+                                  
+
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -105,6 +108,11 @@ namespace ST.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+
+            loggerFactory.AddDebug();
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            var logger = loggerFactory.CreateLogger("Default");
+            
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();
@@ -130,19 +138,10 @@ namespace ST.Web
 
             using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
-                scope.ServiceProvider.GetRequiredService<ApplicationDbContext>()
-                    .Database.Migrate();
-                scope.ServiceProvider.GetRequiredService<ISTRepo>().Initialise();
-
+                var appDbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                appDbContext.Database.Migrate();
+                scope.ServiceProvider.GetRequiredService<ISTRepo>().Initialise(_connectionStringSupportTicket);
             }
-
-            loggerFactory.AddDebug();
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            var logger = loggerFactory.CreateLogger("Default");
-            var connString = $"{Environment.GetEnvironmentVariable("CONN_STRING")}";
-            logger.Log(LogLevel.Information, $"*** CONN_STRING: '{connString}'");
-
-            
         }
     }
 }
