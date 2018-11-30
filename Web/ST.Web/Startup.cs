@@ -51,12 +51,11 @@ namespace ST.Web
             services.AddTransient<IEmailSender, EmailSender>();
 
             #region Authentication
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options
                     .UseSqlServer(_connectionStringAuth ?? throw new InvalidOperationException(
                                       "No connection string for authentication database!")));
-                                  
-
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -96,11 +95,6 @@ namespace ST.Web
             });
 
             #endregion
-
-            services.AddDbContext<ApplicationDbContext>(
-                options =>
-                    options.UseSqlServer(Configuration.GetConnectionString(_connectionStringAuth)
-                    ));
 
             services.AddMvc();
         }
