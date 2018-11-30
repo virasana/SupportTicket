@@ -33,25 +33,45 @@ namespace ST.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Handle the case where it returns cyclically with an unclosed array! i.e. "[\\\ (unclosed"
+            ConfigureJson(services);
+
+            ConfigureCors(services);
+
+            ConfigureAppDI(services);
+
+            ConfigureAuthentication(services);
+
+            services.AddMvc();
+        }
+
+        private static void ConfigureCors(IServiceCollection services)
+        {
+            services.AddCors(options => options.AddPolicy("AllowAnyOrigin",
+                builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()));
+        }
+
+        private static void ConfigureJson(IServiceCollection services)
+        {
+// Handle the case where it returns cyclically with an unclosed array! i.e. "[\\\ (unclosed"
             // See also the IgnoreJson attributes on the entities
             // https://stackoverflow.com/questions/48417166/rest-api-returns-bad-array-instead-of-json-object
             services.AddMvc().AddJsonOptions(
                 options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             );
+        }
 
-            services.AddCors(options => options.AddPolicy("AllowAnyOrigin",
-                builder => builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()));
-
+        private static void ConfigureAppDI(IServiceCollection services)
+        {
             services.AddTransient<ISTRepo, SQLRepo>();
             services.AddTransient<ISTAppService<ISTRepo>, STAppService<ISTRepo>>();
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+        }
 
-            #region Authentication
-
+        private void ConfigureAuthentication(IServiceCollection services)
+        {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options
                     .UseSqlServer(_connectionStringAuth ?? throw new InvalidOperationException(
@@ -61,25 +81,13 @@ namespace ST.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.Configure<IdentityOptions>(options =>
-            {
-                // Password settings
-                options.Password.RequireDigit = true;
-                options.Password.RequiredLength = 8;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = true;
-                options.Password.RequireLowercase = false;
-                options.Password.RequiredUniqueChars = 6;
+            ConfigureIdentityOptions(services);
 
-                // Lockout settings
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
-                options.Lockout.MaxFailedAccessAttempts = 10;
-                options.Lockout.AllowedForNewUsers = true;
+            ConfigureApplicationCookie(services);
+        }
 
-                // User settings
-                options.User.RequireUniqueEmail = true;
-            });
-
+        private static void ConfigureApplicationCookie(IServiceCollection services)
+        {
             services.ConfigureApplicationCookie(options =>
             {
                 // Cookie settings
@@ -93,10 +101,40 @@ namespace ST.Web
                 options.AccessDeniedPath = "/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
+        }
 
-            #endregion
+        private static void ConfigureIdentityOptions(IServiceCollection services)
+        {
+            services.Configure<IdentityOptions>(options =>
+            {
+                ConfigurePassword(options);
 
-            services.AddMvc();
+                ConfigureLockout(options);
+
+                ConfigureUserSettings(options);
+            });
+        }
+
+        private static void ConfigureUserSettings(IdentityOptions options)
+        {
+            options.User.RequireUniqueEmail = true;
+        }
+
+        private static void ConfigureLockout(IdentityOptions options)
+        {
+            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+            options.Lockout.MaxFailedAccessAttempts = 10;
+            options.Lockout.AllowedForNewUsers = true;
+        }
+
+        private static void ConfigurePassword(IdentityOptions options)
+        {
+            options.Password.RequireDigit = true;
+            options.Password.RequiredLength = 8;
+            options.Password.RequireNonAlphanumeric = false;
+            options.Password.RequireUppercase = true;
+            options.Password.RequireLowercase = false;
+            options.Password.RequiredUniqueChars = 6;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
