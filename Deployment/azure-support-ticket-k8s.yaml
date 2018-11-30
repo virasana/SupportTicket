@@ -76,7 +76,7 @@ spec:
         env:
         - name: ACCEPT_EULA
           value: "Y"
-        - name: SUPPORT_TICKET_DEPLOY_DB_SA_PASSWORD
+        - name: SA_PASSWORD
           valueFrom:
             secretKeyRef:
               name: mssql
