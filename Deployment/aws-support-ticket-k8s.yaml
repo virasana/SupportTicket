@@ -45,8 +45,8 @@ spec:
 
 apiVersion: v1
 data:
-  SUPPORT_TICKET_DEPLOY_DB_CONN_STRING: ${SUPPORT_TICKET_DEPLOY_DB_CONN_STRING} 
   SUPPORT_TICKET_DEPLOY_DB_SA_PASSWORD: ${SUPPORT_TICKET_DEPLOY_DB_SA_PASSWORD}
+  SUPPORT_TICKET_DEPLOY_DB_CONN_STRING: ${SUPPORT_TICKET_DEPLOY_DB_CONN_STRING} 
 kind: Secret
 metadata:
   name: mssql
@@ -106,7 +106,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: mssql
-              key: SA_PASSWORD 
+              key: SUPPORT_TICKET_DEPLOY_DB_SA_PASSWORD 
         volumeMounts:
         - name: mssqldb
           mountPath: /var/opt/mssql
@@ -155,9 +155,9 @@ spec:
         ports:
         - containerPort: 80
         env:
-        - name: CONN_STRING
+        - name: SUPPORT_TICKET_DEPLOY_DB_CONN_STRING
           valueFrom:
             secretKeyRef:
               name: mssql
-              key: CONN_STRING               
+              key: SUPPORT_TICKET_DEPLOY_DB_CONN_STRING               
  
