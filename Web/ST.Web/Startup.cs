@@ -99,7 +99,7 @@ namespace ST.Web
 
             services.AddDbContext<ApplicationDbContext>(
                 options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("SupportTicketCoreAuth")
+                    options.UseSqlServer(Configuration.GetConnectionString(_connectionStringAuth)
                     ));
 
             services.AddMvc();
