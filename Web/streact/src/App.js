@@ -5,7 +5,7 @@ import TicketList from "./containers/ticket-list";
 
 export class App extends Component {
   render() {
-    const SUPPORT_TICKET_REACT_IMAGE="virasana/0.0.0.0"; //default
+    const SUPPORT_TICKET_BUILD_REACT_IMAGE="virasana/0.0.0.0"; //default
     let nav = (
       <div>
         <nav className="navbar navbar-inverse navbar-fixed-top">
@@ -39,7 +39,7 @@ export class App extends Component {
     let footer = (
     <div >
         <footer>
-            <p className="st-footer">Ticket-Track : &copy; Karunasoft Ltd 2018. All rights reserved : Docker: ${SUPPORT_TICKET_REACT_IMAGE}</p>
+            <p className="st-footer">Ticket-Track : &copy; Karunasoft Ltd 2018. All rights reserved : Docker: ${SUPPORT_TICKET_BUILD_REACT_IMAGE}</p>
         </footer>
     </div>
     );
