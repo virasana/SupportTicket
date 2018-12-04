@@ -10,13 +10,13 @@ class TicketsNew extends Component {
       const className = `form-group ${touched && error ? "has-danger" : ""}`;
   
       return (
-        <div className={className}>
-          <label>{field.label}</label>
-          <input className="form-control" type="text" {...field.input} />
-          {/* <div className="text-help">
-            {touched ? error : ""}
-          </div> */}
-        </div>
+          <div className={className}>
+            <label>{field.label}</label>
+            <input className="form-control" type="text" {...field.input} />
+            {/* <div className="text-help">
+              {touched ? error : ""}
+            </div> */}
+          </div>
       );
     }
 
@@ -32,6 +32,7 @@ class TicketsNew extends Component {
 
     return (
       <div className="st-tickets-panel">
+        <div><h2>New Ticket</h2></div>
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field
             label="Description For Ticket"

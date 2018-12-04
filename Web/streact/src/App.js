@@ -4,53 +4,63 @@ import TicketList from "./containers/ticket-list";
 import TicketsNew from "./containers/tickets-new";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { stack as Menu } from 'react-burger-menu'
 
 export class App extends Component {
+  constructor (props) {
+    super(props)
+    this.state = { menuOpen: false }
+    this.handleStateChange = this.handleStateChange.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this);
+  }
+
+  handleStateChange (state) {
+    this.setState({menuOpen: state.isOpen})  
+  }
+
+  closeMenu () {
+    this.setState({menuOpen: false})
+  }
+
+  toggleMenu () {
+    this.setState({menuOpen: !this.state.menuOpen})
+  }
+
   render() {
-    const SUPPORT_TICKET_BUILD_REACT_IMAGE="virasana/0.0.0.0"; //default
+    const SUPPORT_TICKET_BUILD_REACT_IMAGE="virasana/0.0.0.0"; //default  
     
     return (
 
       <BrowserRouter>
-      <div>
-        <div>
-          <nav className="navbar navbar-inverse navbar-fixed-top">
-            <div className="container">
-                <div className="navbar-header">
-                    <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span className="sr-only">Toggle Navigation</span>
-                    <span className="icon-bar"></span>
-                    <span className="icon-bar"></span>
-                    <span className="icon-bar"></span>
-                </button>
-                    <span className="navbar-brand">Ticket Track</span>
-                </div>
-                <div className="navbar-collapse collapse">
-                    <ul className="nav navbar-nav">
-                    <li><Link to="/tickets">View Tickets</Link></li>
-                    <li><Link to="/tickets/new">New Ticket</Link></li>
-                    <li><span href="Contact">Contact</span></li>
-                    <li><span href="Login">Login</span></li>
-                    </ul>
-                </div>
+        <div id="outer-container" >
+            <div className="st-pconly">
+                <div className="st-navitem"><Link to="/" className="menu-item">View Tickets</Link></div>
+                <div className="st-navitem"><Link className="st-navitem" to="/tickets/new" className="menu-item">New Ticket</Link></div>
             </div>
-          </nav>
+            <div className="st-mobileonly">
+                <Menu 
+                  isOpen={this.state.menuOpen}
+                  onStateChange={(state) => this.handleStateChange(state)}
+                  right 
+                  pageWrapId={"page-wrap"} outerContainerId={"outer-container"}>
+                    <Link onClick={() => this.closeMenu()} to="/tickets/new" className="menu-item">New Ticket</Link>
+                    <Link onClick={() => this.closeMenu()} to="/" className="menu-item">View Tickets</Link>
+                </Menu>
+            </div>
+            <div id="page-wrap" className="st-main-area">
+                <Switch>
+                    <Route path="/tickets/new" component={TicketsNew} />
+                    <Route path="/tickets" component={TicketList} />
+                    <Route path="/" component={TicketList} />
+                </Switch>
+            </div>
+            <div >
+                <footer>
+                    <p className="st-footer">Ticket-Track : &copy; Karunasoft Ltd 2018. All rights reserved : Docker: ${SUPPORT_TICKET_BUILD_REACT_IMAGE}</p>
+                </footer>
+            </div>
         </div>
-        <div className="st-main-area">
-          <Switch>
-            <Route path="/tickets/new" component={TicketsNew} />
-            <Route path="/tickets" component={TicketList} />
-            <Route path="/" component={TicketList} />
-          </Switch>
-        </div>
-        <div >
-          <footer>
-              <p className="st-footer">Ticket-Track : &copy; Karunasoft Ltd 2018. All rights reserved : Docker: ${SUPPORT_TICKET_BUILD_REACT_IMAGE}</p>
-          </footer>
-        </div>
-      </div>
-
-      
     </BrowserRouter>
     );
   }
