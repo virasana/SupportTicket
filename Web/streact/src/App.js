@@ -4,7 +4,7 @@ import TicketList from "./containers/ticket-list";
 import TicketsNew from "./containers/tickets-new";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { stack as Menu } from 'react-burger-menu'
+import Menu from 'react-burger-menu/lib/menus/stack'
 
 export class App extends Component {
   constructor (props) {

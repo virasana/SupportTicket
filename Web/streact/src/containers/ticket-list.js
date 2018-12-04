@@ -22,9 +22,9 @@ class TicketList extends Component {
 
   render() {
     return (
-      <div>
+      <div className="st-tickets-panel">
+        <div><h2>View Tickets</h2></div>
         <div>
-          <h2>View Tickets</h2>
           <p><strong>Note: </strong>Inactive tickets will not be displayed</p>
           <div>
               <p>
