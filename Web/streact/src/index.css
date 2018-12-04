@@ -2,10 +2,10 @@
 
 .bm-burger-button {
     position: fixed;
-    width: 12px;
-    height: 12px;
+    width: 24px;
+    height: 24px;
     right: 12px;
-    top: 3px;
+    top: 12px;
     color: white;
 }
 
