@@ -115,7 +115,7 @@
 
 .unlinked-nav-item {
     padding: 15px;
-    color: yellowgreen;
+    color: white;
     border-radius: 5px;
     border-style: solid;
 }
@@ -209,4 +209,5 @@ td {
 button {
     margin-left: 5px;
     margin-right: 5px;
+    color: white;
 }
