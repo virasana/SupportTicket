@@ -33,7 +33,7 @@ class TicketList extends Component {
           </div>
         </div>
         <div className="row st-tickets-panel">
-            <div className="col-md-12 container">
+            <div className="col-md-12 container st-scrollable-area">
                 {this.renderList()}
           </div>
         </div>

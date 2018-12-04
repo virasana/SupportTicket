@@ -33,22 +33,29 @@ export class App extends Component {
     return (
 
       <BrowserRouter>
-        <div id="outer-container" >
-            <div className="st-pconly">
-                <div className="st-navitem"><Link to="/" className="menu-item">View Tickets</Link></div>
-                <div className="st-navitem"><Link className="st-navitem" to="/tickets/new" className="menu-item">New Ticket</Link></div>
+        <div id="outer-container" className="st-navbar">
+            <div className="navbar navbar-inverse navbar-fixed-top">
+                <div className="container">
+                    <div className="st-navbar-brand">Ticket Track</div>
+                    <div className="navbar-collapse collapse st-pconly">
+                        <ul className="nav navbar-nav">
+                            <li className="st-navitem"><Link to="/" className="menu-item">View Tickets</Link></li>
+                            <li className="st-navitem"><Link to="/tickets/new" className="menu-item">New Ticket</Link></li>
+                        </ul>
+                    </div>
+                    <div className="st-mobileonly">
+                    <Menu 
+                    isOpen={this.state.menuOpen}
+                    onStateChange={(state) => this.handleStateChange(state)}
+                    right 
+                    pageWrapId={"page-wrap"} outerContainerId={"outer-container"}>
+                        <Link className="st-navitem" onClick={() => this.closeMenu()} to="/tickets/new" >New Ticket</Link>
+                        <Link className="st-navitem" onClick={() => this.closeMenu()} to="/" >View Tickets</Link>
+                    </Menu>
+                </div>
+                </div>
             </div>
-            <div className="st-mobileonly">
-                <Menu 
-                  isOpen={this.state.menuOpen}
-                  onStateChange={(state) => this.handleStateChange(state)}
-                  right 
-                  pageWrapId={"page-wrap"} outerContainerId={"outer-container"}>
-                    <Link onClick={() => this.closeMenu()} to="/tickets/new" className="menu-item">New Ticket</Link>
-                    <Link onClick={() => this.closeMenu()} to="/" className="menu-item">View Tickets</Link>
-                </Menu>
-            </div>
-            <div id="page-wrap" className="st-main-area">
+            <div id="page-wrap">
                 <Switch>
                     <Route path="/tickets/new" component={TicketsNew} />
                     <Route path="/tickets" component={TicketList} />

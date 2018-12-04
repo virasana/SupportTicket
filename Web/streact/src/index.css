@@ -6,6 +6,7 @@
     height: 12px;
     right: 12px;
     top: 3px;
+    color: white;
 }
 
 
@@ -168,6 +169,23 @@ label {
     margin-left: 5px;
     margin-right: 5px;
     display: inline;
+}
+
+.st-navbar {
+    margin-top: 50px;
+}
+
+.st-scrollable-area {
+    overflow-y: auto;
+}
+
+.st-navbar-brand {
+    float: left;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+    color: rgb(157, 157, 157);
 }
 
 @media screen and (min-width: 767px) {
