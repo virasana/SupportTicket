@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import { Field, reduxForm, propTypes } from "redux-form";
+import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { createTicket } from "../actions";
+import { createTicket, fetchStaticData } from "../actions/index";
+import DropDownSelect from "./select-list";
+import _ from "lodash";
 
 
 class TicketsNew extends Component {
@@ -11,7 +13,9 @@ class TicketsNew extends Component {
     this.render = this.render.bind(this);
   }
 
-  
+  componentWillMount() {
+    this.props.fetchStaticData();
+  }  
 
   renderField(field) {
     const { meta: { touched, error } } = field;
@@ -90,9 +94,16 @@ class TicketsNew extends Component {
             component={this.renderCheckBox}
             type="checkbox"
           />
+          <Field
+            name="severity"
+            label="Severities"
+            component={DropDownSelect}
+            items={this.props.severities == null ? [] : this.props.severities}
+            className="form-control"
+          />
           
-          <button type="submit" className="btn btn-primary" disabled={invalid}>Submit</button>
-          <Link to="/" className="btn btn-danger">Cancel</Link>
+          <button type="submit" className="btn btn-basic st-formbutton" disabled={invalid}>Submit</button>
+          <Link to="/" className="btn btn-danger st-formbutton">Cancel</Link>
         </form>
       </div>
     );
@@ -110,12 +121,26 @@ function validate(values) {
     errors.problem = "Provide problem details";
   }
 
+  if (!values.severity) {
+    errors.problem = "Select severity";
+  }
   // If errors is empty, the form is fine to submit
   // If errors has *any* properties, redux form assumes form is invalid
   return errors;
 }
 
+function mapStateToProps(state) {
+  // Whatever is returned will show up as props
+  // inside of TicketList
+  console.log('state', state);
+  if(_.isEmpty(state.tickets)){
+    return;
+  }
+  return { severities: state.tickets.staticData.severities, products: state.tickets.staticData.products };
+}
+
+
 export default reduxForm({
   validate,
   form: "TicketsNewForm"
-})(connect(null, { createTicket })(TicketsNew)); 
+})(connect(mapStateToProps, { createTicket, fetchStaticData })(TicketsNew)); 

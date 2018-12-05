@@ -37,6 +37,14 @@ namespace ST.AppServicesLib
             return result;
         }
 
+        public StaticData GetStaticData()
+        {
+            var result = new StaticData();
+            result.Severities = GetSeverities();
+            result.Products = GetProducts();
+            return result;
+        }
+
         public ICollection<Product> GetProducts()
         {
             var result = _repo.GetProducts();

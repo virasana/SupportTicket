@@ -132,7 +132,7 @@
 }
 
 .formfield * {
-    vertical-align: top
+    vertical-align: top;
 }
 
 label {
@@ -149,6 +149,10 @@ label {
     vertical-align: middle;
     background-color: transparent;
     border-color: transparent;
+}
+
+.st-formbutton {
+    margin-top: 15px;
 }
 
 .st-footer {
@@ -214,4 +218,20 @@ button {
     margin-left: 5px;
     margin-right: 5px;
     color: white;
+}
+
+.btn-basic:hover {
+    color: black;
+    background-color: #bbbfc2;
+}
+
+.btn-basic[disabled] {
+    color: rgb(100, 98, 98);
+    background-color: #888b8c40;
+    opacity: 50;
+}
+
+.btn-basic {
+    color: black;
+    background-color: #a3a8ac;
 }

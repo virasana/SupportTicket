@@ -11,6 +11,8 @@ namespace ST.SharedInterfacesLib
 
         ICollection<Severity> GetSeverities();
 
+        StaticData GetStaticData();
+
         ICollection<Product> GetProducts();
 
         Ticket GetTicket(int id);

@@ -1,8 +1,8 @@
 import axios from "axios";
 
-
 export const FETCH_TICKETS = "FETCH_TICKETS";
 export const CREATE_TICKET = "CREATE_TICKET";
+export const FETCH_STATIC_DATA = "FETCH_STATIC_DATA";
 
 const ROOT_URL = process.env.REACT_APP_API_URL;
 
@@ -10,6 +10,14 @@ export function fetchTickets() {
   const request = axios.get(`${ROOT_URL}/tickets`);
   return {
     type: FETCH_TICKETS,
+    payload: request
+  };
+}
+
+export function fetchStaticData() {
+  const request = axios.get(`${ROOT_URL}/staticdata`);
+  return {
+    type: FETCH_STATIC_DATA,
     payload: request
   };
 }

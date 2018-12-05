@@ -1,20 +1,15 @@
 import _ from "lodash";
-import { FETCH_TICKETS } from "../actions";
+import { FETCH_TICKETS, FETCH_STATIC_DATA } from "../actions";
 
 
-export default function(state = [{ticketId: 1, active: 'false'}], action) {
+export default function(state = {}, action) {
+  let result;
   switch (action.type) {
     case FETCH_TICKETS:
-      let result = [];
-      try
-      {
-        result = _.mapKeys(action.payload.data, "ticketId");
-      }
-      catch
-      {
-        console.log('there was an error fetching tickets. Could not map payload data.');
-      }
-
+      result = _.mapKeys(action.payload.data, "ticketId");
+      return result;
+    case FETCH_STATIC_DATA:
+      result = { ...state, staticData: action.payload.data};
       return result;
     default:
       return state;

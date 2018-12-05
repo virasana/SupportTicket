@@ -8,7 +8,6 @@ import TicketDetail from "./ticket-detail";
 class TicketList extends Component {
 
   componentWillMount() {
-    console.log('componentWillMount');
     this.props.fetchTickets();
   }
 

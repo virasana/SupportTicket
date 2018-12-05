@@ -39,6 +39,13 @@ namespace ST.Web.Controllers.ApiControllers
             return Ok(result);
         }
 
+        [Route("api/StaticData")]
+        public IActionResult GetStaticData()
+        {
+            var result = _stService.GetStaticData();
+            return Ok(result);
+        }
+
         // GET: api/Tickets/5
         [Route("api/Tickets/{id}")]
         [HttpGet("{id}", Name = "GetTicket")]
