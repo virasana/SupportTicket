@@ -13,7 +13,7 @@ class TicketsNew extends Component {
     this.render = this.render.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchStaticData();
   }  
 
@@ -133,7 +133,7 @@ function mapStateToProps(state) {
   // Whatever is returned will show up as props
   // inside of TicketList
   console.log('state', state);
-  if(_.isEmpty(state.tickets) || !state.tickets.severities){
+  if(_.isEmpty(state.tickets)){
     return;
   }
   return { severities: state.tickets.staticData.severities, products: state.tickets.staticData.products };
