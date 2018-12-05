@@ -35,7 +35,7 @@ class TicketDetail extends Component {
                     Active
                 </td>
                 <td>
-                    {this.props.ticket.active.toString()}
+                    {this.props.ticket.active}
                 </td>
             </tr>
             <tr>

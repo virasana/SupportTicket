@@ -133,7 +133,7 @@ function mapStateToProps(state) {
   // Whatever is returned will show up as props
   // inside of TicketList
   console.log('state', state);
-  if(_.isEmpty(state.tickets)){
+  if(_.isEmpty(state.tickets) || !state.tickets.severities){
     return;
   }
   return { severities: state.tickets.staticData.severities, products: state.tickets.staticData.products };

@@ -9,7 +9,7 @@ export default function(state = {}, action) {
       result = _.mapKeys(action.payload.data, "ticketId");
       return result;
     case FETCH_STATIC_DATA:
-      result = { ...state, staticData: action.payload.data};
+      result = {...state, staticData: action.payload.data};
       return result;
     default:
       return state;
