@@ -1,21 +1,28 @@
 import React, { Component } from "react";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, propTypes } from "redux-form";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { createTicket } from "../actions";
 
 class TicketsNew extends Component {
-    renderField(field) {
+  constructor (props) {
+    super(props)
+    this.render = this.render.bind(this);
+  }
+
+  
+
+  renderField(field) {
       const { meta: { touched, error } } = field;
       const className = `form-group ${touched && error ? "has-danger" : ""}`;
-  
+
       return (
           <div className={className}>
             <label>{field.label}</label>
             <input className="form-control" type="text" {...field.input} />
-            {/* <div className="text-help">
+            <div className="text-help">
               {touched ? error : ""}
-            </div> */}
+            </div>
           </div>
       );
     }
@@ -28,7 +35,7 @@ class TicketsNew extends Component {
   }
 
   render() {
-    const { handleSubmit } = this.props;  // automatically passed in because of the hookup at the very bottom of this file.
+    const { handleSubmit, invalid } = this.props
 
     return (
       <div className="st-tickets-panel">
@@ -45,7 +52,7 @@ class TicketsNew extends Component {
             component={this.renderField}
           />
           
-          <button type="submit" className="btn btn-basic">Submit</button>
+          <button type="submit" className="btn btn-primary" disabled={invalid}>Submit</button>
           <Link to="/" className="btn btn-danger">Cancel</Link>
         </form>
       </div>
@@ -57,12 +64,12 @@ function validate(values) {
   const errors = {};
 
   // Validate the inputs from 'values'
-  // if (!values.description) {
-  //   errors.description = "Enter a description";
-  // }
-  // if (!values.problem) {
-  //   errors.problem = "Provide problem details";
-  // }
+  if (!values.description) {
+    errors.description = "Enter a description";
+  }
+  if (!values.problem) {
+    errors.problem = "Provide problem details";
+  }
 
   // If errors is empty, the form is fine to submit
   // If errors has *any* properties, redux form assumes form is invalid

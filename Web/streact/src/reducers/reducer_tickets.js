@@ -1,6 +1,7 @@
 import _ from "lodash";
 import { FETCH_TICKETS } from "../actions";
 
+
 export default function(state = [{ticketId: 1, active: 'false'}], action) {
   switch (action.type) {
     case FETCH_TICKETS:
