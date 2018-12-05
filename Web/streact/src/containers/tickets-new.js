@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { createTicket } from "../actions";
 
+
 class TicketsNew extends Component {
   constructor (props) {
     super(props)
@@ -13,19 +14,49 @@ class TicketsNew extends Component {
   
 
   renderField(field) {
-      const { meta: { touched, error } } = field;
-      const className = `form-group ${touched && error ? "has-danger" : ""}`;
+    const { meta: { touched, error } } = field;
+    const className = `form-group ${touched && error ? "has-danger" : ""}`;
 
-      return (
-          <div className={className}>
-            <label>{field.label}</label>
-            <input className="form-control" type="text" {...field.input} />
-            <div className="text-help">
-              {touched ? error : ""}
-            </div>
+    return (
+        <div className={className}>
+          <label>{field.label}</label>
+          <input className="form-control" type="text" {...field.input} />
+          <div className="text-help">
+            {touched ? error : ""}
           </div>
-      );
-    }
+        </div>
+    );
+  }
+
+  renderTextArea(field) {
+    const { meta: { touched, error } } = field;
+    const className = `form-group ${touched && error ? "has-danger" : ""}`;
+
+    return (
+        <div className={className}>
+          <label>{field.label}</label>
+          <textarea className="form-control" type="text" {...field.input} />
+          <div className="text-help">
+            {touched ? error : ""}
+          </div>
+        </div>
+    );
+  }
+
+  renderCheckBox(field) {
+    const { meta: { touched, error } } = field;
+    const className = `form-group ${touched && error ? "has-danger" : ""}`;
+
+    return (
+        <div className={className}>
+          <label>{field.label}</label>
+          <input className="form-control st-checkbox" type="checkbox" {...field.input} />
+          <div className="text-help">
+            {touched ? error : ""}
+          </div>
+        </div>
+    );
+  }
 
   // See the callback - it will be called by the action creator (see the action creator)
   onSubmit(values) {
@@ -49,7 +80,15 @@ class TicketsNew extends Component {
           <Field
             label="Problem"
             name="problem"
-            component={this.renderField}
+            component={this.renderTextArea}
+            type="textarea"
+          />
+
+          <Field
+            label="Active"
+            name="active"
+            component={this.renderCheckBox}
+            type="checkbox"
           />
           
           <button type="submit" className="btn btn-primary" disabled={invalid}>Submit</button>

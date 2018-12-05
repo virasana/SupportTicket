@@ -188,6 +188,10 @@ label {
     color: rgb(157, 157, 157);
 }
 
+.st-checkbox {
+    width: 30px;
+}
+
 @media screen and (min-width: 767px) {
     /* Hide captions */
     .st-mobileonly {
