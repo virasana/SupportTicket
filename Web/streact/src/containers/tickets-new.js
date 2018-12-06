@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { createTicket, fetchStaticData } from "../actions/index";
 import DropDownSelect from "./select-list";
-import _ from "lodash";
+import { bindActionCreators } from "redux";
 
 
 class TicketsNew extends Component {
@@ -122,7 +122,7 @@ function validate(values) {
   }
 
   if (!values.severity) {
-    errors.problem = "Select severity";
+    errors.severity = "Select severity";
   }
   // If errors is empty, the form is fine to submit
   // If errors has *any* properties, redux form assumes form is invalid
@@ -132,15 +132,33 @@ function validate(values) {
 function mapStateToProps(state) {
   // Whatever is returned will show up as props
   // inside of TicketList
-  console.log('state', state);
-  if(_.isEmpty(state.tickets)){
-    return;
+  
+  if(state.tickets == null) {
+    return {};
   }
-  return { severities: state.tickets.staticData.severities, products: state.tickets.staticData.products };
+  
+  try {
+   // if(Boolean(state.tickets.severities) && Boolean(state.tickets.severities.staticData)){
+      return { severities: state.tickets.staticData.severities, products: state.tickets.staticData.products };
+    //}
+  }
+  catch{
+    console.log('Error getting state.tickets.severities')
+    return {};
+  }
 }
 
+function mapDispatchToProps(dispatch) {
+  // Whenever fetchStaticData is called, the result should be passed
+  // to all of our reducers
+  return bindActionCreators({ createTicket, fetchStaticData }, dispatch);
+}
+
+TicketsNew = connect(mapStateToProps, mapDispatchToProps)(TicketsNew);
+// Could also use destructuring as follows:
+// TicketsNew = connect(mapStateToProps, { createTicket, fetchStaticData })(TicketsNew);
 
 export default reduxForm({
   validate,
   form: "TicketsNewForm"
-})(connect(mapStateToProps, { createTicket, fetchStaticData })(TicketsNew)); 
+})(TicketsNew); 

@@ -8,7 +8,10 @@ class DropDownSelect extends React.Component { // eslint-disable-line react/pref
   )
 
   render() {
-    const { input, label, className } = this.props;
+    const { input, label, className, meta } = this.props;
+
+     const { touched, error } = meta;
+    
     return (
       <div>
         <label htmlFor={label}>{label}</label>
@@ -16,6 +19,9 @@ class DropDownSelect extends React.Component { // eslint-disable-line react/pref
           <option value="">Select</option>
           {this.props.items.map(this.renderSelectOptions)}
         </select>
+        <div className="text-help">
+            {touched ? error : ""}
+          </div>
       </div>
     );
   }
