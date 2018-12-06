@@ -8,9 +8,7 @@ class DropDownSelect extends React.Component { // eslint-disable-line react/pref
   )
 
   render() {
-    const { input, label, className, meta } = this.props;
-
-     const { touched, error } = meta;
+    const { input, label, className, meta: { touched, error }} = this.props;
     
     return (
       <div>
