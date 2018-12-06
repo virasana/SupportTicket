@@ -26,7 +26,7 @@ export function fetchStaticData() {
 // See ticketsNew where it navigates using history.push
 export function createTicket(values, callback) {
   const request = axios
-    .post(`${ROOT_URL}/tickets`, values)
+    .post(`${ROOT_URL}/tickets/add`, values)
     .then(() => callback());
 
   return {

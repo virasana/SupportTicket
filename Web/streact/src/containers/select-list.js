@@ -4,7 +4,7 @@ import React from 'react';
 class DropDownSelect extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   renderSelectOptions = (item) => (
-    <option key={item[Object.keys(item)[0]]} value={item[Object.keys(item)[1]]}>{item[Object.keys(item)[1]]}</option>
+    <option key={item[Object.keys(item)[0]]} value={item[Object.keys(item)[0]]}>{item[Object.keys(item)[1]]}</option>
   )
 
   render() {

@@ -94,14 +94,14 @@ class TicketsNew extends Component {
             type="checkbox"
           />
           <Field
-            name="product"
+            name="productId"
             label="Product"
             component={DropDownSelect}
             items={this.props.products == null ? [] : this.props.products}
             className="form-control"
           />
           <Field
-            name="severity"
+            name="severityId"
             label="Severity"
             component={DropDownSelect}
             items={this.props.severities == null ? [] : this.props.severities}

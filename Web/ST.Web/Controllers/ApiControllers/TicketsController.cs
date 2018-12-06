@@ -63,7 +63,7 @@ namespace ST.Web.Controllers.ApiControllers
 
         [Route("api/tickets/add")]
         [HttpPost]
-        public IActionResult PostTicket(Ticket ticket)
+        public IActionResult PostTicket([FromBody]Ticket ticket)
         {
             if (!ModelState.IsValid)
             {
