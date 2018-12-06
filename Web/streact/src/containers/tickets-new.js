@@ -87,7 +87,6 @@ class TicketsNew extends Component {
             component={this.renderTextArea}
             type="textarea"
           />
-
           <Field
             label="Active"
             name="active"
@@ -95,13 +94,19 @@ class TicketsNew extends Component {
             type="checkbox"
           />
           <Field
+            name="product"
+            label="Product"
+            component={DropDownSelect}
+            items={this.props.products == null ? [] : this.props.products}
+            className="form-control"
+          />
+          <Field
             name="severity"
-            label="Severities"
+            label="Severity"
             component={DropDownSelect}
             items={this.props.severities == null ? [] : this.props.severities}
             className="form-control"
           />
-          
           <button type="submit" className="btn btn-basic st-formbutton" disabled={invalid}>Submit</button>
           <Link to="/" className="btn btn-danger st-formbutton">Cancel</Link>
         </form>
@@ -124,8 +129,11 @@ function validate(values) {
   if (!values.severity) {
     errors.severity = "Select severity";
   }
-  // If errors is empty, the form is fine to submit
-  // If errors has *any* properties, redux form assumes form is invalid
+
+  if (!values.product) {
+    errors.product = "Select product";
+  }
+
   return errors;
 }
 
