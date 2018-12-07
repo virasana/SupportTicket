@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const FETCH_TICKETS = "FETCH_TICKETS";
+export const FETCH_TICKET = "FETCH_TICKET";
 export const CREATE_TICKET = "CREATE_TICKET";
 export const UPDATE_TICKET = "UPDATE_TICKET";
 export const TICKET_SELECTED = "TICKET_SELECTED";
@@ -48,10 +49,11 @@ export function updateTicket(values, callback) {
   };
 }
 
-export function selectTicket(ticket) {
+export function fetchTicket(ticketId) {
+  const request = axios.get(`${ROOT_URL}/tickets/${ticketId}`);
   return {
-    type: "TICKET_SELECTED",
-    payload: ticket
+    type: "FETCH_TICKET",
+    payload: request
   };
 }
 

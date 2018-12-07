@@ -15,7 +15,7 @@ export class App extends Component {
     this.closeMenu = this.closeMenu.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this);
   }
-
+  
   handleStateChange (state) {
     this.setState({menuOpen: state.isOpen})  
   }
@@ -31,12 +31,14 @@ export class App extends Component {
   render() {
     const SUPPORT_TICKET_BUILD_REACT_IMAGE="virasana/0.0.0.0"; //default  
     
+
     return (
 
       <BrowserRouter>
         <div id="outer-container" className="st-navbar">
             <div className="navbar navbar-inverse navbar-fixed-top">
                 <div className="container">
+                    
                     <div className="st-navbar-brand">Ticket Track</div>
                     <div className="navbar-collapse collapse st-pconly">
                         <ul className="nav navbar-nav">
@@ -58,11 +60,12 @@ export class App extends Component {
             </div>
             <div id="page-wrap">
                 <Switch>
-                    <Route path="/tickets/edit" component={TicketsEdit} />
+                    <Route path="/tickets/edit/:id" component={TicketsEdit} />
                     <Route path="/tickets/new" component={TicketsNew} />
                     <Route path="/tickets" component={TicketList} />
                     <Route path="/" component={TicketList} />
                 </Switch>
+                
             </div>
             <div >
                 <footer>

@@ -7,6 +7,10 @@ import TicketItem from "./ticket-item";
 
 class TicketList extends Component {
 
+  constructor(props){
+    super(props);
+    this.render = this.render.bind(this);
+  }
   componentWillMount() {
     this.props.fetchTickets();
   }
@@ -70,7 +74,11 @@ class TicketList extends Component {
 function mapStateToProps(state) {
   // Whatever is returned will show up as props
   // inside of TicketList
-  return { tickets: state.tickets };
+  if(state.tickets == null){
+    return state;
+  }
+
+  return { tickets: state.tickets.tickets};
 }
 
 

@@ -70,6 +70,12 @@ namespace ST.AppServicesLib
             return result;
         }
 
+        public Ticket GetActiveTicket(int ticketId)
+        {
+            Ticket result = _repo.GetTicket(ticketId);
+            return result;
+        }
+
         public ISTRepo Repo => _repo;
     }
 }

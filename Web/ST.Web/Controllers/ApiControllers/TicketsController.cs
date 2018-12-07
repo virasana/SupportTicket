@@ -18,7 +18,7 @@ namespace ST.Web.Controllers.ApiControllers
 
         // GET: api/Tickets
         [Route("api/Tickets")]
-        public IActionResult GetTicket()
+        public IActionResult GetTickets()
         {
             var result = _stService.GetActiveTickets();
 

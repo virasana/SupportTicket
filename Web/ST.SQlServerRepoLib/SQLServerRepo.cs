@@ -157,14 +157,14 @@ namespace ST.SQLServerRepoLib
             //return new List<Product>();
         }
 
-        public Ticket GetTicket(int id)
+        public Ticket GetTicket(int ticketId)
         {
             using (var ctx = new SupportTicketContext(_connectionString))
             {
                 var result = ctx.Tickets
                     .Include("Severity")
                     .Include("Product")
-                    .FirstOrDefault(t => t.TicketId.Equals(id));
+                    .FirstOrDefault(t => t.TicketId.Equals(ticketId));
                 return result;
             }
         }

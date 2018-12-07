@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { updateTicket, fetchStaticData } from "../actions/index";
+import { updateTicket, fetchStaticData, fetchTicket } from "../actions/index";
 import DropDownSelect from "./select-list";
 import { bindActionCreators } from "redux";
+
 
 
 class TicketsEdit extends Component {
@@ -15,7 +16,20 @@ class TicketsEdit extends Component {
 
   componentDidMount() {
     this.props.fetchStaticData();
+    this.props.fetchTicket(this.props.match.params.id);
   }  
+
+  // handleInitialize() {
+  //   const initData = {
+  //     "problem": "p", //this.props.initialValues.problem,
+  //     "description": "d", //this.props.initialValues.description,
+  //     "active": true, //this.props.initialValues.active,
+  //     "productId": (this.props.initialValues ? this.props.initialValues.severityId : 2),
+  //     "severityId": (this.props.initialValues ? this.props.initialValues.productId : 2)
+  //   };
+
+  //   this.props.initialize(initData);
+  // }
 
   renderField(field) {
     const { meta: { touched, error } } = field;
@@ -115,6 +129,8 @@ class TicketsEdit extends Component {
   }
 }
 
+
+
 function validate(values) {
   const errors = {};
 
@@ -146,10 +162,15 @@ function mapStateToProps(state) {
   }
   
   try {
-      return { tickets: state.tickets };
+      let result =  { 
+        initialValues: state.tickets.ticket, 
+        initData: state.tickets.ticket, 
+        severities: state.tickets.staticData.severities,
+        products: state.tickets.staticData.products,
+             };
+      return result;
   }
   catch{
-    console.log('Error getting state.tickets.severities')
     return {};
   }
 }
@@ -157,14 +178,16 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   // Whenever fetchStaticData is called, the result should be passed
   // to all of our reducers
-  return bindActionCreators({ updateTicket, fetchStaticData }, dispatch);
+  return bindActionCreators({ updateTicket, fetchStaticData, fetchTicket }, dispatch);
 }
 
-TicketsEdit = connect(mapStateToProps, mapDispatchToProps)(TicketsEdit);
+TicketsEdit = reduxForm({
+  validate,
+  form: "TicketsEditForm",
+  enableReinitialize: true,
+})(TicketsEdit); 
+
+export default connect(mapStateToProps, mapDispatchToProps)(TicketsEdit);
 // Could also use destructuring as follows:
 // TicketsEdit = connect(mapStateToProps, { updateTicket, fetchStaticData })(TicketsEdit);
 
-export default reduxForm({
-  validate,
-  form: "TicketsEditForm"
-})(TicketsEdit); 
