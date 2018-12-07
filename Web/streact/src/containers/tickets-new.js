@@ -151,7 +151,6 @@ function mapStateToProps(state) {
     //}
   }
   catch{
-    console.log('Error getting state.tickets.severities')
     return {};
   }
 }

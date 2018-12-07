@@ -5,18 +5,15 @@ export default function(state = null, action) {
   let result;
   switch (action.type) {
     case FETCH_TICKETS:
-      console.log('FETCH_TICKETS');
       result = {...state, tickets: _.mapKeys(action.payload.data, "ticketId") };
       return result;
     case FETCH_TICKET:
-    console.log('FETCH_TICKET');
       result = {...state, ticket: action.payload.data};
       return result;
     case UPDATE_TICKET:
       result = {...state, updateresult: action.payload.data}; 
       return result;
     case FETCH_STATIC_DATA:
-      console.log('FETCH_STATIC_DATA');
       result = {...state, staticData: action.payload.data};
       return result;
     default:

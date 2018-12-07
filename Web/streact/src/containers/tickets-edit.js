@@ -156,7 +156,6 @@ function mapStateToProps(state) {
         products: state.tickets.staticData.products,
       };
 
-      console.log('result', result);
       return result;
 
   }
