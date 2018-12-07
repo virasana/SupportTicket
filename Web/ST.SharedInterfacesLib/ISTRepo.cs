@@ -19,5 +19,6 @@ namespace ST.SharedInterfacesLib
 
         Ticket GetTicket(int id);
         Ticket UpdateTicket(Ticket ticket);
+        bool DeleteTicket(int ticketId);
     }
 }

@@ -196,6 +196,10 @@ label {
     width: 30px;
 }
 
+a {
+    cursor: pointer;
+}
+
 @media screen and (min-width: 767px) {
     /* Hide captions */
     .st-mobileonly {

@@ -4,6 +4,7 @@ export const FETCH_TICKETS = "FETCH_TICKETS";
 export const FETCH_TICKET = "FETCH_TICKET";
 export const CREATE_TICKET = "CREATE_TICKET";
 export const UPDATE_TICKET = "UPDATE_TICKET";
+export const DELETE_TICKET = "DELETE_TICKET";
 export const TICKET_SELECTED = "TICKET_SELECTED";
 export const FETCH_STATIC_DATA = "FETCH_STATIC_DATA";
 export const SET_TICKET = "SET_TICKET";
@@ -42,7 +43,7 @@ export function createTicket(values, callback) {
 export function updateTicket(values, callback) {
   const request = axios
     .put(`${ROOT_URL}/tickets`, values)
-    .then(() => callback());
+    .then(() => callback()); // TODO - implement the callback
 
   return {
     type: CREATE_TICKET,
@@ -55,6 +56,18 @@ export function fetchTicket(ticketId) {
   console.log("Fetch ticket from API");
   return {
     type: "FETCH_TICKET",
+    payload: request
+  };
+}
+
+export function deleteTicket(ticketId, callback) {
+  console.log("deleteTicket action");
+  const request = axios
+  .delete(`${ROOT_URL}/tickets/${ticketId}`)
+  .then(() => callback());
+
+  return {
+    type: "DELETE_TICKET",
     payload: request
   };
 }

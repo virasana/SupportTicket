@@ -61,6 +61,24 @@ namespace ST.Web.Controllers.ApiControllers
             return Ok(ticket);
         }
 
+        
+        //[Route("api/Tickets/{id}"), EnableCors("AllowAnyOrigin")]
+        //[HttpDelete("{id}", Name = "DeleteTicket")]
+        //public IActionResult DeleteTicket(int id)
+        //{
+        //    var result = _stService.DeleteTicket(id);
+
+
+        //    if (!result)
+        //    {
+        //        return NotFound();
+        //    }
+        //    else
+        //    {
+        //        return Ok();
+        //    }
+        //}
+
         [Route("api/tickets/add")]
         [HttpPost]
         public IActionResult PostTicket([FromBody]Ticket ticket)

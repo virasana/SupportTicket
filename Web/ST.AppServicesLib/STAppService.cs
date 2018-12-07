@@ -76,6 +76,12 @@ namespace ST.AppServicesLib
             return result;
         }
 
+        public bool DeleteTicket(int ticketId)
+        {
+            var result = _repo.DeleteTicket(ticketId);
+            return result;
+        }
+
         public ISTRepo Repo => _repo;
     }
 }

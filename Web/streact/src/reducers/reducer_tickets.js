@@ -4,7 +4,9 @@ import {
   FETCH_STATIC_DATA, 
   UPDATE_TICKET, 
   FETCH_TICKET, 
-  SET_TICKET } from "../actions";
+  SET_TICKET,
+  DELETE_TICKET
+} from "../actions";
 
 export default function(state = null, action) {
   let result;
@@ -15,8 +17,11 @@ export default function(state = null, action) {
       case FETCH_TICKET:
       result = {...state, ticket: action.payload.data};
       return result;
-    case SET_TICKET:
+      case SET_TICKET:
       result = {...state, ticket: action.payload};
+      return result;
+    case DELETE_TICKET:
+      result = {...state, ticket: null};
       return result;
     case UPDATE_TICKET:
       result = {...state, updateresult: action.payload.data}; 

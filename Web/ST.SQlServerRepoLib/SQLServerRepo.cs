@@ -10,7 +10,8 @@ namespace ST.SQLServerRepoLib
 {
     public class SQLRepo : ISTRepo
     {
-        private static string _connectionString; 
+        private static string _connectionString;
+
         public void Initialise(string connectionString)
         {
             _connectionString = connectionString;
@@ -29,9 +30,9 @@ namespace ST.SQLServerRepoLib
             {
                 var products = new List<Product>()
                 {
-                    new Product(){ Description = "P1"},
-                    new Product(){ Description = "P2"},
-                    new Product(){ Description = "P3"}
+                    new Product() {Description = "P1"},
+                    new Product() {Description = "P2"},
+                    new Product() {Description = "P3"}
                 };
 
                 foreach (var newProduct in products)
@@ -82,6 +83,7 @@ namespace ST.SQLServerRepoLib
 
                 return result;
             }
+
             // return new Tickets();
         }
 
@@ -96,6 +98,7 @@ namespace ST.SQLServerRepoLib
                     .ToList();
                 return result;
             }
+
             //return new List<Tickets>();
         }
 
@@ -110,6 +113,7 @@ namespace ST.SQLServerRepoLib
                     .ToList();
                 return result;
             }
+
             //return new List<Tickets>();
         }
 
@@ -154,6 +158,7 @@ namespace ST.SQLServerRepoLib
                 var result = ctx.Product.ToList();
                 return result;
             }
+
             //return new List<Product>();
         }
 
@@ -168,6 +173,7 @@ namespace ST.SQLServerRepoLib
                 return result;
             }
         }
+
         public Ticket UpdateTicket(Ticket ticket)
         {
             using (var ctx = new SupportTicketContext(_connectionString))
@@ -180,12 +186,27 @@ namespace ST.SQLServerRepoLib
                 result.Problem = ticket.Problem;
                 result.ProductId = ticket.ProductId;
                 result.SeverityId = ticket.SeverityId;
-                
+
                 ctx.SaveChanges();
-                
+
                 return result;
-                
+
             }
+        }
+
+        public bool DeleteTicket(int ticketId)
+        {
+            using (var ctx = new SupportTicketContext(_connectionString))
+            {
+
+                var ticket = GetTicket(ticketId);
+                if (ticket == null) return false;
+
+                ctx.Remove(ticket);
+                ctx.SaveChanges();
+                return true;
+            }
+
         }
     }
 }
