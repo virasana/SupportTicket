@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { selectTicket } from '../actions/index'
+//import { selectTicket } from '../actions/index'
 
 class TicketItem extends Component {
   render() {

@@ -19,18 +19,6 @@ class TicketsEdit extends Component {
     this.props.fetchTicket(this.props.match.params.id);
   }  
 
-  // handleInitialize() {
-  //   const initData = {
-  //     "problem": "p", //this.props.initialValues.problem,
-  //     "description": "d", //this.props.initialValues.description,
-  //     "active": true, //this.props.initialValues.active,
-  //     "productId": (this.props.initialValues ? this.props.initialValues.severityId : 2),
-  //     "severityId": (this.props.initialValues ? this.props.initialValues.productId : 2)
-  //   };
-
-  //   this.props.initialize(initData);
-  // }
-
   renderField(field) {
     const { meta: { touched, error } } = field;
     const className = `form-group ${touched && error ? "has-danger" : ""}`;
@@ -164,11 +152,13 @@ function mapStateToProps(state) {
   try {
       let result =  { 
         initialValues: state.tickets.ticket, 
-        initData: state.tickets.ticket, 
         severities: state.tickets.staticData.severities,
         products: state.tickets.staticData.products,
-             };
+      };
+
+      console.log('result', result);
       return result;
+
   }
   catch{
     return {};
@@ -185,6 +175,7 @@ TicketsEdit = reduxForm({
   validate,
   form: "TicketsEditForm",
   enableReinitialize: true,
+  keepDirtyOnReinitialize: true
 })(TicketsEdit); 
 
 export default connect(mapStateToProps, mapDispatchToProps)(TicketsEdit);
