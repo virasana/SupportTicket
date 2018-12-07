@@ -2,11 +2,9 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { updateTicket, fetchStaticData, fetchTicket } from "../actions/index";
+import { updateTicket, fetchStaticData, fetchTicket, setTicket } from "../actions/index";
 import DropDownSelect from "./select-list";
 import { bindActionCreators } from "redux";
-
-
 
 class TicketsEdit extends Component {
   constructor (props) {
@@ -15,8 +13,14 @@ class TicketsEdit extends Component {
   }
 
   componentDidMount() {
+    
     this.props.fetchStaticData();
-    this.props.fetchTicket(this.props.match.params.id);
+     
+    if(this.props.location.state){
+      this.props.setTicket(this.props.location.state);
+    } else {
+      this.props.fetchTicket(this.props.match.params.id);
+    }
   }  
 
   renderField(field) {
@@ -167,7 +171,11 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   // Whenever fetchStaticData is called, the result should be passed
   // to all of our reducers
-  return bindActionCreators({ updateTicket, fetchStaticData, fetchTicket }, dispatch);
+  return bindActionCreators({ 
+    updateTicket, 
+    fetchStaticData, 
+    fetchTicket, 
+    setTicket }, dispatch);
 }
 
 TicketsEdit = reduxForm({

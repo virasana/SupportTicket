@@ -12,7 +12,10 @@ class TicketItem extends Component {
             <tr>
                 <td>{this.props.ticket.ticketId}</td>
                 <td>{this.props.ticket.description}</td>
-                <td><Link  to={`/tickets/edit/${this.props.ticket.ticketId}` }>Edit</Link></td>
+                <td><Link  to={{ 
+                  pathname: `/tickets/edit/${this.props.ticket.ticketId}`,
+                  state: this.props.ticket
+                } }>Edit</Link></td>
                 <td><Link to={`/tickets/delete/${this.props.ticket.ticketId}` }>Delete</Link></td>
             </tr>
     );

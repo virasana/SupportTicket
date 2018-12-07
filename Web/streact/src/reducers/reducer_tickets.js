@@ -1,5 +1,10 @@
 import _ from "lodash";
-import { FETCH_TICKETS, FETCH_STATIC_DATA, UPDATE_TICKET, FETCH_TICKET } from "../actions";
+import { 
+  FETCH_TICKETS, 
+  FETCH_STATIC_DATA, 
+  UPDATE_TICKET, 
+  FETCH_TICKET, 
+  SET_TICKET } from "../actions";
 
 export default function(state = null, action) {
   let result;
@@ -7,8 +12,11 @@ export default function(state = null, action) {
     case FETCH_TICKETS:
       result = {...state, tickets: _.mapKeys(action.payload.data, "ticketId") };
       return result;
-    case FETCH_TICKET:
+      case FETCH_TICKET:
       result = {...state, ticket: action.payload.data};
+      return result;
+    case SET_TICKET:
+      result = {...state, ticket: action.payload};
       return result;
     case UPDATE_TICKET:
       result = {...state, updateresult: action.payload.data}; 

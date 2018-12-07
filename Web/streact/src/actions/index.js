@@ -6,6 +6,7 @@ export const CREATE_TICKET = "CREATE_TICKET";
 export const UPDATE_TICKET = "UPDATE_TICKET";
 export const TICKET_SELECTED = "TICKET_SELECTED";
 export const FETCH_STATIC_DATA = "FETCH_STATIC_DATA";
+export const SET_TICKET = "SET_TICKET";
 
 const ROOT_URL = process.env.REACT_APP_API_URL;
 
@@ -51,9 +52,19 @@ export function updateTicket(values, callback) {
 
 export function fetchTicket(ticketId) {
   const request = axios.get(`${ROOT_URL}/tickets/${ticketId}`);
+  console.log("Fetch ticket from API");
   return {
     type: "FETCH_TICKET",
     payload: request
+  };
+}
+
+
+export function setTicket(ticket) {
+  console.log("Fetch ticket from cache");
+  return {
+    type: "SET_TICKET",
+    payload: ticket
   };
 }
 
