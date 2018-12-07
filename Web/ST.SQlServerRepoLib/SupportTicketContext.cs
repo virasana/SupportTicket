@@ -45,6 +45,9 @@ namespace ST.SQLServerRepoLib
 
             modelBuilder.Entity<Ticket>(entity =>
             {
+                entity.Property(t => t.TicketId)
+                    .IsRequired();
+
                 entity.HasIndex(e => e.ProductId)
                     .HasName("IX_ProductId");
 

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-//import { selectTicket } from '../actions/index'
+import { setTicket } from '../actions/index'
+import { connect } from "react-redux";
 
 class TicketItem extends Component {
   render() {
@@ -12,7 +13,7 @@ class TicketItem extends Component {
             <tr>
                 <td>{this.props.ticket.ticketId}</td>
                 <td>{this.props.ticket.description}</td>
-                <td><Link  to={{ 
+                <td><Link onClick={ticket => this.props.setTicket}  to={{ 
                   pathname: `/tickets/edit/${this.props.ticket.ticketId}`,
                   state: this.props.ticket
                 } }>Edit</Link></td>
@@ -23,4 +24,4 @@ class TicketItem extends Component {
 }
 
 
-export default TicketItem;
+export default connect(null, { setTicket })(TicketItem);

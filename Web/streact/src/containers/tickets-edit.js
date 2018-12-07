@@ -16,11 +16,11 @@ class TicketsEdit extends Component {
     
     this.props.fetchStaticData();
      
-    if(this.props.location.state){
-      this.props.setTicket(this.props.location.state);
-    } else {
+   // if(this.props.location.state){
+      //this.props.setTicket(this.props.location.state);
+    //} else {
       this.props.fetchTicket(this.props.match.params.id);
-    }
+  //  }
   }  
 
   renderField(field) {
@@ -82,6 +82,11 @@ class TicketsEdit extends Component {
       <div className="st-tickets-panel">
         <div><h2>Edit Ticket</h2></div>
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+        <Field
+            label="Ticket ID"
+            name="ticketId"
+            component={this.renderField}
+          />
           <Field
             label="Description For Ticket"
             name="description"

@@ -81,6 +81,7 @@ namespace ST.Web.Controllers.ApiControllers
             {
                 return BadRequest(ModelState);
             }
+            
             var result = _stService.UpdateTicket(ticket);
             
             return Ok(result); // can return NoContent too (204)

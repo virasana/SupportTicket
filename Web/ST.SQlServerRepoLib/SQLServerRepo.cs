@@ -172,11 +172,19 @@ namespace ST.SQLServerRepoLib
         {
             using (var ctx = new SupportTicketContext(_connectionString))
             {
-                ctx.Update(ticket);
-                
                 var result = ctx.Tickets
                     .First(t => t.TicketId == ticket.TicketId);
+
+                result.Active = ticket.Active;
+                result.Description = ticket.Description;
+                result.Problem = ticket.Problem;
+                result.ProductId = ticket.ProductId;
+                result.SeverityId = ticket.SeverityId;
+                
+                ctx.SaveChanges();
+                
                 return result;
+                
             }
         }
     }

@@ -1,7 +1,12 @@
-﻿namespace ST.SharedEntitiesLib
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ST.SharedEntitiesLib
 {
     public partial class Ticket
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TicketId { get; set; }
         public int SeverityId { get; set; }
         public string Problem { get; set; }
