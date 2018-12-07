@@ -46,8 +46,8 @@ export class App extends Component {
                             <li className="st-navitem"><Link to="/tickets/new" className="menu-item">New Ticket</Link></li>
                         </ul>
                     </div>
-                    <div className="st-mobileonly">
-                    <Menu 
+                    <div className="st-mobileonly" onClick={() => this.closeMenu()}>
+                    <Menu
                     isOpen={this.state.menuOpen}
                     onStateChange={(state) => this.handleStateChange(state)}
                     right 

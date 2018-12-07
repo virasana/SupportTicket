@@ -239,3 +239,7 @@ button {
     color: black;
     background-color: #a3a8ac;
 }
+
+.bm-menu-wrap {
+    transition-duration: .2s !important;
+}
