@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchTickets } from "../actions/index";
 //import { bindActionCreators } from "redux";
-import TicketDetail from "./ticket-detail";
+import TicketItem from "./ticket-item";
 
 class TicketList extends Component {
 
@@ -14,7 +14,7 @@ class TicketList extends Component {
   renderList() {
     return _.map(this.props.tickets, ticket => {
       return (
-        <TicketDetail key={ticket.ticketId} ticket={ticket}/>
+        <TicketItem key={ticket.ticketId} ticket={ticket}/>
       );
     });
   }
@@ -33,7 +33,19 @@ class TicketList extends Component {
         </div>
         <div className="row st-tickets-panel">
             <div className="col-md-12 container st-scrollable-area">
-                {this.renderList()}
+            <table className="table-bordered table-striped table-responsive">
+                <thead>
+                  <tr>
+                    <th>Ticket ID</th>
+                    <th>Description</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.renderList()}
+                </tbody>
+            </table>
           </div>
         </div>
       </div>

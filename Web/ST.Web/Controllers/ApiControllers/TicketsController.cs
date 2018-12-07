@@ -72,5 +72,18 @@ namespace ST.Web.Controllers.ApiControllers
             var result = _stService.AddTicket(ticket);
             return CreatedAtRoute("GetTicket", new { id = result.TicketId }, result);
         }
+
+        [Route("api/tickets")]
+        [HttpPut]
+        public IActionResult PutTicket([FromBody]Ticket ticket)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = _stService.UpdateTicket(ticket);
+            
+            return Ok(result); // can return NoContent too (204)
+        }
     }
 }

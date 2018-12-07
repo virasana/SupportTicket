@@ -20,5 +20,6 @@ namespace ST.SharedInterfacesLib
         TRepo Repo { get; }
 
         Ticket AddTicket(Ticket ticket);
+        Ticket UpdateTicket(Ticket ticket);
     }
 }

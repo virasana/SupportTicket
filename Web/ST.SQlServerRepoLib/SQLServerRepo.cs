@@ -167,7 +167,17 @@ namespace ST.SQLServerRepoLib
                     .FirstOrDefault(t => t.TicketId.Equals(id));
                 return result;
             }
-            // return new Tickets();
+        }
+        public Ticket UpdateTicket(Ticket ticket)
+        {
+            using (var ctx = new SupportTicketContext(_connectionString))
+            {
+                ctx.Update(ticket);
+                
+                var result = ctx.Tickets
+                    .First(t => t.TicketId == ticket.TicketId);
+                return result;
+            }
         }
     }
 }

@@ -64,6 +64,12 @@ namespace ST.AppServicesLib
             return result;
         }
 
+        public Ticket UpdateTicket(Ticket ticket)
+        {
+            Ticket result = _repo.UpdateTicket(ticket);
+            return result;
+        }
+
         public ISTRepo Repo => _repo;
     }
 }

@@ -2,6 +2,7 @@ import React from "react";
 import { Component } from "react";
 import TicketList from "./containers/ticket-list";
 import TicketsNew from "./containers/tickets-new";
+import TicketsEdit from "./containers/tickets-edit";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Menu from 'react-burger-menu/lib/menus/stack'
@@ -57,6 +58,7 @@ export class App extends Component {
             </div>
             <div id="page-wrap">
                 <Switch>
+                    <Route path="/tickets/edit" component={TicketsEdit} />
                     <Route path="/tickets/new" component={TicketsNew} />
                     <Route path="/tickets" component={TicketList} />
                     <Route path="/" component={TicketList} />

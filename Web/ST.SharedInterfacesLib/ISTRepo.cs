@@ -18,5 +18,6 @@ namespace ST.SharedInterfacesLib
         ICollection<Product> GetProducts();
 
         Ticket GetTicket(int id);
+        Ticket UpdateTicket(Ticket ticket);
     }
 }

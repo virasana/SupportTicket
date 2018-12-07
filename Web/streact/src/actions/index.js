@@ -2,6 +2,8 @@ import axios from "axios";
 
 export const FETCH_TICKETS = "FETCH_TICKETS";
 export const CREATE_TICKET = "CREATE_TICKET";
+export const UPDATE_TICKET = "UPDATE_TICKET";
+export const TICKET_SELECTED = "TICKET_SELECTED";
 export const FETCH_STATIC_DATA = "FETCH_STATIC_DATA";
 
 const ROOT_URL = process.env.REACT_APP_API_URL;
@@ -34,5 +36,24 @@ export function createTicket(values, callback) {
     payload: request
   };
 }
+
+export function updateTicket(values, callback) {
+  const request = axios
+    .put(`${ROOT_URL}/tickets`, values)
+    .then(() => callback());
+
+  return {
+    type: CREATE_TICKET,
+    payload: request
+  };
+}
+
+export function selectTicket(ticket) {
+  return {
+    type: "TICKET_SELECTED",
+    payload: ticket
+  };
+}
+
 
   
