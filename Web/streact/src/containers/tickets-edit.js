@@ -82,11 +82,7 @@ class TicketsEdit extends Component {
       <div className="st-tickets-panel">
         <div><h2>Edit Ticket</h2></div>
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-        <Field
-            label="Ticket ID"
-            name="ticketId"
-            component={this.renderField}
-          />
+          <div><label>Ticket ID</label>{this.props.initialValues ? this.props.initialValues.ticketId: ""}</div>
           <Field
             label="Description For Ticket"
             name="description"
