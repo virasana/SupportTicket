@@ -10,8 +10,8 @@ class TicketItem extends Component {
     }
 
     return (
-            <tr>
-                <td>{this.props.ticket.ticketId}</td>
+            <tr className="st-ticketRow">
+                <td className="st-ticketId-column">{this.props.ticket.ticketId}</td>
                 <td>{this.props.ticket.description}</td>
                 <td><button className="btn btn-basic"><Link onClick={ticket => this.props.setTicket}  to={{ 
                   pathname: `/tickets/edit/${this.props.ticket.ticketId}`,
@@ -22,6 +22,5 @@ class TicketItem extends Component {
     );
   }
 }
-
 
 export default connect(null, { setTicket, deleteTicket, fetchTickets })(TicketItem);

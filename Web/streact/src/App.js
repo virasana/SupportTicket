@@ -30,7 +30,6 @@ export class App extends Component {
 
   render() {
     const SUPPORT_TICKET_BUILD_REACT_IMAGE="virasana/0.0.0.0"; //default  
-    
 
     return (
 
