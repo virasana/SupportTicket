@@ -39,11 +39,11 @@ class TicketList extends Component {
             <div className="col-md-12 container st-scrollable-area">
             <table className="table-bordered table-striped table-responsive">
                 <thead>
-                  <tr>
+                  <tr className="st-ticketHeader">
                     <th>Ticket ID</th>
                     <th>Description</th>
                     <th>Edit</th>
-                    <th>Delete</th>
+                    {/* <th>Delete</th> */}
                   </tr>
                 </thead>
                 <tbody>

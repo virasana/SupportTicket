@@ -13,11 +13,11 @@ class TicketItem extends Component {
             <tr className="st-ticketRow">
                 <td className="st-ticketId-column">{this.props.ticket.ticketId}</td>
                 <td>{this.props.ticket.description}</td>
-                <td><button className="btn btn-basic"><Link onClick={ticket => this.props.setTicket}  to={{ 
+                <td><Link onClick={ticket => this.props.setTicket}  to={{ 
                   pathname: `/tickets/edit/${this.props.ticket.ticketId}`,
                   state: this.props.ticket
-                } }>Edit</Link></button></td>
-                <td><button className="btn btn-danger" onClick={()=> this.props.deleteTicket(this.props.ticket.ticketId, this.props.fetchTickets)}>Delete</button></td>
+                } }><button className="btn btn-basic">Edit</button></Link></td>
+                {/* <td><button className="btn btn-danger" onClick={()=> this.props.deleteTicket(this.props.ticket.ticketId, this.props.fetchTickets)}>Delete</button></td> */}
             </tr>
     );
   }
