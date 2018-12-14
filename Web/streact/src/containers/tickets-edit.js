@@ -164,7 +164,7 @@ function mapStateToProps(state) {
       return result;
 
   }
-  catch{
+  catch(err) {
     return {};
   }
 }

@@ -150,7 +150,7 @@ function mapStateToProps(state) {
       return { severities: state.tickets.staticData.severities, products: state.tickets.staticData.products };
     //}
   }
-  catch{
+  catch(err) {
     return {};
   }
 }
