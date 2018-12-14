@@ -1,4 +1,6 @@
-﻿body {
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+for details on configuring this project to bundle and minify static web assets. */
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -32,45 +34,4 @@
     .carousel-caption {
         display: none;
     }
-}
-
-.unlinked-nav-item {
-    padding: 15px;
-    color: yellowgreen;
-    border-radius: 5px;
-    border-style: solid;
-}
-
-@media (max-width: 767px) {
-    .unlinked-nav-item {
-        padding: 15px;
-    }
-}
-
-.validation-errors {
-    color: #ff0000;
-    margin-left: 200px;
-}
-
-.formfield * {
-    vertical-align: top
-}
-label {
-    width: 200px;
-    display: inline-block;
-}
-
-.normal {
-    color: rgb(157,157,157);
-    margin-top: 8px;
-    margin-bottom: 8px;
-    padding-top: 6px;
-    padding-bottom: 6px;
-    vertical-align: middle;
-    background-color: transparent;
-    border-color: transparent;
-}
-
-td {
-    padding: 5px;
 }

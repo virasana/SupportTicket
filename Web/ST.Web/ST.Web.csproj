@@ -1,35 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="React\**" />
-    <Content Remove="React\**" />
-    <EmbeddedResource Remove="React\**" />
-    <None Remove="React\**" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.0.2105168" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ST.AppServicesLib\ST.AppServicesLib.csproj" />
+    <ProjectReference Include="..\ST.SharedEntitiesLib\ST.SharedEntitiesLib.csproj" />
     <ProjectReference Include="..\ST.SharedInterfacesLib\ST.SharedInterfacesLib.csproj" />
-    <ProjectReference Include="..\ST.SQlServerRepoLib\ST.SQLServerRepoLib.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\AccountViewModels\" />
+    <ProjectReference Include="..\ST.SQLServerRepoLib\ST.SQLServerRepoLib.csproj" />
   </ItemGroup>
 
 </Project>

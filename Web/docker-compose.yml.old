@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  st.web:
+    image: ${DOCKER_REGISTRY-}stweb
+    build:
+      context: .
+      dockerfile: ST.Web/Dockerfile

@@ -1,9 +1,7 @@
-version: '3'
+version: '3.4'
 
 services:
   mssql:
-    #volumes:
-#     - .\sqldata:/var/opt/mssql
     image: mcr.microsoft.com/mssql/server:2017-latest
     container_name: sqlservice
     ports:
@@ -18,7 +16,7 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
     depends_on:
      - mssql
-    image: virasana/stweb:1.0.0.1
+    image: ${DOCKER_REGISTRY-}stweb
     container_name: stweb
     build:
       context: .
