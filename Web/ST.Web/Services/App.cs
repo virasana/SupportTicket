@@ -10,6 +10,7 @@ namespace ST.Web.Services
         public static class Constants
         {
             public const string SupportTicketConnStringKey = "SUPPORT_TICKET_DEPLOY_DB_CONN_STRING";
+            public const string JWTSecret = "SUPPORT_TICKET_DEPLOY_JWT_SECRET";
         }
     }
 }
