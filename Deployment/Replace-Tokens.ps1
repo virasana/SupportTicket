@@ -29,17 +29,16 @@ foreach($theEnv in (Get-ChildItem env:* | sort-object Name)){
     }
 }
 
+$fileContentsDisplay = $fileContents
 
 if($secrets -ne ""){
     $theSecrets = $secrets | ConvertFrom-JSON 
     foreach($theSecret in $theSecrets.PSObject.Properties){
         Write-Host -Fore Yellow "Updating Secret: $($theSecret.Name)"
         $fileContents = $fileContents.Replace("`${$($theSecret.Name)}", (base64encode -encodedString $theSecret.Value))
-        $fileContentsDisplay = $fileContents.Replace("`${$($theSecret.Name)}", "********")
+        $fileContentsDisplay = $fileContentsDisplay.Replace("`${$($theSecret.Name)}", "********")
     }
-    
-    
 }
 
-$fileContents | Out-File -Encoding utf8 -filePath $filePath | Out-Null
+#$fileContents | Out-File -Encoding utf8 -filePath $filePath | Out-Null
 Write-Host -Fore Yellow $fileContentsDisplay

@@ -1,5 +1,6 @@
 ﻿cls
 & $PSScriptRoot/Replace-Tokens.ps1 `
+            -tokensStartingWith "SUPPORT_TICKET_DEPLOY.PLAINTEXT" `
             -filePath (Join-Path -Path $PSScriptRoot -ChildPath "test.yaml") `
             -secrets `
 "
