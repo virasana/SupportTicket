@@ -18,18 +18,14 @@ foreach($theEnv in (Get-ChildItem env:* | sort-object Name)){
 }
 
 
-if($secrets -eq ""){exit}
+if($secrets -ne ""){
+    $theSecrets = $secrets | ConvertFrom-JSON 
+    foreach($theSecret in $theSecrets.PSObject.Properties){
+        Write-Host -Fore Yellow "Updating Secret: $($theSecret.Name)"
+        $fileContents = $fileContents.Replace("`${$($theSecret.Name)}", $theSecret.Value)
+    }
+    
+    $fileContents | Out-File -Encoding utf8 -filePath $filePath | Out-Null
+    Write-Host -Fore Yellow $fileContents
 
-# Iterate secrets - VSTS won't pass these 
-#      into the environment - we need to use $secrets
-$theSecrets = $secrets | ConvertFrom-JSON 
-foreach($theSecret in $theSecrets.PSObject.Properties){
-    Write-Host -Fore Yellow "Updating: $($theSecret.Name)=$($theSecret.Value)"
-    $fileContents = $fileContents.Replace("`${$($theSecret.Name)}", $theSecret.Value)
 }
-
-$fileContents
-
-#$fileContents | Out-File -Encoding utf8 -filePath $filePath | Out-Null
-#Write-Host -Fore Yellow $fileContents
-
