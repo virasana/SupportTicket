@@ -4,6 +4,18 @@
     [Parameter(Mandatory=$true)][string]$tokensStartingWith       
 )
 
+function base64Encode
+{
+    param(
+    [Parameter(Mandatory=$true)][string]$encodedString
+    )
+    
+    $theBytes = [System.Text.Encoding]::Utf8.GetBytes($encodedString)
+    $result =[Convert]::ToBase64String($theBytes)
+    return $result
+}
+
+
 Write-Host -Fore Yellow "Replacing Tokens";
     
 $fileContents = [IO.File]::ReadAllText($filePath)
@@ -22,7 +34,7 @@ if($secrets -ne ""){
     $theSecrets = $secrets | ConvertFrom-JSON 
     foreach($theSecret in $theSecrets.PSObject.Properties){
         Write-Host -Fore Yellow "Updating Secret: $($theSecret.Name)"
-        $fileContents = $fileContents.Replace("`${$($theSecret.Name)}", $theSecret.Value)
+        $fileContents = $fileContents.Replace("`${$($theSecret.Name)}", (base64encode -encodedString $theSecret.Value))
         $fileContentsDisplay = $fileContents.Replace("`${$($theSecret.Name)}", "********")
     }
     
