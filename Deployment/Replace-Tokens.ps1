@@ -23,9 +23,10 @@ if($secrets -ne ""){
     foreach($theSecret in $theSecrets.PSObject.Properties){
         Write-Host -Fore Yellow "Updating Secret: $($theSecret.Name)"
         $fileContents = $fileContents.Replace("`${$($theSecret.Name)}", $theSecret.Value)
+        $fileContentsDisplay = $fileContents.Replace("`${$($theSecret.Name)}", "********")
     }
     
     $fileContents | Out-File -Encoding utf8 -filePath $filePath | Out-Null
 }
 
-Write-Host -Fore Yellow $fileContents
+Write-Host -Fore Yellow $fileContentsDisplay
