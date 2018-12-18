@@ -40,5 +40,5 @@ if($secrets -ne ""){
     }
 }
 
-#$fileContents | Out-File -Encoding utf8 -filePath $filePath | Out-Null
+$fileContents | Out-File -Encoding utf8 -filePath $filePath | Out-Null
 Write-Host -Fore Yellow $fileContentsDisplay
