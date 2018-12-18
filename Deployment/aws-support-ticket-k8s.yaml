@@ -137,7 +137,7 @@ spec:
         - containerPort: 3000
         env:
         - name: REACT_APP_API_URL
-          value: ${SUPPORT_TICKET_DEPLOY_REACT_AWS_API_URL}
+          value: ${SUPPORT_TICKET_DEPLOY_PLAINTEXT_REACT_AWS_API_URL}
 ---
 
 apiVersion: apps/v1beta1
