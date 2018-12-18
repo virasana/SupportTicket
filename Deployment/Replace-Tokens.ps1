@@ -1,6 +1,6 @@
 ﻿param(
     [Parameter(Mandatory=$true)][string]$filePath,
-    [Parameter(Mandatory=$true)][string]$secrets,   
+    [string]$secrets = @{},   
     [Parameter(Mandatory=$true)][string]$tokensStartingWith       
 )
 
