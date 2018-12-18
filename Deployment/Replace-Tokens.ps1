@@ -1,6 +1,6 @@
 ﻿param(
     [Parameter(Mandatory=$true)][string]$filePath,
-    [string]$secrets = @{},   
+    [string]$secrets = "",   
     [Parameter(Mandatory=$true)][string]$tokensStartingWith       
 )
 
@@ -17,6 +17,8 @@ foreach($theEnv in (Get-ChildItem env:* | sort-object Name)){
     }
 }
 
+
+if($secrets -eq ""){exit}
 
 # Iterate secrets - VSTS won't pass these 
 #      into the environment - we need to use $secrets
