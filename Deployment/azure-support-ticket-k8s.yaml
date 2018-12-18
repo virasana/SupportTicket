@@ -132,22 +132,18 @@ spec:
         ports:
         - containerPort: 80
         env:
-        - name: SUPPORT_TICKET_DEPLOY_DB_CONN_STRING
-          valueFrom:
-            secretKeyRef:
-              name: mssql
-              key: SUPPORT_TICKET_DEPLOY_DB_CONN_STRING        
-      - name: SUPPORT_TICKET_DEPLOY_DB_CONN_STRING_AUTH
+        - name: SUPPORT_TICKET_DEPLOY_DB_CONN_STRING_AUTH
           valueFrom:
             secretKeyRef:
               name: mssql
               key: SUPPORT_TICKET_DEPLOY_DB_CONN_STRING_AUTH
-      - name: SUPPORT_TICKET_DEPLOY_JWT_SECRET
+        - name: SUPPORT_TICKET_DEPLOY_DB_CONN_STRING
+          valueFrom:
+            secretKeyRef:
+              name: mssql
+              key: SUPPORT_TICKET_DEPLOY_DB_CONN_STRING
+        - name: SUPPORT_TICKET_DEPLOY_JWT_SECRET
           valueFrom:
             secretKeyRef:
               name: mssql
               key: SUPPORT_TICKET_DEPLOY_JWT_SECRET
-              
-              
-          
- 
