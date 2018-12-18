@@ -26,6 +26,6 @@ if($secrets -ne ""){
     }
     
     $fileContents | Out-File -Encoding utf8 -filePath $filePath | Out-Null
-    Write-Host -Fore Yellow $fileContents
-
 }
+
+Write-Host -Fore Yellow $fileContents
