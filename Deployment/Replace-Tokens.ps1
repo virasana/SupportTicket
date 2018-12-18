@@ -1,6 +1,7 @@
 ﻿param(
     [Parameter(Mandatory=$true)][string]$filePath,
-    [Parameter(Mandatory=$true)][string]$secrets   
+    [Parameter(Mandatory=$true)][string]$secrets,   
+    [Parameter(Mandatory=$true)][string]$tokensStartingWith       
 )
 
 Write-Host -Fore Yellow "Replacing Tokens";
