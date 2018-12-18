@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 
-namespace ST.SQLServerRepoLib.Extensions
+namespace ST.SharedHelpersLib.Extensions
 {
-    internal static class DbContextExtensions
+    public static class DbContextExtensions
     {
         // https://stackoverflow.com/questions/36208580/what-happened-to-addorupdate-in-ef-7
         public static void AddOrUpdate<T>(this DbSet<T> dbSet, T data) where T : class

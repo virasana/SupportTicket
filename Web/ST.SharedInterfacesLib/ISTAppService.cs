@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using ST.SharedEntitiesLib;
+using ST.SharedUserEntitiesLib;
 
 namespace ST.SharedInterfacesLib
 {
-    public interface ISTAppService<out TRepo> where TRepo : ISTRepo
+    public interface ISTAppService<out TAppRepo>  
+        where TAppRepo : ISTRepo
     {
         ICollection<Ticket> GetActiveTickets();
 
@@ -16,8 +18,6 @@ namespace ST.SharedInterfacesLib
         ICollection<Product> GetProducts();
 
         Ticket GetTicket(int id);
-
-        TRepo Repo { get; }
 
         Ticket AddTicket(Ticket ticket);
         Ticket UpdateTicket(Ticket ticket);

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ST.Web.Entities;
+using ST.SharedUserEntitiesLib;
 using ST.Web.Services;
 
 namespace ST.Web.Controllers.ApiControllers

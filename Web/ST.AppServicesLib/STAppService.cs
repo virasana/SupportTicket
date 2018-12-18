@@ -4,36 +4,37 @@ using ST.SharedInterfacesLib;
 
 namespace ST.AppServicesLib
 {
-    public class STAppService<TRepo> : ISTAppService<ISTRepo> where TRepo: ISTRepo
+    public class STAppService<TAppRepo> :
+        ISTAppService<ISTRepo> where TAppRepo: ISTRepo
     {
-        private readonly TRepo _repo;
+        private readonly TAppRepo _appRepo;
 
-        public STAppService(TRepo repo)
+        public STAppService(TAppRepo appRepo)
         {
-            _repo = repo;
+            _appRepo = appRepo;
         }
 
         public Ticket CreateTicket(Ticket ticket)
         {
-            var result = _repo.AddTicket(ticket);
+            var result = _appRepo.AddTicket(ticket);
             return result;
         }
 
         public ICollection<Ticket> GetActiveTickets()
         {
-            var result = _repo.GetActiveTickets();
+            var result = _appRepo.GetActiveTickets();
             return result;
         }
 
         public ICollection<Ticket> GetActiveTicketsMatching(string searchTerm)
         {
-            var result = _repo.GetActiveTicketsMatching(searchTerm);
+            var result = _appRepo.GetActiveTicketsMatching(searchTerm);
             return result;
         }
 
         public ICollection<Severity> GetSeverities()
         {
-            var result = _repo.GetSeverities();
+            var result = _appRepo.GetSeverities();
             return result;
         }
 
@@ -47,41 +48,42 @@ namespace ST.AppServicesLib
 
         public ICollection<Product> GetProducts()
         {
-            var result = _repo.GetProducts();
+            var result = _appRepo.GetProducts();
             return result;
         }
 
         public Ticket GetTicket(int id)
         {
-            var result = _repo.GetTicket(id);
+            var result = _appRepo.GetTicket(id);
             return result;
         }
 
         public Ticket AddTicket(Ticket ticket)
         {
-            var result = _repo.AddTicket(ticket);
+            var result = _appRepo.AddTicket(ticket);
 
             return result;
         }
 
         public Ticket UpdateTicket(Ticket ticket)
         {
-            Ticket result = _repo.UpdateTicket(ticket);
+            Ticket result = _appRepo.UpdateTicket(ticket);
             return result;
         }
 
         public Ticket GetActiveTicket(int ticketId)
         {
-            Ticket result = _repo.GetTicket(ticketId);
+            Ticket result = _appRepo.GetTicket(ticketId);
             return result;
         }
 
         public bool DeleteTicket(int ticketId)
         {
-            var result = _repo.DeleteTicket(ticketId);
+            var result = _appRepo.DeleteTicket(ticketId);
             return result;
         }
 
-        public ISTRepo Repo => _repo;
+        // TODO: All callers to use this instead of the above methods
+        public ISTRepo AppRepo => _appRepo;
     }
 }

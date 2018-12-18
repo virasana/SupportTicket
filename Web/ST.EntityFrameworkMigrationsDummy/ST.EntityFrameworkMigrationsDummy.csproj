@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
@@ -10,12 +11,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\ST.SharedHelpersLib\ST.SharedHelpersLib.csproj" />
+    <ProjectReference Include="..\ST.AppServicesLib\ST.AppServicesLib.csproj" />
     <ProjectReference Include="..\ST.SharedEntitiesLib\ST.SharedEntitiesLib.csproj" />
     <ProjectReference Include="..\ST.SharedInterfacesLib\ST.SharedInterfacesLib.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
+    <ProjectReference Include="..\ST.SharedUserEntitiesLib\ST.SharedUserEntitiesLib.csproj" />
+    <ProjectReference Include="..\ST.SQLServerRepoLib\ST.SQLServerRepoLib.csproj" />
+    <ProjectReference Include="..\ST.UsersRepoLib\ST.UsersRepoLib.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace ST.SharedEntitiesLib
 {
-    public partial class Severity
+    public class Severity
     {
         public Severity()
         {

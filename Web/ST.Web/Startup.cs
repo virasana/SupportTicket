@@ -14,8 +14,7 @@ using Newtonsoft.Json;
 using ST.AppServicesLib;
 using ST.SharedInterfacesLib;
 using ST.SQLServerRepoLib;
-using ST.Web.Data;
-using ST.Web.Models;
+using ST.UsersRepoLib;
 using ST.Web.Services;
 
 namespace ST.Web
@@ -24,11 +23,12 @@ namespace ST.Web
     {
         private readonly string _connectionStringAuth;
         private readonly string _connectionStringSupportTicket;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            _connectionStringSupportTicket = Environment.GetEnvironmentVariable(App.Constants.SupportTicketConnStringKey);
-            _connectionStringAuth = Environment.GetEnvironmentVariable(App.Constants.SupportTicketConnStringKey);
+            _connectionStringSupportTicket = Environment.GetEnvironmentVariable(App.Constants.ConnStringSupportTicket);
+            _connectionStringAuth = Environment.GetEnvironmentVariable(App.Constants.ConnStringAuth);
         }
 
         public IConfiguration Configuration { get; }
@@ -44,7 +44,15 @@ namespace ST.Web
 
             ConfigureAppDI(services);
 
+            services.AddDbContext<UsersDbContext>(c =>
+                c.UseSqlServer(Environment.GetEnvironmentVariable(App.Constants.ConnStringAuth)));
+
+            services.AddDbContext<SupportTicketDbContext>(c =>
+                c.UseSqlServer(Environment.GetEnvironmentVariable(App.Constants.ConnStringSupportTicket)));
+
             services.AddMvc();
+
+
         }
 
         private void ConfigureJWT(IServiceCollection services)
@@ -90,6 +98,7 @@ namespace ST.Web
         private static void ConfigureAppDI(IServiceCollection services)
         {
             services.AddScoped<ISTRepo, SQLRepo>();
+            services.AddScoped<ISTUsersRepo, UsersRepo>();
             services.AddScoped<ISTAppService<ISTRepo>, STAppService<ISTRepo>>();
             services.AddScoped<ISTEnvironment, STEnvironment>();
             services.AddScoped<IUserService, UserService>();
@@ -115,11 +124,42 @@ namespace ST.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            ConfigureLogging(loggerFactory);
 
-            loggerFactory.AddDebug();
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            var logger = loggerFactory.CreateLogger("Default");
-            
+            ConfigureExceptionHandling(app, env);
+
+            app.UseStaticFiles();
+
+            app.UseAuthentication();
+
+            app.UseCors("AllowAnyOrigin");
+
+            ConfigureRoutes(app);
+
+            InitialiseServices(app);
+        }
+
+        private void InitialiseServices(IApplicationBuilder app)
+        {
+            using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                scope.ServiceProvider.GetRequiredService<ISTRepo>().Initialise(_connectionStringSupportTicket);
+                scope.ServiceProvider.GetRequiredService<ISTUsersRepo>().Initialise(_connectionStringAuth);
+            }
+        }
+
+        private static void ConfigureRoutes(IApplicationBuilder app)
+        {
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=ST}/{action=Index}/{id?}");
+            });
+        }
+
+        private static void ConfigureExceptionHandling(IApplicationBuilder app, IHostingEnvironment env)
+        {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -128,24 +168,13 @@ namespace ST.Web
             {
                 app.UseExceptionHandler("/ST/Error");
             }
+        }
 
-            app.UseStaticFiles();
-
-            app.UseAuthentication();
-
-            app.UseCors("AllowAnyOrigin");
-
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=ST}/{action=Index}/{id?}");
-            });
-
-            using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-            {
-                scope.ServiceProvider.GetRequiredService<ISTRepo>().Initialise(_connectionStringSupportTicket);
-            }
+        private void ConfigureLogging(ILoggerFactory loggerFactory)
+        {
+            loggerFactory.AddDebug();
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            var logger = loggerFactory.CreateLogger("Default");
         }
     }
 }

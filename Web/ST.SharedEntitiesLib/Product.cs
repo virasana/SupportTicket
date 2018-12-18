@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace ST.SharedEntitiesLib
 {
-    public partial class Product
+    public class Product
     {
         public Product()
         {

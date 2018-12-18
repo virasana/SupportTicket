@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using ST.SharedEntitiesLib;
 using ST.SharedInterfacesLib;
-using ST.SQLServerRepoLib.Extensions;
+using ST.SharedHelpersLib.Extensions;
 
 namespace ST.SQLServerRepoLib
 {
@@ -16,7 +16,7 @@ namespace ST.SQLServerRepoLib
         {
             _connectionString = connectionString;
 
-            using (var context = new SupportTicketContext(connectionString))
+            using (var context = new SupportTicketDbContext(connectionString))
             {
                 context.Database.Migrate();
             }
@@ -26,7 +26,7 @@ namespace ST.SQLServerRepoLib
 
         private void SeedDatabase()
         {
-            using (var context = new SupportTicketContext(_connectionString))
+            using (var context = new SupportTicketDbContext(_connectionString))
             {
                 var products = new List<Product>()
                 {
@@ -68,7 +68,7 @@ namespace ST.SQLServerRepoLib
 
         public virtual Ticket AddTicket(Ticket ticket)
         {
-            using (var ctx = new SupportTicketContext(_connectionString))
+            using (var ctx = new SupportTicketDbContext(_connectionString))
             {
                 ticket.Product = null;
                 ticket.Severity = null;
@@ -89,7 +89,7 @@ namespace ST.SQLServerRepoLib
 
         public ICollection<Ticket> GetActiveTickets()
         {
-            using (var ctx = new SupportTicketContext(_connectionString))
+            using (var ctx = new SupportTicketDbContext(_connectionString))
             {
                 var result = ctx.Tickets
                     .Include("Severity")
@@ -104,7 +104,7 @@ namespace ST.SQLServerRepoLib
 
         private ICollection<Ticket> GetActiveTicketsMatching(List<int> ticketIds)
         {
-            using (var ctx = new SupportTicketContext(_connectionString))
+            using (var ctx = new SupportTicketDbContext(_connectionString))
             {
                 var result = ctx.Tickets
                     .Include("Severity")
@@ -113,8 +113,6 @@ namespace ST.SQLServerRepoLib
                     .ToList();
                 return result;
             }
-
-            //return new List<Tickets>();
         }
 
         public ICollection<Ticket> GetActiveTicketsMatching(string searchTerm)
@@ -142,18 +140,16 @@ namespace ST.SQLServerRepoLib
 
         public ICollection<Severity> GetSeverities()
         {
-            using (var ctx = new SupportTicketContext(_connectionString))
+            using (var ctx = new SupportTicketDbContext(_connectionString))
             {
                 var result = ctx.Severity.ToList();
                 return result;
             }
-
-            //return new List<Severity>();
         }
 
         public ICollection<Product> GetProducts()
         {
-            using (var ctx = new SupportTicketContext(_connectionString))
+            using (var ctx = new SupportTicketDbContext(_connectionString))
             {
                 var result = ctx.Product.ToList();
                 return result;
@@ -164,7 +160,7 @@ namespace ST.SQLServerRepoLib
 
         public Ticket GetTicket(int ticketId)
         {
-            using (var ctx = new SupportTicketContext(_connectionString))
+            using (var ctx = new SupportTicketDbContext(_connectionString))
             {
                 var result = ctx.Tickets
                     .Include("Severity")
@@ -176,7 +172,7 @@ namespace ST.SQLServerRepoLib
 
         public Ticket UpdateTicket(Ticket ticket)
         {
-            using (var ctx = new SupportTicketContext(_connectionString))
+            using (var ctx = new SupportTicketDbContext(_connectionString))
             {
                 var result = ctx.Tickets
                     .First(t => t.TicketId == ticket.TicketId);
@@ -196,7 +192,7 @@ namespace ST.SQLServerRepoLib
 
         public bool DeleteTicket(int ticketId)
         {
-            using (var ctx = new SupportTicketContext(_connectionString))
+            using (var ctx = new SupportTicketDbContext(_connectionString))
             {
 
                 var ticket = GetTicket(ticketId);

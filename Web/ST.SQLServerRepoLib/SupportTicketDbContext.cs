@@ -5,11 +5,12 @@ using ST.SharedEntitiesLib;
 
 namespace ST.SQLServerRepoLib
 {
-    public partial class SupportTicketContext : DbContext
+    public class SupportTicketDbContext : DbContext
     {
         private readonly string _connectionString;
 
-        public SupportTicketContext(string connectionString)
+        public SupportTicketDbContext(DbContextOptions<SupportTicketDbContext> options) : base(options) { }
+        public SupportTicketDbContext(string connectionString)
         {
             _connectionString = connectionString;
         }
@@ -47,6 +48,11 @@ namespace ST.SQLServerRepoLib
             {
                 entity.Property(t => t.TicketId)
                     .IsRequired();
+
+                entity.HasKey(p => p.TicketId);
+
+                entity.HasIndex(e => e.TicketId)
+                    .HasName("IX_TicketId");
 
                 entity.HasIndex(e => e.ProductId)
                     .HasName("IX_ProductId");

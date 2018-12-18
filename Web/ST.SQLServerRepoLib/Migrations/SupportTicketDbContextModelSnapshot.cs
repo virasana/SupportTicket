@@ -3,27 +3,27 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Storage.Internal;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using ST.SQLServerRepoLib;
 
-namespace ST.SQLServerRepoLib.Migrations
+namespace ST.SqlServerRepoLib.Migrations
 {
-    [DbContext(typeof(SupportTicketContext))]
-    partial class SupportTicketContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(SupportTicketDbContext))]
+    partial class SupportTicketDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.0-preview1-28290")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("ST.SharedEntitiesLib.Product", b =>
                 {
                     b.Property<int>("ProductId")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -38,7 +38,8 @@ namespace ST.SQLServerRepoLib.Migrations
             modelBuilder.Entity("ST.SharedEntitiesLib.Severity", b =>
                 {
                     b.Property<int>("SeverityId")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("DisplayName")
                         .HasMaxLength(50)
@@ -49,10 +50,11 @@ namespace ST.SQLServerRepoLib.Migrations
                     b.ToTable("Severity");
                 });
 
-            modelBuilder.Entity("ST.SharedEntitiesLib.Tickets", b =>
+            modelBuilder.Entity("ST.SharedEntitiesLib.Ticket", b =>
                 {
                     b.Property<int>("TicketId")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("Active");
 
@@ -83,10 +85,13 @@ namespace ST.SQLServerRepoLib.Migrations
                     b.HasIndex("SeverityId")
                         .HasName("IX_SeverityId");
 
+                    b.HasIndex("TicketId")
+                        .HasName("IX_TicketId");
+
                     b.ToTable("Tickets");
                 });
 
-            modelBuilder.Entity("ST.SharedEntitiesLib.Tickets", b =>
+            modelBuilder.Entity("ST.SharedEntitiesLib.Ticket", b =>
                 {
                     b.HasOne("ST.SharedEntitiesLib.Product", "Product")
                         .WithMany("Tickets")

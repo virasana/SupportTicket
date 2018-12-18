@@ -7,13 +7,14 @@ services:
     ports:
       - 1433:1433
     environment:
-      SA_PASSWORD: "D3vs123^^^D3vs123"
+      SA_PASSWORD: "D3vs123---D3vs123"
       ACCEPT_EULA: "Y"
       MSSQL_PID: Developer
   st.web:
     environment:
-      SUPPORT_TICKET_DEPLOY_DB_CONN_STRING: "Data Source=sqlservice;Initial Catalog=SupportTicket;User Id=SA;password=D3vs123^^^D3vs123"
-      SUPPORT_TICKET_DEPLOY_JWT_SECRET: "A3D83047-A68D-4C4E-829C-181-DEV-KEY-AE9FD3CB8-375AA03A-D77F-4841-8427-69E78CB17899"
+      SUPPORT_TICKET_DEPLOY_DB_CONN_STRING: Data Source=sqlservice;Initial Catalog=SupportTicket;User Id=SA;password=D3vs123---D3vs123
+      SUPPORT_TICKET_DEPLOY_DB_CONN_STRING_AUTH: Data Source=sqlservice;Initial Catalog=SupportTicketAuth;User Id=SA;password=D3vs123---D3vs123
+      SUPPORT_TICKET_DEPLOY_JWT_SECRET: A3D83047A68D4C4E829C181DEVKEYAE9FD3CB8375AA03AD77F4841842769E78CB17899
       ASPNETCORE_ENVIRONMENT: Development
     depends_on:
      - mssql

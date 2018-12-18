@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ST.SQLServerRepoLib.Migrations
+namespace ST.SqlServerRepoLib.Migrations
 {
-    public partial class Initial001 : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -50,7 +49,7 @@ namespace ST.SQLServerRepoLib.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ticket", x => x.TicketId);
+                    table.PrimaryKey("PK_Tickets", x => x.TicketId);
                     table.ForeignKey(
                         name: "FK_dbo.Ticket_dbo.Product_ProductId",
                         column: x => x.ProductId,
@@ -74,6 +73,11 @@ namespace ST.SQLServerRepoLib.Migrations
                 name: "IX_SeverityId",
                 table: "Tickets",
                 column: "SeverityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TicketId",
+                table: "Tickets",
+                column: "TicketId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
