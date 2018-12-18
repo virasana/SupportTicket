@@ -10,6 +10,7 @@ COPY "ST.AppServicesLib/ST.AppServicesLib.csproj" "ST.AppServicesLib/"
 COPY "ST.SharedInterfacesLib/ST.SharedInterfacesLib.csproj" "ST.SharedInterfacesLib/"
 COPY "ST.SharedEntitiesLib/ST.SharedEntitiesLib.csproj" "ST.SharedEntitiesLib/"
 COPY "ST.SQLServerRepoLib/ST.SQLServerRepoLib.csproj" "ST.SQLServerRepoLib/"
+COPY "ST.SharedHelpersLib/ST.SharedHelpersLib.csproj" "ST.SharedHelpersLib/"
 RUN dotnet restore "ST.Web/ST.Web.csproj"
 
 COPY . .

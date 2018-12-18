@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ST.SharedHelpersLib\ST.SharedHelpersLib.csproj" />
+    <ProjectReference Include="..\ST.SharedHelpersLib\ST.SharedHelpersLib.csproj" />
     <ProjectReference Include="..\ST.SharedInterfacesLib\ST.SharedInterfacesLib.csproj" />
   </ItemGroup>
 
