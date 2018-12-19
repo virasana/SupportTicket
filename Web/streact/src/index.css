@@ -155,6 +155,10 @@ label {
     margin-top: 15px;
 }
 
+.st-authlinks {
+    display: flex;
+}
+
 .st-footer {
     text-align: center;
 }

@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { updateTicket, fetchStaticData, fetchTicket, setTicket } from "../actions/index";
 import DropDownSelect from "./select-list";
 import { bindActionCreators } from "redux";
+import requireAuth from './auth/requireAuth'
 
 class TicketsEdit extends Component {
   constructor (props) {
@@ -186,7 +187,7 @@ TicketsEdit = reduxForm({
   keepDirtyOnReinitialize: true
 })(TicketsEdit); 
 
-export default connect(mapStateToProps, mapDispatchToProps)(TicketsEdit);
+export default requireAuth(connect(mapStateToProps, mapDispatchToProps)(TicketsEdit));
 // Could also use destructuring as follows:
 // TicketsEdit = connect(mapStateToProps, { updateTicket, fetchStaticData })(TicketsEdit);
 

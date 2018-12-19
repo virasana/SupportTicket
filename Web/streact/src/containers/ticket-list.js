@@ -2,8 +2,8 @@ import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchTickets } from "../actions/index";
-//import { bindActionCreators } from "redux";
 import TicketItem from "./ticket-item";
+import requireAuth from './auth/requireAuth';
 
 class TicketList extends Component {
 
@@ -57,23 +57,7 @@ class TicketList extends Component {
   }
 }
 
-
-
-// function mapDispatchToProps(dispatch) {
-//   // Whenever selectTicket is called, the result should be passed
-//   // to all of our reducers
-//   return bindActionCreators({ fetchTickets: fetchTickets }, dispatch);
-// }
-
-// Promote TicketList from a component to a container - it needs to know
-// about this new dispatch method, selectTicket. Make it available
-// as a prop.
-
-// Anything returned from this function will end up as props
-// on the TicketList container
 function mapStateToProps(state) {
-  // Whatever is returned will show up as props
-  // inside of TicketList
   if(state.tickets == null){
     return state;
   }
@@ -82,4 +66,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps, { fetchTickets })(TicketList);
+export default requireAuth(connect(mapStateToProps, { fetchTickets })(TicketList));
