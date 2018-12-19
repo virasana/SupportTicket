@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// TODO: Move to action-types.js
 export const FETCH_TICKETS = "FETCH_TICKETS";
 export const FETCH_TICKET = "FETCH_TICKET";
 export const CREATE_TICKET = "CREATE_TICKET";

@@ -6,6 +6,7 @@ import TicketsEdit from "./containers/tickets-edit";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Menu from 'react-burger-menu/lib/menus/stack'
+import Signin from './containers/auth/Signin';
 
 export class App extends Component {
   constructor (props) {
@@ -43,6 +44,7 @@ export class App extends Component {
                         <ul className="nav navbar-nav">
                             <li className="st-navitem"><Link to="/" className="menu-item">View Tickets</Link></li>
                             <li className="st-navitem"><Link to="/tickets/new" className="menu-item">New Ticket</Link></li>
+                            <li className="st-navitem"><Link to="/signin" className="menu-item">Sign In</Link></li>
                         </ul>
                     </div>
                     <div className="st-mobileonly" onClick={() => this.closeMenu()}>
@@ -53,12 +55,14 @@ export class App extends Component {
                     pageWrapId={"page-wrap"} outerContainerId={"outer-container"}>
                         <Link className="st-navitem" onClick={() => this.closeMenu()} to="/tickets/new" >New Ticket</Link>
                         <Link className="st-navitem" onClick={() => this.closeMenu()} to="/" >View Tickets</Link>
+                        <Link className="st-navitem" onClick={() => this.closeMenu()} to="/signin" >Sign In</Link>
                     </Menu>
                 </div>
                 </div>
             </div>
             <div id="page-wrap">
                 <Switch>
+                    <Route path="/signin" component={Signin} />
                     <Route path="/tickets/edit/:id" component={TicketsEdit} />
                     <Route path="/tickets/new" component={TicketsNew} />
                     <Route path="/tickets" component={TicketList} />
