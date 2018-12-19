@@ -5,6 +5,7 @@ import TicketsNew from "./containers/tickets-new";
 import TicketsEdit from "./containers/tickets-edit";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Signin from './containers/auth/Signin';
+import Signup from './containers/auth/Signup';
 import Signout from './containers/auth/Signout';
 import Header from './containers/header';
 
@@ -17,6 +18,7 @@ export class App extends Component {
             <Header />
             <div id="page-wrap">
                 <Switch>
+                    <Route path="/signup" component={Signup} />
                     <Route path="/signout" component={Signout} />
                     <Route path="/signin" component={Signin} />
                     <Route path="/tickets/edit/:id" component={TicketsEdit} />

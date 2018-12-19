@@ -6,7 +6,7 @@ const ROOT_URL = process.env.REACT_APP_API_URL;
 export const signup = (formProps, callback) => async dispatch => {
   try {
     const response = await axios.post(
-      `${ROOT_URL}/signup`,
+      `http://localhost:32768/api/signup`,
       formProps
     );
 
@@ -14,7 +14,7 @@ export const signup = (formProps, callback) => async dispatch => {
     localStorage.setItem('token', response.data.token);
     callback();
   } catch (e) {
-    dispatch({ type: AUTH_ERROR, payload: 'Email in use' });
+    dispatch({ type: AUTH_ERROR, payload: 'Username in use' });
   }
 };
 
