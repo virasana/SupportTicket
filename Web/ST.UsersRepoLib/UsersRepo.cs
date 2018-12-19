@@ -19,6 +19,52 @@ namespace ST.UsersRepoLib
             SeedDatabase();
         }
 
+        public User SignUp(User user)
+        {
+            if (UserExists(user)) return null;
+
+            AddUser(user);
+
+            var result = GetUser(user.Username);
+            result.Password = null;
+            result.Token = "";
+
+            return result;
+        }
+
+        public User Get(int id)
+        {
+            using (var ctx = new UsersDbContext(_connectionString))
+            {
+                return ctx.Users.FirstOrDefault(u => u.Id.Equals(id));
+            }
+        }
+
+        private void AddUser(User user)
+        {
+            using (var ctx = new UsersDbContext(_connectionString))
+            {
+                ctx.Users.Add(user);
+                ctx.SaveChanges();
+            }
+        }
+
+            private bool UserExists(User user)
+        {
+            return GetUser(user.Username) != null;
+        }
+
+        private static User GetUser(string userName)
+        {
+            using (var ctx = new UsersDbContext(_connectionString))
+            {
+                var result = ctx.Users.FirstOrDefault(u =>
+                    u.Username.Equals(userName));
+
+                return result;
+            }
+        }
+
         private void SeedDatabase()
         {
             using (var ctx = new UsersDbContext(_connectionString))

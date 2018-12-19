@@ -10,5 +10,7 @@ namespace ST.SharedInterfacesLib
         User GetUserMatching(string userName, string password);
         IEnumerable<User> GetAllUsers();
         void Initialise(string connectionString);
+        User SignUp(User user);
+        User Get(int id);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ST.SharedInterfacesLib;
 using ST.SharedUserEntitiesLib;
 using ST.Web.Services;
 
@@ -29,12 +30,40 @@ namespace ST.Web.Controllers.ApiControllers
             return Ok(user);
         }
 
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("api/signup")]
+        public IActionResult SignUp([FromBody]User user)
+        {
+            User result =  _userService.SignUp(user);
+
+            if (result != null)
+            {
+                return CreatedAtRoute(
+                    routeName: "User",
+                    routeValues: new { id = result.Id },
+                    value: result);
+            }
+            else
+            {
+                return BadRequest(new { message = "Username could not be added.  Is this user already registered?" });
+            }
+        }
+
         [HttpGet]
         [Route("api/users")]
         public IActionResult GetAll()
         {
             var users = _userService.GetAll();
             return Ok(users);
+        }
+
+        [HttpGet]
+        [Route("api/user", Name = "User")]
+        public IActionResult Get(int id)
+        {
+            var user = _userService.Get(id);
+            return Ok(user);
         }
     }
 }

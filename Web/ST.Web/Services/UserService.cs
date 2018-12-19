@@ -10,12 +10,6 @@ using ST.SharedUserEntitiesLib;
 
 namespace ST.Web.Services
 {
-    public interface IUserService
-    {
-        User Authenticate(string username, string password);
-        IEnumerable<User> GetAll();
-    }
-
     public class UserService : IUserService
     {
         private readonly ISTUsersRepo _usersRepo;
@@ -61,6 +55,16 @@ namespace ST.Web.Services
         {
             // return users without passwords
             return _usersRepo.GetAllUsers();
+        }
+
+        User IUserService.SignUp(User user)
+        {
+            return _usersRepo.SignUp(user);
+        }
+
+        public User Get(int id)
+        {
+            return _usersRepo.Get(id);
         }
     }
 }
