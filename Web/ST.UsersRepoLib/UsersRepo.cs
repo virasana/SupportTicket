@@ -26,9 +26,7 @@ namespace ST.UsersRepoLib
             AddUser(user);
 
             var result = GetUser(user.Username);
-            result.Password = null;
-            result.Token = "";
-
+            result = ClearUserSecrets(result);
             return result;
         }
 
@@ -36,8 +34,17 @@ namespace ST.UsersRepoLib
         {
             using (var ctx = new UsersDbContext(_connectionString))
             {
-                return ctx.Users.FirstOrDefault(u => u.Id.Equals(id));
+                var result = ctx.Users.FirstOrDefault(u => u.Id.Equals(id));
+                result = ClearUserSecrets(result);
+                return result;
             }
+        }
+
+        private User ClearUserSecrets(User user)
+        {
+            user.Password = null;
+            user.Token = "";
+            return user;
         }
 
         private void AddUser(User user)

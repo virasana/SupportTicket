@@ -59,7 +59,7 @@ namespace ST.Web.Controllers.ApiControllers
         }
 
         [HttpGet]
-        [Route("api/user", Name = "User")]
+        [Route("api/user/{id}", Name = "User")]
         public IActionResult Get(int id)
         {
             var user = _userService.Get(id);
