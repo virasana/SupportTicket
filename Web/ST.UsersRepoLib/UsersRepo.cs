@@ -17,7 +17,6 @@ namespace ST.UsersRepoLib
         public UsersRepo(UsersDbContext context)
         {
             _context = context;
-            Initialise();
         }
 
         public void Initialise()

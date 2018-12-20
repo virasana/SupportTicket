@@ -145,7 +145,7 @@ namespace ST.Web
             using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 scope.ServiceProvider.GetRequiredService<ISTRepo>().Initialise(_connectionStringSupportTicket);
-                scope.ServiceProvider.GetRequiredService<ISTUsersRepo>();
+                scope.ServiceProvider.GetRequiredService<ISTUsersRepo>().Initialise();
             }
         }
 
