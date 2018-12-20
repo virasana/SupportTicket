@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ST.SharedHelpersLib.Exceptions;
 using ST.SharedInterfacesLib;
@@ -23,12 +24,16 @@ namespace ST.Web.Controllers.ApiControllers
         [Route("api/authenticate")]
         public IActionResult Authenticate([FromBody]User userParam)
         {
-            var user = _userService.Authenticate(userParam.Username, userParam.Password);
-
-            if (user == null)
-                return BadRequest(new { message = "Username or password is incorrect" });
-
-            return Ok(user);
+            try
+            {
+                var user = _userService.Authenticate(userParam.Username, userParam.Password);
+                if (user != null) return Ok(user);
+                return Unauthorized();
+            }
+            catch (SupportTicketDatabaseException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
         [AllowAnonymous]
