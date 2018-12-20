@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ST.SharedHelpersLib.Exceptions;
 using ST.SharedInterfacesLib;
 using ST.SharedUserEntitiesLib;
 using ST.Web.Services;
@@ -35,7 +36,16 @@ namespace ST.Web.Controllers.ApiControllers
         [Route("api/signup")]
         public IActionResult SignUp([FromBody]User user)
         {
-            User result =  _userService.SignUp(user);
+            User result;
+
+            try
+            {
+                result = _userService.SignUp(user);
+            }
+            catch (SupportTicketApplicationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
             if (result != null)
             {
@@ -44,10 +54,8 @@ namespace ST.Web.Controllers.ApiControllers
                     routeValues: new { id = result.Id },
                     value: result);
             }
-            else
-            {
-                return BadRequest(new { message = "Username could not be added.  Is this user already registered?" });
-            }
+
+            return BadRequest(new { message = "Unknown error during signup." });
         }
 
         [HttpGet]

@@ -25,7 +25,8 @@ namespace ST.SharedHelpersLib.Extensions
 
             if (keyField == null)
             {
-                throw new Exception($"{t.FullName} does not have a KeyAttribute field. Unable to exec AddOrUpdate call.");
+                throw new Exception(
+                    $"{t.FullName} does not have a KeyAttribute field. Unable to exec AddOrUpdate call.");
             }
 
             var keyVal = keyField.GetValue(data);
@@ -46,5 +47,6 @@ namespace ST.SharedHelpersLib.Extensions
                 dbSet.AddOrUpdate(item);
             }
         }
-        }
+
+    }
 }

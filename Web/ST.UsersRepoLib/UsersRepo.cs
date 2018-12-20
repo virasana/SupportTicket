@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using ST.SharedHelpersLib.EntityFramework;
+using ST.SharedHelpersLib.Exceptions;
 using ST.SharedHelpersLib.Extensions;
 using ST.SharedInterfacesLib;
 using ST.SharedUserEntitiesLib;
@@ -21,7 +23,10 @@ namespace ST.UsersRepoLib
 
         public User SignUp(User user)
         {
-            if (UserExists(user)) return null;
+            if (UserExists(user))
+            {
+                throw new SupportTicketUserAlreadyExistsException();
+            }
 
             AddUser(user);
 
@@ -32,12 +37,14 @@ namespace ST.UsersRepoLib
 
         public User Get(int id)
         {
-            using (var ctx = new UsersDbContext(_connectionString))
-            {
-                var result = ctx.Users.FirstOrDefault(u => u.Id.Equals(id));
-                result = ClearUserSecrets(result);
-                return result;
-            }
+            var result = EfHelpers.Execute<UsersDbContext, User>(
+                _connectionString, ctx =>
+                {
+                    var theUser = ctx.Users.FirstOrDefault(u => u.Id.Equals(id));
+                    theUser = ClearUserSecrets(theUser);
+                    return theUser;
+                });
+            return result;
         }
 
         private User ClearUserSecrets(User user)
@@ -49,10 +56,18 @@ namespace ST.UsersRepoLib
 
         private void AddUser(User user)
         {
-            using (var ctx = new UsersDbContext(_connectionString))
+            try
             {
-                ctx.Users.Add(user);
-                ctx.SaveChanges();
+                using (var ctx = new UsersDbContext(_connectionString))
+                {
+                    ctx.Users.Add(user);
+                    ctx.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new SupportTicketApplicationException("Could not add user to the database.", 
+                    new SupportTicketDatabaseException(ex));
             }
         }
 
@@ -63,13 +78,15 @@ namespace ST.UsersRepoLib
 
         private static User GetUser(string userName)
         {
-            using (var ctx = new UsersDbContext(_connectionString))
-            {
-                var result = ctx.Users.FirstOrDefault(u =>
+            var result = EfHelpers.Execute<UsersDbContext, User>(_connectionString,
+            ctx => {
+                var theUser = ctx.Users.FirstOrDefault(u =>
                     u.Username.Equals(userName));
 
-                return result;
-            }
+                return theUser;
+            });
+
+            return result;
         }
 
         private void SeedDatabase()
