@@ -18,6 +18,7 @@
     <ProjectReference Include="..\ST.SharedInterfacesLib\ST.SharedInterfacesLib.csproj" />
     <ProjectReference Include="..\ST.SharedUserEntitiesLib\ST.SharedUserEntitiesLib.csproj" />
     <ProjectReference Include="..\ST.SQLServerRepoLib\ST.SQLServerRepoLib.csproj" />
+    <ProjectReference Include="..\ST.UserServiceLib\ST.UserServiceLib.csproj" />
     <ProjectReference Include="..\ST.UsersRepoLib\ST.UsersRepoLib.csproj" />
   </ItemGroup>
 

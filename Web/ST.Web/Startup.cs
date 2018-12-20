@@ -15,6 +15,7 @@ using ST.AppServicesLib;
 using ST.SharedInterfacesLib;
 using ST.SQLServerRepoLib;
 using ST.UsersRepoLib;
+using ST.UserServiceLib;
 using ST.Web.Services;
 
 namespace ST.Web
@@ -100,8 +101,8 @@ namespace ST.Web
             services.AddScoped<ISTRepo, SQLRepo>();
             services.AddScoped<ISTUsersRepo, UsersRepo>();
             services.AddScoped<ISTAppService<ISTRepo>, STAppService<ISTRepo>>();
+            services.AddScoped<IUserService<ISTUsersRepo>, UserService<ISTUsersRepo>>();
             services.AddScoped<ISTEnvironment, STEnvironment>();
-            services.AddScoped<IUserService, UserService>();
         }
 
         private static void ConfigureApplicationCookie(IServiceCollection services)
@@ -144,7 +145,7 @@ namespace ST.Web
             using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 scope.ServiceProvider.GetRequiredService<ISTRepo>().Initialise(_connectionStringSupportTicket);
-                scope.ServiceProvider.GetRequiredService<ISTUsersRepo>().Initialise(_connectionStringAuth);
+                scope.ServiceProvider.GetRequiredService<ISTUsersRepo>();
             }
         }
 

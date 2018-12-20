@@ -12,12 +12,17 @@ namespace ST.UsersRepoLib
 {
     public class UsersRepo : ISTUsersRepo
     {
-        private static string _connectionString;
+        private readonly UsersDbContext _context;
 
-        public void Initialise(string connectionString)
+        public UsersRepo(UsersDbContext context)
         {
-            _connectionString = connectionString;
-            MigrateDb(connectionString);
+            _context = context;
+            Initialise();
+        }
+
+        public void Initialise()
+        {
+            MigrateDb();
             SeedDatabase();
         }
 
@@ -37,8 +42,10 @@ namespace ST.UsersRepoLib
 
         public User Get(int id)
         {
-            var result = EfHelpers.Execute<UsersDbContext, User>(
-                _connectionString, ctx =>
+            var result = EfHelpers.Execute(
+                _context, 
+                "Could not get users from the database", 
+                ctx =>
                 {
                     var theUser = ctx.Users.FirstOrDefault(u => u.Id.Equals(id));
                     theUser = ClearUserSecrets(theUser);
@@ -56,19 +63,13 @@ namespace ST.UsersRepoLib
 
         private void AddUser(User user)
         {
-            try
+            EfHelpers.Execute(_context, "Could not add user to the database.", 
+                ctx =>
             {
-                using (var ctx = new UsersDbContext(_connectionString))
-                {
-                    ctx.Users.Add(user);
-                    ctx.SaveChanges();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new SupportTicketApplicationException("Could not add user to the database.", 
-                    new SupportTicketDatabaseException(ex));
-            }
+                ctx.Users.Add(user);
+                ctx.SaveChanges();
+                return user;
+            });
         }
 
             private bool UserExists(User user)
@@ -76,9 +77,10 @@ namespace ST.UsersRepoLib
             return GetUser(user.Username) != null;
         }
 
-        private static User GetUser(string userName)
+        private User GetUser(string userName)
         {
-            var result = EfHelpers.Execute<UsersDbContext, User>(_connectionString,
+            var result = EfHelpers.Execute(_context,
+                "Could not get user from the database",
             ctx => {
                 var theUser = ctx.Users.FirstOrDefault(u =>
                     u.Username.Equals(userName));
@@ -91,55 +93,68 @@ namespace ST.UsersRepoLib
 
         private void SeedDatabase()
         {
-            using (var ctx = new UsersDbContext(_connectionString))
-            {
-                var user = new User()
+            EfHelpers.Execute(_context,
+                "Could not seed users database", ctx =>
                 {
-                    FirstName = "Joe",
-                    LastName = "Soap",
-                    Password = "test",
-                    Username = "test",
-                    Token = string.Empty
-                };
+                    var user = new User()
+                    {
+                        FirstName = "Joe",
+                        LastName = "Soap",
+                        Password = "test",
+                        Username = "test",
+                        Token = string.Empty
+                    };
 
-                ctx.Users.AddOrUpdate(user);
+                    ctx.Users.AddOrUpdate(user);
 
-                ctx.SaveChanges();
-            }
+                    ctx.SaveChanges();
+                    return user;
+                });
         }
 
-        private static void MigrateDb(string connectionString)
+        private void MigrateDb()
         {
-            using (var context = new UsersDbContext(connectionString))
-            {
-                context.Database.Migrate();
-            }
+            EfHelpers.Execute<object,UsersDbContext>(
+                _context,
+                "Could not migrate database.  Database operation failed.",
+                ctx =>
+                {
+                    ctx.Database.Migrate();
+                    return null;
+                });
         }
 
         public User GetUserMatching(string userName, string password)
         {
-            using (var ctx = new UsersDbContext(_connectionString))
-            {
-                return ctx.Users.FirstOrDefault(user =>
-                    user.Username.Equals(userName)
-                    && user.Password.Equals(password));
-            }
+            var result = EfHelpers.Execute(_context, 
+                $"Could not get user matching {userName}. The database operation failed.",
+                ctx =>
+                {
+                    return ctx.Users.FirstOrDefault(user =>
+                        user.Username.Equals(userName)
+                        && user.Password.Equals(password));
+                });
+            return result;
         }
 
         public IEnumerable<User> GetAllUsers()
         {
-            using (var ctx = new UsersDbContext(_connectionString))
-            {
-                var result = ctx.Users.Select(u =>
-                    new User()
-                    {
-                        FirstName = u.FirstName,
-                        LastName = u.LastName,
-                        Username = u.Username
-                    }
-                );
-                return result;
-            }
+            var result = EfHelpers.Execute(
+                _context,
+                "Could not get all users.  The database operation failed.",
+                ctx =>
+                {
+                    var users = _context.Users.Select(u =>
+                        new User()
+                        {
+                            FirstName = u.FirstName,
+                            LastName = u.LastName,
+                            Username = u.Username
+                        }
+                    );
+                    return users;
+                });
+            return result;
         }
     }
 }

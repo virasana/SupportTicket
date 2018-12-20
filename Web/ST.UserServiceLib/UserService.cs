@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using ST.SharedInterfacesLib;
 using Microsoft.IdentityModel.Tokens;
+using ST.SharedInterfacesLib;
 using ST.SharedUserEntitiesLib;
 
-namespace ST.Web.Services
+
+namespace ST.UserServiceLib
 {
-    public class UserService : IUserService
+    public class UserService<TUsersRepo> :
+        IUserService<ISTUsersRepo> where TUsersRepo: ISTUsersRepo
     {
         private readonly ISTUsersRepo _usersRepo;
         private readonly string _jwtSecret;
 
-        public UserService(ISTEnvironment stEnvironment, ISTUsersRepo usersRepo)
+        public UserService(ISTEnvironment stEnvironment, TUsersRepo usersRepo)
         {
             _usersRepo = usersRepo;
             _jwtSecret = stEnvironment.JWTSecret;
@@ -35,7 +36,7 @@ namespace ST.Web.Services
             var key = Encoding.ASCII.GetBytes(_jwtSecret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new Claim[]
+                Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Name, user.Id.ToString())
                 }),
@@ -57,7 +58,7 @@ namespace ST.Web.Services
             return _usersRepo.GetAllUsers();
         }
 
-        User IUserService.SignUp(User user)
+        public User SignUp(User user)
         {
             return _usersRepo.SignUp(user);
         }

@@ -11,9 +11,9 @@ namespace ST.Web.Controllers.ApiControllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IUserService _userService;
+        private readonly IUserService<ISTUsersRepo> _userService;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService<ISTUsersRepo> userService)
         {
             _userService = userService;
         }
