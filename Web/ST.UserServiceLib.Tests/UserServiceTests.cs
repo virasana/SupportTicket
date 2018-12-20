@@ -17,7 +17,7 @@ namespace ST.UserServiceLib.Tests
         }
 
         [Fact]
-        public void Signup_Adds_New_User()
+        public void SignupAddsNewUser()
         {
             var options = new DbContextOptionsBuilder<UsersDbContext>()
                 .UseInMemoryDatabase(databaseName: "GetUsers_Returns_Users")
@@ -49,7 +49,7 @@ namespace ST.UserServiceLib.Tests
 
 
         [Fact]
-        public void Duplicate_Signup_Throws_Exception()
+        public void DuplicateSignupThrowsException()
         {
             var options = new DbContextOptionsBuilder<UsersDbContext>()
                 .UseInMemoryDatabase(databaseName: "GetUsers_Returns_Users")
@@ -73,6 +73,41 @@ namespace ST.UserServiceLib.Tests
 
                 Assert.Throws<SupportTicketUserAlreadyExistsException>(
                     () => service.SignUp(newUser));
+                context.Database.EnsureDeleted();
+            }
+        }
+
+        [Fact]
+        public void GetUserReturnsNoSecrets()
+        {
+            var options = new DbContextOptionsBuilder<UsersDbContext>()
+                .UseInMemoryDatabase(databaseName: "GetUsers_Returns_Users")
+                .Options;
+
+
+            using (var context = new UsersDbContext(options))
+            {
+                var newUser = new User()
+                {
+                    FirstName = "Bob",
+                    LastName = "Smith",
+                    Password = "password",
+                    Token = "SecretToken!",
+                    Username = "bsmith"
+                };
+
+                var service = new UserService<UsersRepo>(new TestEnvironment(), new UsersRepo(context));
+
+                service.SignUp(newUser); 
+
+                var users = service.GetAll();
+
+                foreach (var user in users)
+                {
+                    Assert.Null(user.Password);
+                    Assert.True(string.IsNullOrEmpty(user.Token));
+                }
+
                 context.Database.EnsureDeleted();
             }
         }
