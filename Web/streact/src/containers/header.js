@@ -36,7 +36,6 @@ class Header extends Component {
     } else {
       return (
         <Fragment>
-          <li className="st-navitem"><Link to="/signup" className="menu-item">Sign Up</Link></li>
           <li className="st-navitem"><Link to="/signin" className="menu-item">Sign In</Link></li>
         </Fragment>
       );
