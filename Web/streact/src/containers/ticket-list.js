@@ -11,7 +11,7 @@ class TicketList extends Component {
     super(props);
     this.render = this.render.bind(this);
   }
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchTickets();
   }
 
