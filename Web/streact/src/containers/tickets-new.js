@@ -51,14 +51,14 @@ class TicketsNew extends Component {
             type="checkbox"
           />
           <Field
-            name="productid"
+            name="productId"
             label="Product"
             component={DropDownSelect}
             items={this.props.products == null ? [] : this.props.products}
             className="form-control"
           />
           <Field
-            name="severityid"
+            name="severityId"
             label="Severity"
             component={DropDownSelect}
             items={this.props.severities == null ? [] : this.props.severities}
@@ -84,12 +84,12 @@ function validate(values) {
   }
 
 debugger;
-  if (!values.severityid) {
-    errors.severityid = "Select severity";
+  if (!values.severityId) {
+    errors.severityId = "Select severity";
   }
 
-  if (!values.productid) {
-    errors.productid = "Select product";
+  if (!values.productId) {
+    errors.productId = "Select product";
   }
 
   return errors;
