@@ -65,6 +65,7 @@ class Header extends Component {
                         <Link className="st-navitem" onClick={() => this.closeMenu()} to="/tickets/new" >New Ticket</Link>
                         <Link className="st-navitem" onClick={() => this.closeMenu()} to="/" >View Tickets</Link>
                         <Link className="st-navitem" onClick={() => this.closeMenu()} to="/signin" >Sign In</Link>
+                        <Link className="st-navitem" onClick={() => this.closeMenu()} to="/signout" >Sign Out</Link>
                     </Menu>
                 </div>
                 </div>
