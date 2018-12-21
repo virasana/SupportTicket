@@ -51,10 +51,7 @@ namespace ST.Web.Tests
                 Username = "bsmith"
             };
 
-            
-
             var usersController = new UsersController(fakeUsersService);
-
 
             A.CallTo(() => fakeUsersService.SignUp(newUser)).Returns(newUser);
             usersController.SignUp(newUser);

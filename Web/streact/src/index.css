@@ -200,6 +200,14 @@ label {
     width: 30px;
 }
 
+.st-texthelp {
+    color: #ff0000
+}
+
+.st-exclamation {
+    margin-right: 5px;
+}
+
 a {
     cursor: pointer;
 }

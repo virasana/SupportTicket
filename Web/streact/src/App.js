@@ -8,6 +8,11 @@ import Signin from './containers/auth/Signin';
 import Signup from './containers/auth/Signup';
 import Signout from './containers/auth/Signout';
 import Header from './containers/header';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faExclamation } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faExclamation)
+
 
 export class App extends Component {
   render() {
