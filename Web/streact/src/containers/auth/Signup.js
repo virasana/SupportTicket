@@ -102,7 +102,17 @@ function validate(values) {
     if (values.confirmpassword && values.password 
         && values.confirmpassword !== values.password) {
             errors.validationsummary = "Passwords do not match";
-      }
+    }
+
+    if (values.confirmpassword && values.confirmpassword.length < 9)
+    {
+        errors.confirmpassword = "Password must be at least 9 characters long";
+    }
+
+    if (values.password && values.password.length < 9)
+    {
+        errors.password = "Password must be at least 9 characters long";
+    }
   
     return errors;
   }
