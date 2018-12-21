@@ -4,7 +4,7 @@ import { AUTH_USER, AUTH_ERROR } from './action-types';
 const ROOT_URL = process.env.REACT_APP_API_URL;
 
 export const signup = (formProps, callback) => async dispatch => {
-    const response = await axios.post(
+    await axios.post(
       `${ROOT_URL}/signup`,
       formProps
     )

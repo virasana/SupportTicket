@@ -1,5 +1,6 @@
 // https://stackoverflow.com/questions/40075281/how-to-create-custom-dropdown-field-component-with-redux-form-v6
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class DropDownSelect extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -18,8 +19,8 @@ class DropDownSelect extends React.Component { // eslint-disable-line react/pref
           {this.props.items.map(this.renderSelectOptions)}
         </select>
         <div className="text-help">
-            {touched ? error : ""}
-          </div>
+            {touched && ((error && <span className="st-texthelp"><FontAwesomeIcon className="st-exclamation" icon="exclamation"/>{error}</span>))}
+        </div>
       </div>
     );
   }

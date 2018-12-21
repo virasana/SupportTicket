@@ -6,7 +6,9 @@ import { createTicket, fetchStaticData } from "../actions/index";
 import DropDownSelect from "./select-list";
 import { bindActionCreators } from "redux";
 import requireAuth from './auth/requireAuth'
-
+import StTextBox from './form-components/st-text-box';
+import StTextArea from './form-components/st-text-area';
+import StCheckBox from './form-components/st-check-box';
 
 class TicketsNew extends Component {
   constructor (props) {
@@ -17,52 +19,7 @@ class TicketsNew extends Component {
   componentDidMount() {
     this.props.fetchStaticData();
   }  
-
-  renderField(field) {
-    const { meta: { touched, error } } = field;
-    const className = `form-group ${touched && error ? "has-danger" : ""}`;
-
-    return (
-        <div className={className}>
-          <label>{field.label}</label>
-          <input className="form-control" type="text" {...field.input} />
-          <div className="text-help">
-            {touched ? error : ""}
-          </div>
-        </div>
-    );
-  }
-
-  renderTextArea(field) {
-    const { meta: { touched, error } } = field;
-    const className = `form-group ${touched && error ? "has-danger" : ""}`;
-
-    return (
-        <div className={className}>
-          <label>{field.label}</label>
-          <textarea className="form-control" type="text" {...field.input} />
-          <div className="text-help">
-            {touched ? error : ""}
-          </div>
-        </div>
-    );
-  }
-
-  renderCheckBox(field) {
-    const { meta: { touched, error } } = field;
-    const className = `form-group ${touched && error ? "has-danger" : ""}`;
-
-    return (
-        <div className={className}>
-          <label>{field.label}</label>
-          <input className="form-control st-checkbox" type="checkbox" {...field.input} />
-          <div className="text-help">
-            {touched ? error : ""}
-          </div>
-        </div>
-    );
-  }
-
+  
   // See the callback - it will be called by the action creator (see the action creator)
   onSubmit(values) {
     this.props.createTicket(values, () => { 
@@ -80,29 +37,28 @@ class TicketsNew extends Component {
           <Field
             label="Description For Ticket"
             name="description"
-            component={this.renderField}
+            component={StTextBox}
           />
           <Field
             label="Problem"
             name="problem"
-            component={this.renderTextArea}
-            type="textarea"
+            component={StTextArea}
           />
           <Field
             label="Active"
             name="active"
-            component={this.renderCheckBox}
+            component={StCheckBox}
             type="checkbox"
           />
           <Field
-            name="productId"
+            name="productid"
             label="Product"
             component={DropDownSelect}
             items={this.props.products == null ? [] : this.props.products}
             className="form-control"
           />
           <Field
-            name="severityId"
+            name="severityid"
             label="Severity"
             component={DropDownSelect}
             items={this.props.severities == null ? [] : this.props.severities}
@@ -127,12 +83,13 @@ function validate(values) {
     errors.problem = "Provide problem details";
   }
 
-  if (!values.severity) {
-    errors.severity = "Select severity";
+debugger;
+  if (!values.severityid) {
+    errors.severityid = "Select severity";
   }
 
-  if (!values.product) {
-    errors.product = "Select product";
+  if (!values.productid) {
+    errors.productid = "Select product";
   }
 
   return errors;
