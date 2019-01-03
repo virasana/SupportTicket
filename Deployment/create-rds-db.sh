@@ -1,3 +1,4 @@
+# These commands will help you to create the RDS database with appropriate security groups so that the sqlservice can access the database
 # Need to execute this one manually as you need the Security Group Id.  TODO - grep it
 export AWS_REGION=eu-west-1
 export RDS_DATABASE_NAME=kssupportticketsql
