@@ -4,7 +4,7 @@ metadata:
   name: sqlservice
 spec:
   type: ExternalName
-  externalName: ${SUPPORT_TICKET_DEPLOY_PLAINTEXT_DB_ENDPOINT}
+  externalName: ${SUPPORT_TICKET_DEPLOY_PLAINTEXT_DB_ENDPOINT_AWS}
 
 ---
 
