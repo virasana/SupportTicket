@@ -3,13 +3,12 @@ kind: Service
 metadata:
   name: sqlservice
 spec:
-  selector:
-    app: sql1
   ports:
     - protocol: TCP
       port: 1433
       targetPort: 1433
-  type: LoadBalancer #ClusterIP for internal only 
+  type: ExternalName
+  externalName: ${SUPPORT_TICKET_DEPLOY_DB_ENDPOINT}
 
 ---
 
