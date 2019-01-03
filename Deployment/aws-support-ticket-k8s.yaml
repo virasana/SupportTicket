@@ -3,10 +3,6 @@ kind: Service
 metadata:
   name: sqlservice
 spec:
-  ports:
-    - protocol: TCP
-      port: 1433
-      targetPort: 1433
   type: ExternalName
   externalName: ${SUPPORT_TICKET_DEPLOY_DB_ENDPOINT}
 
