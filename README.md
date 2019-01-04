@@ -38,6 +38,9 @@ All dev and test is done using the Microsoft Linux SQL Server image.  (Container
 
 Production uses a managed SQL Server database, hosted on AWS using their Relational Database Service (RDS).
 
+### Mobile Phones
+Supports mobile phone displays - see the hamburger menu (tested on my Android).  
+
 ## Devops Practices
 ### Configuration as Code
 The application is automated from top to bottom (I term this "Systems As Code" - see [here](https://www.slideshare.net/virasana/clipboards/systems-as-code-a-model-for-devops-automation?rftp=success_toast)).  
