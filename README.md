@@ -2,7 +2,7 @@ SupportTicket
 =============
 
 
-This is a project to demonstrate some of the technoloies that I am working on: 
+This is a project to demonstrate some of the technologies that I am working on, to demonstrate DevOps best practices.
 
 # Overview
 Support Ticket is a simple application which allows you to capture support tickets into a database.  
