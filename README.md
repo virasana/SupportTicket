@@ -53,7 +53,7 @@ Build once on a build server.  This produces a set of build artifacts, sometimes
 * The developer machine should be configured as close to Production as possible.  Containers offer a big leap forward in the right direction.  (They do not eliminate configuration differences though!)
 
 ### Zero-Downtime Upgrades
-Also known as "rolling upgrades".  You should be able to roll out a new version of the application withouth having to pull down the system!  Kubernetes is the winner here - rolling upgrades are what it does!  The database changes need to be carefully thought-through, and you will need to be able to support at least two schemas at the same time, as you roll a new version.
+Also known as "rolling upgrades".  You should be able to roll out a new version of the application withouth having to pull down the system!  Kubernetes is the winner here!  The database changes need to be carefully thought-through, and you will need to be able to support at least two schemas at the same time, as you roll a new version.
 
 ### Ability to deploy "n" number of environments 
 With the container-based kubernetes orchestration in place, it is well possible to provision new environments in the cloud.  Self service for developers is becoming a reality.
