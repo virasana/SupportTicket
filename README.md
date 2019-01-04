@@ -2,7 +2,7 @@ SupportTicket
 =============
 
 
-This is a project to demonstrate some of the technologies that I am working on, using DevOps best practices (broadly based upon the [Twelve Factor App approach](https://12factor.net/)).
+This is a project to demonstrate some of the technologies that I am working on, using DevOps best practices (broadly based upon the [Twelve Factor App approach](https://12factor.net/)).  <a href="https://12factor.net/" target="_blank">Twelve Factor App approach</a>
 
 ## Overview
 Support Ticket is a simple application which allows you to capture support tickets into a database. You can add, view and edit tickets. 
