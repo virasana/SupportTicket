@@ -40,7 +40,7 @@ Production uses a managed SQL Server database, hosted on AWS using their Relatio
 
 ## Devops Practices
 ### Configuration as Code
-The application is automated from top to bottom (I have been calling this "Systems As Code" - see [here](https://www.slideshare.net/virasana/clipboards/systems-as-code-a-model-for-devops-automation?rftp=success_toast).  
+The application is automated from top to bottom (I term this "Systems As Code" - see [here](https://www.slideshare.net/virasana/clipboards/systems-as-code-a-model-for-devops-automation?rftp=success_toast).  
 
 
 See the whole presentation (in the context of Azure Service Fabric) [Deployment for Devops](https://www.slideshare.net/virasana/deployment-for-dev-ops-with-service-fabric-127250670).
