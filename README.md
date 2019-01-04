@@ -2,7 +2,7 @@ SupportTicket
 =============
 
 
-This is a project to demonstrate some of the technologies that I am working on, using DevOps best practices (broadly based upon the [Twelve Factor App approach](https://12factor.net/)).
+This is a project to demonstrate some of the technologies that I am working on, using DevOps best practices (broadly based upon the [Twelve Factor App approach](https://12factor.net/)).  
 
 ## Running Deployments
 
@@ -13,8 +13,6 @@ This is a project to demonstrate some of the technologies that I am working on, 
 ### Azure
 * http://dev.react.ticket-track.com
 * http://dev.webapi.ticket-track.com
-
-
 
 ## Overview
 Support Ticket is a simple application which allows you to capture support tickets into a database. You can add, view and edit tickets. 
@@ -29,16 +27,19 @@ The application demonstrates full DevOps automation from end to end, allowing yo
 The deployed version appears at the foot of each of the pages of the application e.g. **Docker: virasana/streact:2.0.20190103.3**
 
 ## Technologies and architecture
-It is a React front end, with a .Net Core REST API. There is also a legacy .Net Core front end, which I keep alive. 
+It is a React front end, with a .Net Core REST API. There is also a legacy .Net Core front end. 
 There are three Docker containers (all Linux): 
 
 * React front end
-* .Net Core Web API
+* .Net Core Web API with Entity Framework Core
 * SQL Server
 
 All dev and test is done using the Microsoft Linux SQL Server image.  (Containers facilitate parity between dev and test - we see a great reduction in configuration drift!)
 Production uses a managed SQL Server database, hosted on AWS using their Relational Database Service (RDS)
 
+## Devops Practices
+### Configuration as Code
+The application is automated from top to bottom (I have been calling this "Systems As Code").  See my presentation [on SlideShare](https://www.slideshare.net/virasana/deployment-for-dev-ops-with-service-fabric-127250670).
 
 
 
