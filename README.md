@@ -35,7 +35,8 @@ There are three Docker containers (all Linux):
 * SQL Server
 
 All dev and test is done using the Microsoft Linux SQL Server image.  (Containers facilitate parity between dev and test - we see a great reduction in configuration drift!)
-Production uses a managed SQL Server database, hosted on AWS using their Relational Database Service (RDS)
+
+Production uses a managed SQL Server database, hosted on AWS using their Relational Database Service (RDS).
 
 ## Devops Practices
 ### Configuration as Code
