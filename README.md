@@ -2,7 +2,19 @@ SupportTicket
 =============
 
 
-This is a project to demonstrate some of the technologies that I am working on, using DevOps best practices (broadly based upon the [Twelve Factor App approach](https://12factor.net/)).  <a href="https://12factor.net/" target="_new">Twelve Factor App approach</a>
+This is a project to demonstrate some of the technologies that I am working on, using DevOps best practices (broadly based upon the [Twelve Factor App approach](https://12factor.net/)).
+
+## Running Examples
+
+### AWS
+* http://react.ticket-track.com
+* http://webapi.ticket-track.com
+
+### Azure
+* http://dev.ticket-track.com
+* http://webapi.ticket-track.com
+
+
 
 ## Overview
 Support Ticket is a simple application which allows you to capture support tickets into a database. You can add, view and edit tickets. 
@@ -13,8 +25,11 @@ You need to register, and sign in order to capture tickets.  The authentication 
 ## Kubernetes
 The application demonstrates full DevOps automation from end to end, allowing you to deploy to multiple Kubernetes cloud hosts (AWS and Azure AKS are supported).
 
+## Versioning
+The deployed version appears at the foot of each of the pages of the application e.g. **Docker: virasana/streact:2.0.20190103.3**
+
 ## Technologies and architecture
-It is a React front end, with a .Net Core REST API.  
+It is a React front end, with a .Net Core REST API. There is also a legacy .Net Core front end, which I keep alive. 
 There are three Docker containers (all Linux): 
 
 * React front end
