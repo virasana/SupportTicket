@@ -4,16 +4,16 @@ SupportTicket
 
 This is a project to demonstrate some of the technologies that I am working on, to demonstrate DevOps best practices.
 
-# Overview
+## Overview
 Support Ticket is a simple application which allows you to capture support tickets into a database.  
 
-# Authentication
+## Authentication
 You need to register, and sign in order to capture tickets.  The authentication is implemented on the browser (using JWT tokens) as well as in the back end, using .Net Core "Authorize" attributes and JWT integration.
 
-# Kubernetes
+## Kubernetes
 The application demonstrates full DevOps automation from end to end, allowing you to deploy to multiple Kubernetes cloud hosts (AWS and Azure AKS are supported).
 
-# Technologies and architecture
+## Technologies and architecture
 It is a React front end, with a .Net Core REST API.  
 There are three Docker containers (all Linux): 
 
