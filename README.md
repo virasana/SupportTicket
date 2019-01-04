@@ -11,8 +11,8 @@ This is a project to demonstrate some of the technologies that I am working on, 
 * http://webapi.ticket-track.com
 
 ### Azure
-* http://dev.ticket-track.com
-* http://webapi.ticket-track.com
+* http://dev.react.ticket-track.com
+* http://rev.webapi.ticket-track.com
 
 
 
