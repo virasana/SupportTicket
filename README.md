@@ -12,7 +12,7 @@ This is a project to demonstrate some of the technologies that I am working on, 
 
 ### Azure
 * http://dev.react.ticket-track.com
-* http://rev.webapi.ticket-track.com
+* http://dev.webapi.ticket-track.com
 
 
 
