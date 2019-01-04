@@ -4,7 +4,7 @@ SupportTicket
 
 This is a project to demonstrate some of the technologies that I am working on, using DevOps best practices (broadly based upon the [Twelve Factor App approach](https://12factor.net/)).
 
-## Running Examples
+## Running Deployments
 
 ### AWS
 * http://react.ticket-track.com
