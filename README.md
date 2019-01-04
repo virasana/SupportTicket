@@ -42,6 +42,22 @@ Production uses a managed SQL Server database, hosted on AWS using their Relatio
 ### Configuration as Code
 The application is automated from top to bottom (I term this "Systems As Code" - see [here](https://www.slideshare.net/virasana/clipboards/systems-as-code-a-model-for-devops-automation?rftp=success_toast)).  
 
+### Build Once, Deploy Many
+Build once on a build server.  This produces a set of build artifacts, sometimes called the "Drop".   You can then take this "Drop", configure it, and deploy it to all of your environments.  You should not need to rebuild the application in order to reconfigure it, and nor should you tinker with a build package after it has been built.  Configuration is "orthogonal" to the build.  Always build and test the same artifact - don't rebuild to push the code to QA!
+
+### "F5" Developer Experience
+* The developer should be able to download the code and be up and running with the minimum of fuss (i.e. if using Visual Studio, you would hit F5 and go).
+* The developer machine should be configured as close to Production as possible.  Containers offer a big leap forward in the right direction.  (They do not eliminate configuration differences though!)
+
+### Zero-Downtime Upgrades
+Also known as "rolling upgrades".  You should be able to roll out a new version of the application withouth having to pull down the system!  Kubernetes is the winner here - rolling upgrades are what it does!  The database changes need to be carefully thought-through, and you will need to be able to support at least two schemas at the same time, as you roll a new version.
+
+
+
+
+
+
+
 
 See the whole presentation (in the context of Azure Service Fabric) [Deployment for Devops](https://www.slideshare.net/virasana/deployment-for-dev-ops-with-service-fabric-127250670).
 
