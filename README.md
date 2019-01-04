@@ -52,11 +52,8 @@ Build once on a build server.  This produces a set of build artifacts, sometimes
 ### Zero-Downtime Upgrades
 Also known as "rolling upgrades".  You should be able to roll out a new version of the application withouth having to pull down the system!  Kubernetes is the winner here - rolling upgrades are what it does!  The database changes need to be carefully thought-through, and you will need to be able to support at least two schemas at the same time, as you roll a new version.
 
-
-
-
-
-
+### Ability to deploy "n" number of environments 
+With the container-based kubernetes orchestration in place, it is well possible to provision new environments in the cloud.  Self service for developers is becoming a reality.
 
 
 See the whole presentation (in the context of Azure Service Fabric) [Deployment for Devops](https://www.slideshare.net/virasana/deployment-for-dev-ops-with-service-fabric-127250670).
