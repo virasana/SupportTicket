@@ -15,7 +15,7 @@ This is a project to demonstrate some of the technologies that I am working on, 
 * http://dev.webapi.ticket-track.com
 
 ## Overview
-Support Ticket is a simple application which allows you to capture support tickets into a database. You can add, view and edit tickets. 
+Support Ticket is a simple single page web React application (and an ASP.Net Core counterpart) which allows you to capture support tickets into a database. You can add, view and edit tickets. 
 
 ## Authentication
 You need to register, and sign in order to capture tickets.  The authentication is implemented on the browser (using JWT tokens) as well as in the back end, using .Net Core "Authorize" attributes and JWT integration.
