@@ -2,7 +2,7 @@ SupportTicket
 =============
 
 
-This is a project to demonstrate some of the technologies that I am working on, using DevOps best practices (broadly based upon the [Twelve Factor App approach](https://12factor.net/)).  Using Docker containers with Kubernetes orchestration, I am able to deploy to Azure and AWS using a single codebase.
+This is a project to demonstrate some of the technologies that I am working on, using widely accepted DevOps practices (broadly based upon the [Twelve Factor App approach](https://12factor.net/)).  Using Docker containers with Kubernetes orchestration, I am able to deploy to Azure and AWS using a single codebase.
 
 ## Running Deployments
 
